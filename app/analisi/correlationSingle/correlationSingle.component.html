@@ -1,0 +1,29 @@
+<div class="panel panel-default col-lg-8">
+    <div class="panel-body">
+        <div class="col-lg-8" style="text-align:center;">
+            <h3>{{Title}}</h3>
+            <table class="table table-bordered">
+                <tr class="active">
+                    <th>
+                        #
+                    </th>
+                    <th *ngFor="let nome_colonna of nomi_colonne; let i = index">
+                        {{nome_colonna}}
+                    </th>
+                </tr>
+                <tr *ngFor="let riga of righe;let i=index">
+                    <td class="active">
+                        <b>{{nomi_colonne[i]}}</b>
+                    </td>
+                    <td *ngFor="let colonna of riga">
+                        {{colonna.toString()}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-4">
+            <correlation-table-columans [nomi_colonne]="nomi_colonne"
+                                        (onSelectedColumnAdd)="onSelectedColumnAdd($event)"></correlation-table-columans>
+        </div>
+    </div>
+</div>

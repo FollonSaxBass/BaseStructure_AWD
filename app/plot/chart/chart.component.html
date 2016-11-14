@@ -1,0 +1,31 @@
+<div class="panel panel-default col-lg-8">
+    <div class="panel-body">
+        <div class="row" style="-webkit-user-select: none; /* Chrome/Safari */
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+ */">
+            <div class="col-md-11">
+                <div style="display: block;">
+                    <canvas #Chart baseChart
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <div>
+                <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="chartMin" [max]="chartMax"
+                          (onChange)="onChange($event)"></p-slider>
+            </div>
+            <br>
+            <div><h4 style="float: left;">Range: {{lineChartLabelsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
+                {{lineChartLabelsTotal[rangeValues[1]]}}</h4></div>
+        </div>
+    </div>
+</div>

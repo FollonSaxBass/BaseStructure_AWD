@@ -1,0 +1,50 @@
+{
+  "colonne":[
+    {
+  "id_colonna": 3,
+  "nome_colonna": "pressione_max",
+  "valori": [
+    130,
+    150,
+    160,
+    160
+  ]
+},
+    {
+      "id_colonna": 1,
+      "nome_colonna": "globuli rossi",
+      "valori": [
+        53,
+        56,
+        30,
+        70
+      ]
+    },
+    {
+      "id_colonna": 2,
+      "nome_colonna": "pressione_min",
+      "valori": [
+        70,
+        80,
+        30,
+        50
+      ]
+    },
+    {
+      "id_colonna": 1,
+      "nome_colonna": "asdasdasdi",
+      "valori": [
+        23,
+        34,
+        34,
+        23
+      ]
+    }
+  ],
+  "timestamps": [
+    "1-11-2016",
+    "2-11-2016",
+    "3-11-2016",
+    "4-11-2016"
+  ]
+}

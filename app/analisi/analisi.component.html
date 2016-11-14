@@ -1,0 +1,12 @@
+<div class="panel panel-default col-lg-2">
+    <div class="panel-body">
+        <user-list-ans-plot (onSelectUser)="onSelectedUser($event)"></user-list-ans-plot>
+    </div>
+</div>
+<div *ngIf="selectedUser" class="panel panel-default col-lg-2">
+    <div class="panel-body">
+        <object-list-ans-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
+                              (onSelectedPlotta)="onSelectedPlotta($event)"></object-list-ans-plot>
+    </div>
+</div>
+<dynamic-ans-component [componentData]="componentData"></dynamic-ans-component>

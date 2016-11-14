@@ -1,0 +1,9 @@
+<h1>Users</h1>
+<ul class="list-group">
+    <a class="list-group-item" *ngFor="let user of users" (click)="onSelect(user)"
+       [class.active]="user === selectedUser">
+        {{user.nome_user}}
+    </a>
+</ul>
+
+
