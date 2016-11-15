@@ -1,0 +1,25 @@
+{
+  "colonne": [
+    {
+      "nome": "ematocrito",
+      "id": 1
+    },
+    {
+      "nome": "press_min",
+      "id": 2
+    },
+    {
+      "nome": "press_max",
+      "id": 3
+    }
+  ],
+  "utenti": [
+    {
+      "nome": "Riccardo",
+      "id": 3
+    },{
+      "nome": "Gianluca",
+      "id": 2
+    }
+  ]
+}
