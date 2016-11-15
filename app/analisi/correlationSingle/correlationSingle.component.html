@@ -21,7 +21,7 @@
                 </tr>
             </table>
         </div>
-        <div class="col-lg-4">
+        <div *ngIf="loaded" class="col-lg-4">
             <correlation-table-columans [nomi_colonne]="nomi_colonne"
                                         (onSelectedColumnAdd)="onSelectedColumnAdd($event)"></correlation-table-columans>
         </div>

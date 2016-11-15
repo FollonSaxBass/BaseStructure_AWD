@@ -9,69 +9,65 @@ import {DataService, User, Oggetto} from "../../data.service";
 export class correlationSingle implements OnInit {
     Title = "Matrice di correlazione"
 
-    nomi_colonne = ["ematocrito", "press_min", "press_max", "qualcosa", "last"]
-    righe = [
-        [1, -0.85, 0.54, 0.38],
-        [-0.85, 1, -0.21, -0.24],
-        [0.54, -0.21, 1, 0.60],
-        [0.38, -0.24, 0.60, 1],
-    ];
+    nomi_colonne: Array<any> = [];
+    righe: Array<any> = [];
+    // ["ematocrito", "press_min", "press_max", "qualcosa", "last"]
+    real_nomi_colonne: Array<any> = [];
+    real_righe: Array<any> = [];
+    correlation_vector: Array<any> = [];
+    loaded: Boolean;
 
-    real_nomi_colonne = ["ematocrito", "press_min", "press_max", "qualcosa", "last"]
-    real_righe = [
-        [1, -0.85, 0.54, 0.38],
-        [-0.85, 1, -0.21, -0.24],
-        [0.54, -0.21, 1, 0.60],
-        [0.38, -0.24, 0.60, 1],
-    ];
-    correlation_vector = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.11]
-
-    // rangeValues: any = [];
-    // chartMin = 0;
-    // chartMax = 0;
-    //
-    // realNomiColonne: any = [];
-    // realRighe: any = []
 
     constructor(private dataService: DataService) {
     }
 
     ngOnInit(): void {
-        let righe_da_considerare: Array<any> = [];
-        let _rigaTemp: Array<any> = [];
-
-        let n = this.real_nomi_colonne.length;
-        for (let _y = 0; _y < this.real_nomi_colonne.length; _y++) {
-            for (let _x = 0; _x < this.real_nomi_colonne.length; _x++) {
-                if (_x == _y) {
-                    _rigaTemp.push(1)
-                } else {
-                    if (_x > _y) {
-                        _rigaTemp.push(this.correlation_vector[(n * (n - 1) / 2) - (n - _y) * ((n - _y) - 1) / 2 + _x - _y - 1])
-
-                    }
-
-                    if (_x < _y) {
-                        _rigaTemp.push(this.correlation_vector[(n * (n - 1) / 2) - (n - _x) * ((n - _x) - 1) / 2 + _y - _x - 1])
-
-                    }
+        this.dataService.getObjectCorrelation().subscribe(
+            (data) => {
+                console.log(data)
+                for (let nome_colonna of data.colonne) {
+                    this.real_nomi_colonne.push(nome_colonna.toString());
+                    console.log(nome_colonna)
                 }
-            }
-            if (_rigaTemp.length != 0)
-                righe_da_considerare.push(_rigaTemp)
-            _rigaTemp = []
-        }
-        this.real_righe = righe_da_considerare
-        this.righe = righe_da_considerare
-    }
 
+                for (let corr of data.correlazioni) {
+                    this.correlation_vector.push(corr);
+                }
+
+                let righe_da_considerare: Array<any> = [];
+                let _rigaTemp: Array<any> = [];
+
+                let n = this.real_nomi_colonne.length;
+                for (let _y = 0; _y < this.real_nomi_colonne.length; _y++) {
+                    for (let _x = 0; _x < this.real_nomi_colonne.length; _x++) {
+                        if (_x == _y) {
+                            _rigaTemp.push(1)
+                        } else {
+                            if (_x > _y) {
+                                _rigaTemp.push(this.correlation_vector[(n * (n - 1) / 2) - (n - _y) * ((n - _y) - 1) / 2 + _x - _y - 1])
+                            }
+                            if (_x < _y) {
+                                _rigaTemp.push(this.correlation_vector[(n * (n - 1) / 2) - (n - _x) * ((n - _x) - 1) / 2 + _y - _x - 1])
+                            }
+                        }
+                    }
+                    if (_rigaTemp.length != 0)
+                        righe_da_considerare.push(_rigaTemp)
+                    _rigaTemp = []
+                }
+                this.nomi_colonne = this.real_nomi_colonne
+                this.real_righe = righe_da_considerare
+                this.righe = righe_da_considerare
+                this.loaded = true
+            }
+        );
+    }
 
     onSelectedColumnAdd(e: any) {
         let nomi_passati: Array<any> = [];
         for (let dato of e.dati) {
             nomi_passati.push(dato.colonne)
         }
-
         let _indexes: Array<any> = [];
         let _i = 0;
         for (let nome_colonna of this.real_nomi_colonne) {

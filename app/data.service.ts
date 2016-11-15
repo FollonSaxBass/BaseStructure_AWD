@@ -45,9 +45,9 @@ export class DataService implements OnInit {
 
     constructor(private http: Http) {
         this.http.get('./JSON/plot_prima_risposta.json').map(
-            (res)=>res.json()
+            (res) => res.json()
         ).subscribe(
-            (data)=> {
+            (data) => {
                 for (let user of data) {
                     let new_user = new User();
                     new_user.id_user = user.id_utente;
@@ -64,14 +64,14 @@ export class DataService implements OnInit {
         );
     }
 
-    getColumns(id_user:number,id_oggetto:number){
-        if(id_oggetto==1) {
+    getColumns(id_user: number, id_oggetto: number) {
+        if (id_oggetto == 1) {
             return this.http.get('./JSON/plot_seconda_risposta.json').map(
-                (res)=>res.json()
+                (res) => res.json()
             );
-        }else{
+        } else {
             return this.http.get('./JSON/plot_seconda_risposta2.json').map(
-                (res)=>res.json()
+                (res) => res.json()
             );
         }
     }
@@ -80,8 +80,10 @@ export class DataService implements OnInit {
         return this.users;
     }
 
-    fetchData() {
-
+    getObjectCorrelation() {
+        return this.http.get('./JSON/JSON_Correlation_Object.json').map(
+            (res) => res.json()
+        )
     }
 
     ngOnInit(): void {
