@@ -4,12 +4,21 @@
         <object-list-mul-plot [objects]="objects" (onSelectedObject)="onSelectedObject($event)"></object-list-mul-plot>
     </div>
 </div>
-<!--[objects]="objects"-->
-<!--<div *ngIf="selectedUser" class="panel panel-default col-lg-2">-->
-<!--<div class="panel-heading">Object for selected user</div>-->
-<!--<div class="panel-body">-->
-<!--<object-list-ans-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"-->
-<!--(onSelectedPlotta)="onSelectedPlotta($event)"></object-list-ans-plot>-->
-<!--</div>-->
-<!--</div>-->
-<!--<dynamic-ans-component [componentData]="componentData"></dynamic-ans-component>-->
+<div class="col-lg-2">
+    <div *ngIf="columns" class="panel panel-default ">
+        <div class="panel-heading">Attributi dell'oggetto {{selectedObject.nome_oggetto}}</div>
+        <div class="panel-body">
+            <column-list-mul-plot [columns]="columns"
+                                  (onSelectedColumn)="onSelectedColumn($event)"></column-list-mul-plot>
+        </div>
+    </div>
+
+    <div *ngIf="users" class="panel panel-default">
+        <div class="panel-heading">Users aventi l'oggetto {{selectedObject.nome_oggetto}}</div>
+        <div class="panel-body">
+            <user-list-an-mul [selColumn]="selectedColumn" [users]="users"
+                              (onInvia)="onInvia($event)"></user-list-an-mul>
+        </div>
+    </div>
+</div>
+<dynamic-anm-component [componentData]="componentData"></dynamic-anm-component>
