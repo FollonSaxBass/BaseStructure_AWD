@@ -1,4 +1,3 @@
-<h1>Object for selected user</h1>
 <div *ngIf="user">
     <ul class="list-group">
         <a class="list-group-item" *ngFor="let object of user.oggetti" (click)="onSelect(object)"
@@ -7,4 +6,4 @@
         </a>
     </ul>
 </div>
-<button *ngIf="selectedObject" (click)="clickedPlotta(object)" class="btn btn-primary">Plotta!!</button>
+<button *ngIf="selectedObject" (click)="clickedPlotta(object)" class="btn btn-primary">Plotta</button>

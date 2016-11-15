@@ -1,9 +1,18 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {
+    Component, OnInit, Input, Output, EventEmitter, trigger, state, style, transition,
+    animate
+} from '@angular/core';
 import {DataService, User, Oggetto} from "../../data.service";
 
 @Component({
     selector: 'correlation-single',
-    templateUrl: './app/analisi/correlationSingle/correlationSingle.component.html'
+    templateUrl: './app/analisi/correlationSingle/correlationSingle.component.html',
+    animations: [
+        trigger('visibilityChanged', [
+            state('shown', style({opacity: 1})),
+            state('hidden', style({opacity: 0})),
+            transition('hidden => shown', animate('300ms'))
+        ])]
 })
 
 export class correlationSingle implements OnInit {
@@ -11,12 +20,11 @@ export class correlationSingle implements OnInit {
 
     nomi_colonne: Array<any> = [];
     righe: Array<any> = [];
-    // ["ematocrito", "press_min", "press_max", "qualcosa", "last"]
     real_nomi_colonne: Array<any> = [];
     real_righe: Array<any> = [];
     correlation_vector: Array<any> = [];
     loaded: Boolean;
-
+    visibility = 'hidden';
 
     constructor(private dataService: DataService) {
     }
@@ -59,6 +67,7 @@ export class correlationSingle implements OnInit {
                 this.real_righe = righe_da_considerare
                 this.righe = righe_da_considerare
                 this.loaded = true
+                this.visibility = 'shown'
             }
         );
     }

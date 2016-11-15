@@ -1,12 +1,18 @@
 import {
-    Component, OnInit, Input, Injector, ViewChild
+    Component, OnInit, Input, Injector, ViewChild, style, state, trigger, animate, transition
 } from '@angular/core';
 import {DataService, User, Oggetto, Colonna, Valore} from "../../data.service";
 import 'rxjs/Rx';
 
 @Component({
     selector: 'chart',
-    templateUrl: './app/plot/chart/chart.component.html'
+    templateUrl: './app/plot/chart/chart.component.html',
+    animations: [
+        trigger('visibilityChanged', [
+            state('shown', style({opacity: 1})),
+            state('hidden', style({opacity: 0})),
+            transition('hidden => shown', animate('300ms'))
+        ])]
 })
 
 export class ChartComponent implements OnInit {
@@ -22,9 +28,7 @@ export class ChartComponent implements OnInit {
     public lineChartDataTotal: Array<any> = [{data: [0, 0, 0, 0, 0, 0, 0], label: 'eta', fill: false}];
     public lineChartLabelsTotal: Array<any> = [0, 0, 0, 0, 0, 0, 0];
 
-    // this.selectedUser.nome_user.toString()
-    // this.selectedObject.nome_oggetto.toString()
-
+    visibility = 'hidden';
     // lineChart
     public lineChartData: Array<any> = [{data: [0, 0, 0, 0, 0, 0, 0], label: 'eta', fill: false}];
     public lineChartLabels: Array<any> = [0, 0, 0, 0, 0, 0, 0];
@@ -59,21 +63,6 @@ export class ChartComponent implements OnInit {
     public lineChartLegend: boolean = true;
     public lineChartType: string = 'line';
 
-    // public randomize(): void {
-    //     let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    //     for (let i = 0; i < this.lineChartData.length; i++) {
-    //         _lineChartData[i] = {
-    //             data: new Array(this.lineChartData[i].data.length),
-    //             label: this.lineChartData[i].label,
-    //             fill: false
-    //         };
-    //         for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-    //             _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-    //         }
-    //     }
-    //     this.lineChartData = _lineChartData;
-    // }
-
     public chartClicked(e: any): void {
     }
 
@@ -87,7 +76,7 @@ export class ChartComponent implements OnInit {
 
     ngOnInit() {
         this.dataService.getColumns(this.selectedUser.id_user, this.selectedObject.id_oggetto).subscribe(
-            (data: any)=> {
+            (data: any) => {
                 for (let column of data.colonne) {
                     let new_column = new Colonna();
                     new_column.id_colonna = column.id_colonna;
@@ -128,6 +117,7 @@ export class ChartComponent implements OnInit {
                 this.rangeValues = [0, this.lineChartLabels.length - 1]
                 this.chartMin = 0
                 this.chartMax = this.lineChartLabels.length - 1
+                this.visibility = 'shown';
             });
     }
 
