@@ -76,6 +76,12 @@ export class DataService implements OnInit {
         }
     }
 
+    getObjects() {
+        return this.http.get('./JSON/Primo_analisi_multipla.json').map(
+            (res) => res.json()
+        );
+    }
+
     getUsers() {
         return this.users;
     }

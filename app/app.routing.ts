@@ -14,6 +14,9 @@ import {objectListAns} from "./analisi/objectListAns/objectListAns.component";
 import {correlationSingle} from "./analisi/correlationSingle/correlationSingle.component";
 import DynamicComponentAns from "./analisi/correlationSingle/dynamic_ans.component";
 import {correlationTableSingle} from "./analisi/correlationSingle/correlationTableSingle.component";
+import {AnalisiMultiplaComponent} from "./analisi_multipla/analisi_multipla.component";
+import {objectListAnm} from "./analisi_multipla/objectListAnm/objectListAnm.component";
+import {columnListAnm} from "./analisi_multipla/columnListAnm/columnListAnm.component";
 
 const routes: Routes = [
     {
@@ -33,6 +36,10 @@ const routes: Routes = [
         path: 'analisi',
         component: AnalisiComponent
     },
+    {
+        path: 'analisi_multipla',
+        component: AnalisiMultiplaComponent
+    },
 ]
 
 @NgModule({
@@ -45,4 +52,5 @@ export class AppRoutingModule {
 
 export const routingComponents = [HomeComponent, PlotComponent, AnalisiComponent,
     userList, objectList, ChartComponent, DynamicComponent, userListAns, objectListAns,
-    correlationSingle, DynamicComponentAns, correlationTableSingle]
+    correlationSingle, DynamicComponentAns, correlationTableSingle, AnalisiMultiplaComponent,
+    objectListAnm, columnListAnm]

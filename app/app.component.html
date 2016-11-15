@@ -29,7 +29,8 @@
                             <li [ngClass]="{'active': isAnalisisActive }" (click)="activateAnalisi1()"><a
                                     routerLink="/analisi">Analisi singola</a></li>
                             <li role="separator" class="divider"></li>
-                            <li [ngClass]="{'active': isAnalisimActive }" (click)="activateAnalisi2()"><a>Analisi
+                            <li routerLink="/analisi_multipla" [ngClass]="{'active': isAnalisimActive }"
+                                (click)="activateAnalisi2()"><a>Analisi
                                 multipla</a></li>
                         </ul>
                     </li>

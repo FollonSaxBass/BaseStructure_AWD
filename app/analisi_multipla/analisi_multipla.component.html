@@ -1,0 +1,15 @@
+<div class="panel panel-default col-lg-2">
+    <div class="panel-heading">Oggetti</div>
+    <div class="panel-body" *ngIf="objects">
+        <object-list-mul-plot [objects]="objects" (onSelectedObject)="onSelectedObject($event)"></object-list-mul-plot>
+    </div>
+</div>
+<!--[objects]="objects"-->
+<!--<div *ngIf="selectedUser" class="panel panel-default col-lg-2">-->
+<!--<div class="panel-heading">Object for selected user</div>-->
+<!--<div class="panel-body">-->
+<!--<object-list-ans-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"-->
+<!--(onSelectedPlotta)="onSelectedPlotta($event)"></object-list-ans-plot>-->
+<!--</div>-->
+<!--</div>-->
+<!--<dynamic-ans-component [componentData]="componentData"></dynamic-ans-component>-->

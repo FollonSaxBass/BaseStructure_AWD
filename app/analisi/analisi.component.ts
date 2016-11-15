@@ -1,8 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter, ElementRef} from '@angular/core';
 import {User, Oggetto, DataService} from "../data.service";
-import {ChartComponent} from "../plot/chart/chart.component";
 import {correlationSingle} from "./correlationSingle/correlationSingle.component";
-
 
 @Component({
     selector: 'analisi-comp',

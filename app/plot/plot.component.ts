@@ -33,7 +33,6 @@ export class PlotComponent implements OnInit {
     }
 
     onSelectedPlotta() {
-
         this.componentData = {
             component: ChartComponent,
             inputs: {
