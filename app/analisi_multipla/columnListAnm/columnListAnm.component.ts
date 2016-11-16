@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {DataService, User, Oggetto} from "../../data.service";
+import {DataService, User, Oggetto, Colonna} from "../../data.service";
 import {Column} from "primeng/components/common/shared";
 
 @Component({
@@ -10,11 +10,14 @@ import {Column} from "primeng/components/common/shared";
 export class columnListAnm implements OnInit {
 
     @Input()
-    object: Oggetto;
-    selectedColumn: Column
+    columns: Colonna;
+    selectedColumn: Column;
+
+    @Output() onSelectedColumn = new EventEmitter();
 
     onSelect(colonna: Column): void {
         this.selectedColumn = colonna;
+        this.onSelectedColumn.emit()
     }
 
     constructor(private dataService: DataService) {

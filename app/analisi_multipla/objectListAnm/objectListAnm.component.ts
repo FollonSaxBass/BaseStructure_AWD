@@ -27,10 +27,5 @@ export class objectListAnm implements OnInit {
 
     clickedInvia(oggetto: Oggetto) {
         this.onSelectedObject.emit(this.selectedObject)
-        // if (this.selectedObject != null) {
-        //     this.onSelectedObject.emit(this.selectedObject)
-        // } else {
-        //     console.log("Prima di inviare devi selezionare l'oggetto da analizzare")
-        // }
     }
 }

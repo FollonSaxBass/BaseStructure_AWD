@@ -86,8 +86,19 @@ export class DataService implements OnInit {
         return this.users;
     }
 
+    getColumnUsers(){
+        return this.http.get('./JSON/Secondo_analisi_multipla.json').map(
+            (res) => res.json()
+        );
+    }
+
     getObjectCorrelation() {
         return this.http.get('./JSON/JSON_Correlation_Object.json').map(
+            (res) => res.json()
+        )
+    }
+    getUserCorrelation() {
+        return this.http.get('./JSON/Correlazione_con_date_analisi_multipla.json').map(
             (res) => res.json()
         )
     }

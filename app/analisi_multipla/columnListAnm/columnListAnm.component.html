@@ -1,8 +1,8 @@
-<!--<div *ngIf="object">-->
-    <!--<ul class="list-group">-->
-        <!--<a class="list-group-item" *ngFor="let object of user.oggetti" (click)="onSelect(object)"-->
-           <!--[class.active]="object === selectedObject">-->
-            <!--{{object.nome_oggetto}}-->
-        <!--</a>-->
-    <!--</ul>-->
-<!--</div>-->
+<div *ngIf="columns">
+    <ul class="list-group">
+        <a class="list-group-item" *ngFor="let colonna of columns" (click)="onSelect(colonna)"
+           [class.active]="colonna === selectedColumn">
+            {{colonna.nome_colonna}}
+        </a>
+    </ul>
+</div>

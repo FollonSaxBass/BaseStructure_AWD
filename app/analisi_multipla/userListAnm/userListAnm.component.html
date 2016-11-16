@@ -1,0 +1,12 @@
+<div *ngIf="users">
+    <ul class="list-group">
+        <a class="list-group-item" *ngFor="let user of users" (click)="onSelect(user)"
+           [class.active]="selectedUsers.indexOf(user)>=0">
+            {{user.nome_user}}
+        </a>
+    </ul>
+</div>
+<button *ngIf="selectedUsers.length>0" (click)="clickedInvia()"
+        class="btn btn-primary">
+    Invia
+</button>

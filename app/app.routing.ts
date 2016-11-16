@@ -17,6 +17,10 @@ import {correlationTableSingle} from "./analisi/correlationSingle/correlationTab
 import {AnalisiMultiplaComponent} from "./analisi_multipla/analisi_multipla.component";
 import {objectListAnm} from "./analisi_multipla/objectListAnm/objectListAnm.component";
 import {columnListAnm} from "./analisi_multipla/columnListAnm/columnListAnm.component";
+import {userListAnm} from "./analisi_multipla/userListAnm/userListAnm.component";
+import {correlationMultiple} from "./analisi_multipla/correlationMultiple/correlationMultiple.component";
+import {correlationTableMultiple} from "./analisi_multipla/correlationMultiple/correlationTableMultiple.component";
+import DynamicComponentAnm from "./analisi_multipla/correlationMultiple/dynamic_anm.component";
 
 const routes: Routes = [
     {
@@ -53,4 +57,4 @@ export class AppRoutingModule {
 export const routingComponents = [HomeComponent, PlotComponent, AnalisiComponent,
     userList, objectList, ChartComponent, DynamicComponent, userListAns, objectListAns,
     correlationSingle, DynamicComponentAns, correlationTableSingle, AnalisiMultiplaComponent,
-    objectListAnm, columnListAnm]
+    objectListAnm, columnListAnm, userListAnm, correlationMultiple, correlationTableMultiple, DynamicComponentAnm]
