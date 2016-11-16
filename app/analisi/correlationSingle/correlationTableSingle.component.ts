@@ -31,7 +31,6 @@ export class correlationTableSingle implements OnInit {
         for (let nome of this.nomi_colonne) {
             _dati.push({"colonne": nome})
         }
-        console.log(_dati)
         this.dati = _dati
     }
 

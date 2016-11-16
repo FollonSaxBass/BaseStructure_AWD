@@ -19,9 +19,7 @@ import {objectListAnm} from "./analisi_multipla/objectListAnm/objectListAnm.comp
 import {columnListAnm} from "./analisi_multipla/columnListAnm/columnListAnm.component";
 import {userListAnm} from "./analisi_multipla/userListAnm/userListAnm.component";
 import {correlationMultiple} from "./analisi_multipla/correlationMultiple/correlationMultiple.component";
-import {correlationTableMultiple} from "./analisi_multipla/correlationMultiple/correlationTableMultiple.component";
 import DynamicComponentAnm from "./analisi_multipla/correlationMultiple/dynamic_anm.component";
-import {CalendarModule} from "primeng/components/calendar/calendar";
 
 const routes: Routes = [
     {
@@ -58,4 +56,4 @@ export class AppRoutingModule {
 export const routingComponents = [HomeComponent, PlotComponent, AnalisiComponent,
     userList, objectList, ChartComponent, DynamicComponent, userListAns, objectListAns,
     correlationSingle, DynamicComponentAns, correlationTableSingle, AnalisiMultiplaComponent,
-    objectListAnm, columnListAnm, userListAnm, correlationMultiple, correlationTableMultiple, DynamicComponentAnm]
+    objectListAnm, columnListAnm, userListAnm, correlationMultiple, DynamicComponentAnm]

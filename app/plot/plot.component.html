@@ -1,5 +1,8 @@
+<div class="panel panel-default col-lg-12 header-title">
+    <h2>Plot Analysis</h2>
+</div>
 <div class="panel panel-default col-lg-2">
-    <div class="panel-heading" >Users</div>
+    <div class="panel-heading">Users</div>
     <div class="panel-body">
         <user-list-plot (onSelectUser)="onSelectedUser($event)"></user-list-plot>
     </div>
@@ -11,4 +14,4 @@
                           (onSelectedPlotta)="onSelectedPlotta($event)"></object-list-plot>
     </div>
 </div>
-<dynamic-component [componentData]="componentData"></dynamic-component>
+<dynamic-component *ngIf="selectedObject" [componentData]="componentData"></dynamic-component>

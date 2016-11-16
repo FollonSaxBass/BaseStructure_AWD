@@ -16,6 +16,11 @@ body {
     padding-top: 60px;
 }
 
+.ui-growl {
+    padding-top: 60px;
+}
+
+
 .list-group {
     max-height: 50vh;
     overflow: auto
@@ -25,6 +30,10 @@ p-dataTable {
     text-align: center;
 }
 
-p-table .col-button {
-    width: 40%;
+.header-title {
+    text-align: center;
+}
+
+p-dataTable .col-button {
+    width: 15%;
 }

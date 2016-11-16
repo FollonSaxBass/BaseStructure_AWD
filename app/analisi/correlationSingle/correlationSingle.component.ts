@@ -32,10 +32,8 @@ export class correlationSingle implements OnInit {
     ngOnInit(): void {
         this.dataService.getObjectCorrelation().subscribe(
             (data) => {
-                console.log(data)
                 for (let nome_colonna of data.colonne) {
                     this.real_nomi_colonne.push(nome_colonna.toString());
-                    console.log(nome_colonna)
                 }
 
                 for (let corr of data.correlazioni) {
@@ -103,7 +101,6 @@ export class correlationSingle implements OnInit {
                 righe_da_considerare.push(_rigaTemp)
             _rigaTemp = []
         }
-        console.log(righe_da_considerare)
         this.righe = righe_da_considerare
         this.nomi_colonne = nomi_da_considerare
     }

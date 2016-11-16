@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 import {DataService, User, Oggetto, Colonna, Valore} from "../../data.service";
 import 'rxjs/Rx';
+import {Message} from "primeng/components/common/api";
 
 @Component({
     selector: 'chart',
@@ -24,6 +25,7 @@ export class ChartComponent implements OnInit {
 
     selectedUser: User;
     selectedObject: Oggetto;
+    message_ok: Message[] = [];
 
     public lineChartDataTotal: Array<any> = [{data: [0, 0, 0, 0, 0, 0, 0], label: 'eta', fill: false}];
     public lineChartLabelsTotal: Array<any> = [0, 0, 0, 0, 0, 0, 0];
@@ -118,11 +120,11 @@ export class ChartComponent implements OnInit {
                 this.chartMin = 0
                 this.chartMax = this.lineChartLabels.length - 1
                 this.visibility = 'shown';
+                this.message_ok.push({severity: 'success', summary: 'Plotted!', detail: 'Plot avvenuto con successo'})
             });
     }
 
     onChange(e: any) {
-        console.log(this.lineChartData)
         let _lineChartLabels: Array<any> = [];
         for (let i = this.rangeValues[0]; i <= this.rangeValues[1]; i++) {
             _lineChartLabels.push(this.lineChartLabelsTotal[i])
@@ -144,7 +146,6 @@ export class ChartComponent implements OnInit {
 
             n = n + 1
         }
-        console.log(_lineChartData)
         this.lineChartData = _lineChartData;
     }
 
