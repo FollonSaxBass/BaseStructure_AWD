@@ -1,19 +1,17 @@
 <p-dataTable [value]="dati">
     <p-column field="colonne" header="Colonne da analizzare"></p-column>
-    <p-column styleClass="col-button" [style]="{'width':'20%'}">
+    <p-column styleClass="col-button">
         <template let-colonna="rowData" pTemplate type="body">
-            <button type="button" pButton (click)="selectColumnRemove(colonna)">
-                <i class="fa fa-minus" aria-hidden="true"></i>
+            <button type="button" pButton (click)="selectColumnRemove(colonna)" icon="fa-minus">
             </button>
         </template>
     </p-column>
 </p-dataTable>
 <p-dataTable [value]="deleted">
     <p-column field="colonne" header="Colonne eliminate"></p-column>
-    <p-column styleClass="col-button" [style]="{'width':'20%'}">
+    <p-column styleClass="col-button" >
         <template let-colonna="rowData" pTemplate type="body">
-            <button type="button" pButton (click)="selectColumnAdd(colonna)">
-                <i class="fa fa-plus" aria-hidden="true"></i>
+            <button type="button" pButton (click)="selectColumnAdd(colonna)" icon="fa-plus">
             </button>
         </template>
     </p-column>

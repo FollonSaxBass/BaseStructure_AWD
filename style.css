@@ -8,7 +8,23 @@
     padding-right: 0;
 }
 
-.table .th {
+.table th {
     text-align: center;
 }
-body { padding-top: 70px; }
+
+body {
+    padding-top: 60px;
+}
+
+.list-group {
+    max-height: 50vh;
+    overflow: auto
+}
+
+p-dataTable {
+    text-align: center;
+}
+
+p-table .col-button {
+    width: 40%;
+}
