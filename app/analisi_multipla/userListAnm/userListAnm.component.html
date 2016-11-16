@@ -1,5 +1,5 @@
-<div *ngIf="users">
-    <ul class="list-group">
+<div *ngIf="users" >
+    <ul class="list-group double-list" >
         <a class="list-group-item" *ngFor="let user of users" (click)="onSelect(user)"
            [class.active]="selectedUsers.indexOf(user)>=0">
             {{user.nome_user}}

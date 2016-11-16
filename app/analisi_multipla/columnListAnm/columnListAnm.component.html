@@ -1,5 +1,5 @@
 <div *ngIf="columns">
-    <ul class="list-group">
+    <ul class="list-group double-list">
         <a class="list-group-item" *ngFor="let colonna of columns" (click)="onSelect(colonna)"
            [class.active]="colonna === selectedColumn">
             {{colonna.nome_colonna}}

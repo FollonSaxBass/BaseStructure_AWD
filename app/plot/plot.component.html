@@ -7,7 +7,7 @@
         <user-list-plot (onSelectUser)="onSelectedUser($event)"></user-list-plot>
     </div>
 </div>
-<div *ngIf="selectedUser" class="panel panel-default col-lg-2">
+<div *ngIf="selectedUser" class="panel panel-default col-lg-2" >
     <div class="panel-heading">Object for selected user</div>
     <div class="panel-body">
         <object-list-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
