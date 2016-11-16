@@ -11,6 +11,7 @@ export class userList implements OnInit {
     users: User[]
     selectedUser: User
 
+    daFiltrare: string
 
 
     @Output() onSelectUser = new EventEmitter();

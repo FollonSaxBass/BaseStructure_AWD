@@ -13,8 +13,9 @@ import {DataTableModule, SharedModule} from 'primeng/primeng';
 import {CalendarModule} from "primeng/components/calendar/calendar";
 import {GrowlModule} from "primeng/components/growl/growl";
 import {LaddaModule} from "angular2-ladda";
+import {FilterPipe} from "./filter.pipe";
 @NgModule({
-    declarations: [AppComponent, routingComponents],
+    declarations: [AppComponent, routingComponents,FilterPipe],
     imports: [
         BrowserModule,
         FormsModule,

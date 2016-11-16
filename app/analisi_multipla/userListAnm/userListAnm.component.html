@@ -1,6 +1,10 @@
-<div *ngIf="users" >
-    <ul class="list-group double-list" >
-        <a class="list-group-item" *ngFor="let user of users" (click)="onSelect(user)"
+<div *ngIf="users">
+    <ul class="list-group double-list">
+        <form id="filter">
+            <label>Filter by name:</label>
+            <input type="text" [(ngModel)]="daFiltrare" [ngModelOptions]="{standalone: true}"/>
+        </form>
+        <a class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
            [class.active]="selectedUsers.indexOf(user)>=0">
             {{user.nome_user}}
         </a>

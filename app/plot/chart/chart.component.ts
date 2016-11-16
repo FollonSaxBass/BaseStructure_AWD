@@ -1,5 +1,5 @@
 import {
-    Component, OnInit, Input, Injector, ViewChild, style, state, trigger, animate, transition
+    Component, OnInit, Input, Injector, ViewChild, style, state, trigger, animate, transition, AfterViewInit
 } from '@angular/core';
 import {DataService, User, Oggetto, Colonna, Valore} from "../../data.service";
 import 'rxjs/Rx';
