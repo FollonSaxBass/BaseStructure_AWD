@@ -15,9 +15,17 @@ export class PlotComponent implements OnInit {
     selectedObject: Oggetto;
     selectedPlotta: any;
 
+    isLoading = false
+
+
     componentData: any = null;
 
     constructor(private dataService: DataService, private ref: ElementRef) {
+        dataService.content$.subscribe(
+            content => {
+                console.log("received"); // test purpose
+                this.isLoading = false
+            });
     }
 
     ngOnInit() {
@@ -41,5 +49,7 @@ export class PlotComponent implements OnInit {
             }
         };
         this.selectedPlotta = true
+        this.isLoading = true
     }
+
 }

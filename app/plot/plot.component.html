@@ -10,7 +10,7 @@
 <div *ngIf="selectedUser" class="panel panel-default col-lg-2" >
     <div class="panel-heading">Object for selected user</div>
     <div class="panel-body">
-        <object-list-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
+        <object-list-plot [isLoading]="isLoading" [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
                           (onSelectedPlotta)="onSelectedPlotta($event)"></object-list-plot>
     </div>
 </div>

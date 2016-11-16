@@ -12,6 +12,7 @@ import {SliderModule} from 'primeng/primeng';
 import {DataTableModule, SharedModule} from 'primeng/primeng';
 import {CalendarModule} from "primeng/components/calendar/calendar";
 import {GrowlModule} from "primeng/components/growl/growl";
+import {LaddaModule} from "angular2-ladda";
 @NgModule({
     declarations: [AppComponent, routingComponents],
     imports: [
@@ -26,7 +27,8 @@ import {GrowlModule} from "primeng/components/growl/growl";
         DataTableModule,
         SharedModule,
         CalendarModule,
-        GrowlModule
+        GrowlModule,
+        LaddaModule
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

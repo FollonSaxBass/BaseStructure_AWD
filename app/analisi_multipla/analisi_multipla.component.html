@@ -27,10 +27,12 @@
         </div>
     </div>
 </div>
+<dynamic-anm-component [componentData]="componentData"
+></dynamic-anm-component>
 <div *ngIf="componentData" style="text-align: center" class="panel panel-default col-lg-8">
+    <div class="panel-heading">Nuova anlisi - Seleziona le date di riferimento</div>
     <div class="panel-body">
         <div>
-            <h1>Nuova anlisi</h1>
             <div class="col-lg-6">
                 <div>Data inizio</div>
                 <p-calendar [minDate]="minDateValue" [maxDate]="maxDateValue" dateFormat="dd/mm/yy"
@@ -52,5 +54,3 @@
         </div>
     </div>
 </div>
-<dynamic-anm-component [componentData]="componentData"
-></dynamic-anm-component>

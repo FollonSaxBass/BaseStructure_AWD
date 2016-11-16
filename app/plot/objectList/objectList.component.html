@@ -6,4 +6,6 @@
         </a>
     </ul>
 </div>
-<button *ngIf="selectedObject" (click)="clickedPlotta(object)" class="btn btn-primary">Plotta</button>
+<button *ngIf="selectedObject" [ladda]='isLoading' (click)="clickedPlotta(object)" class="btn btn-primary"
+      style="background-color: #337AB7" data-size="s">Plotta
+</button>

@@ -121,6 +121,7 @@ export class ChartComponent implements OnInit {
                 this.chartMax = this.lineChartLabels.length - 1
                 this.visibility = 'shown';
                 this.message_ok.push({severity: 'success', summary: 'Plotted!', detail: 'Plot avvenuto con successo'})
+                this.dataService.contentSource.next();
             });
     }
 

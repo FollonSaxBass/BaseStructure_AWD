@@ -1,6 +1,7 @@
 import {Injectable, OnInit} from '@angular/core'
 import {Http} from '@angular/http'
 import 'rxjs/Rx';
+import {Subject}    from 'rxjs/Subject';
 
 export class Valore {
     val: number;
@@ -41,6 +42,9 @@ export class User {
 @Injectable()
 export class DataService implements OnInit {
     users: User[] = new Array();
+
+    contentSource = new Subject();
+    content$ = this.contentSource.asObservable();
 
     constructor(private http: Http) {
         this.http.get('./JSON/plot_prima_risposta.json').map(

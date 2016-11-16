@@ -34,4 +34,11 @@ export class AppComponent {
         this.isAnalisimActive = true
         this.isDropdownActive = true
     }
+
+    deactivateAll() {
+        this.isPlotActive = false
+        this.isAnalisisActive = false
+        this.isAnalisimActive = false
+        this.isDropdownActive = false
+    }
 }

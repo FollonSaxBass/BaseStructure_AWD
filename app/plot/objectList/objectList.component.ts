@@ -12,6 +12,8 @@ export class objectList implements OnInit {
     user: User;
     selectedObject: Oggetto
 
+    @Input() isLoading:boolean
+
     @Output() onSelectedObject = new EventEmitter();
     @Output() onSelectedPlotta = new EventEmitter();
 
@@ -26,7 +28,7 @@ export class objectList implements OnInit {
     ngOnInit(): void {
     }
 
-    clickedPlotta(object:any) {
+    clickedPlotta(object: any) {
         this.onSelectedPlotta.emit()
     }
 }
