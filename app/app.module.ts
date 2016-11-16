@@ -10,6 +10,7 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
 import { HttpModule, JsonpModule } from '@angular/http';
 import {SliderModule} from 'primeng/primeng';
 import {DataTableModule,SharedModule} from 'primeng/primeng';
+import {CalendarModule} from "primeng/components/calendar/calendar";
 @NgModule({
     declarations: [AppComponent, routingComponents],
     imports: [
@@ -22,7 +23,8 @@ import {DataTableModule,SharedModule} from 'primeng/primeng';
         JsonpModule,
         SliderModule,
         DataTableModule,
-        SharedModule
+        SharedModule,
+        CalendarModule
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

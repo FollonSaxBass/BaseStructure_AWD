@@ -40,7 +40,6 @@ export class User {
 
 @Injectable()
 export class DataService implements OnInit {
-
     users: User[] = new Array();
 
     constructor(private http: Http) {
@@ -86,7 +85,7 @@ export class DataService implements OnInit {
         return this.users;
     }
 
-    getColumnUsers(){
+    getColumnUsers() {
         return this.http.get('./JSON/Secondo_analisi_multipla.json').map(
             (res) => res.json()
         );
@@ -97,11 +96,13 @@ export class DataService implements OnInit {
             (res) => res.json()
         )
     }
+
     getUserCorrelation() {
         return this.http.get('./JSON/Correlazione_con_date_analisi_multipla.json').map(
             (res) => res.json()
         )
     }
+
 
     ngOnInit(): void {
 

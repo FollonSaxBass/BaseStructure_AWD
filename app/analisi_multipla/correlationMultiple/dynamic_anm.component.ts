@@ -4,7 +4,7 @@ import {
     ViewContainerRef,
     ViewChild,
     ReflectiveInjector,
-    ComponentFactoryResolver
+    ComponentFactoryResolver, EventEmitter, Output
 } from '@angular/core';
 import {correlationMultiple} from "./correlationMultiple.component";
 
@@ -12,7 +12,7 @@ import {correlationMultiple} from "./correlationMultiple.component";
     selector: 'dynamic-anm-component',
     entryComponents: [correlationMultiple], // Reference to the components must be here in order to dynamically create them
     template: `
-    <div #dynamicComponentContainer></div>
+    <div  #dynamicComponentContainer (onSelectedInvia)="onSelectedInvia($event)"></div>
   `,
 })
 export default class DynamicComponentAnm {
@@ -26,7 +26,6 @@ export default class DynamicComponentAnm {
         if (!data) {
             return;
         }
-
         // Inputs need to be in the following format to be resolved properly
         let inputProviders = Object.keys(data.inputs).map((inputName) => {
             return {provide: inputName, useValue: data.inputs[inputName]};

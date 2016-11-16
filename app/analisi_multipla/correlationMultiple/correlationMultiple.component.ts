@@ -1,6 +1,6 @@
 import {
     Component, OnInit, Input, Output, EventEmitter, trigger, state, style, transition,
-    animate
+    animate, OnChanges, Injector
 } from '@angular/core';
 import {DataService, User, Oggetto} from "../../data.service";
 
@@ -16,6 +16,8 @@ import {DataService, User, Oggetto} from "../../data.service";
 })
 
 export class correlationMultiple implements OnInit {
+    value: Date;
+
     Title = "Matrice di correlazione"
 
     nomi_colonne: Array<any> = [];
@@ -26,50 +28,21 @@ export class correlationMultiple implements OnInit {
     loaded: Boolean;
     visibility = 'hidden';
 
-    constructor(private dataService: DataService) {
+    @Input() componentData: any
+    @Output() onSelectedInvia = new EventEmitter()
+
+    constructor(private dataService: DataService, private injector: Injector) {
+        this.real_nomi_colonne = this.injector.get('real_nomi_colonne');
+        this.real_righe = this.injector.get('righe_da_considerare');
+        this.righe = this.injector.get('righe_da_considerare');
+        this.correlation_vector = this.injector.get('correlation_vector');
+
+        this.nomi_colonne = this.real_nomi_colonne
+        this.loaded = true
+        this.visibility = 'shown'
     }
 
     ngOnInit(): void {
-        this.dataService.getUserCorrelation().subscribe(
-            (data) => {
-                console.log(data)
-                for (let nome_colonna of data.colonne) {
-                    this.real_nomi_colonne.push(nome_colonna.toString());
-                    console.log(nome_colonna)
-                }
-
-                for (let corr of data.correlazioni) {
-                    this.correlation_vector.push(corr);
-                }
-
-                let righe_da_considerare: Array<any> = [];
-                let _rigaTemp: Array<any> = [];
-
-                let n = this.real_nomi_colonne.length;
-                for (let _y = 0; _y < this.real_nomi_colonne.length; _y++) {
-                    for (let _x = 0; _x < this.real_nomi_colonne.length; _x++) {
-                        if (_x == _y) {
-                            _rigaTemp.push(1)
-                        } else {
-                            if (_x > _y) {
-                                _rigaTemp.push(this.correlation_vector[(n * (n - 1) / 2) - (n - _y) * ((n - _y) - 1) / 2 + _x - _y - 1])
-                            }
-                            if (_x < _y) {
-                                _rigaTemp.push(this.correlation_vector[(n * (n - 1) / 2) - (n - _x) * ((n - _x) - 1) / 2 + _y - _x - 1])
-                            }
-                        }
-                    }
-                    if (_rigaTemp.length != 0)
-                        righe_da_considerare.push(_rigaTemp)
-                    _rigaTemp = []
-                }
-                this.nomi_colonne = this.real_nomi_colonne
-                this.real_righe = righe_da_considerare
-                this.righe = righe_da_considerare
-                this.loaded = true
-                this.visibility = 'shown'
-            }
-        );
     }
 
     onSelectedColumnAdd(e: any) {
@@ -103,8 +76,8 @@ export class correlationMultiple implements OnInit {
                 righe_da_considerare.push(_rigaTemp)
             _rigaTemp = []
         }
-        console.log(righe_da_considerare)
         this.righe = righe_da_considerare
         this.nomi_colonne = nomi_da_considerare
     }
+
 }

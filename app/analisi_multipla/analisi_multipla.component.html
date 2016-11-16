@@ -21,4 +21,30 @@
         </div>
     </div>
 </div>
-<dynamic-anm-component [componentData]="componentData"></dynamic-anm-component>
+<div *ngIf="componentData" style="text-align: center" class="panel panel-default col-lg-8">
+    <div class="panel-body">
+        <div>
+            <h1>Nuova anlisi</h1>
+            <div class="col-lg-6">
+                <div>Data inizio</div>
+                <p-calendar [minDate]="minDateValue" [maxDate]="maxDateValue" dateFormat="dd/mm/yy"
+                            [(ngModel)]="data_min"></p-calendar>
+            </div>
+            <div class="col-lg-6">
+                <div>Data fine</div>
+                <p-calendar [minDate]="minDateValue" [maxDate]="maxDateValue" dateFormat="dd/mm/yy"
+                            [(ngModel)]="data_max"></p-calendar>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div>
+            <button (click)="aggiornaDate()"
+                    class="btn btn-primary">
+                Invia richiesta
+            </button>
+        </div>
+    </div>
+</div>
+<dynamic-anm-component [componentData]="componentData"
+                       ></dynamic-anm-component>

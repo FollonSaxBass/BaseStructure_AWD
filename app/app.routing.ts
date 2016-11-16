@@ -21,6 +21,7 @@ import {userListAnm} from "./analisi_multipla/userListAnm/userListAnm.component"
 import {correlationMultiple} from "./analisi_multipla/correlationMultiple/correlationMultiple.component";
 import {correlationTableMultiple} from "./analisi_multipla/correlationMultiple/correlationTableMultiple.component";
 import DynamicComponentAnm from "./analisi_multipla/correlationMultiple/dynamic_anm.component";
+import {CalendarModule} from "primeng/components/calendar/calendar";
 
 const routes: Routes = [
     {
