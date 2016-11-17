@@ -40,7 +40,7 @@ export class User {
  * Possibilmente condiviso da tutti aiuta per le richieste http
  */
 @Injectable()
-export class DataService implements OnInit {
+export class DataService {
 
     /**
      * Prova di caricamenti
@@ -66,6 +66,7 @@ export class DataService implements OnInit {
      * @param http
      */
     constructor(private http: Http) {
+        //https://awdapi.herokuapp.com/getUser
         this.http.get('./JSON/plot_prima_risposta.json').map(
             (res) => res.json()
         ).subscribe(
@@ -102,6 +103,14 @@ export class DataService implements OnInit {
      * @returns {Observable<R>}
      */
     getColumns(id_user: number, id_oggetto: number) {
+        // let toSend = {
+        //     "userid": id_user,
+        //     "objectid": id_oggetto
+        // }
+        // let url = "https://awdapi.herokuapp.com/getTable"
+        // return this.http.post(url, toSend).map(
+        //     (res) => res.json()
+        // );
 
         if (id_oggetto == 1) {
             return this.http.get('./JSON/plot_seconda_risposta.json').map(
@@ -114,11 +123,27 @@ export class DataService implements OnInit {
         }
     }
 
+    getObjectCorrelation(id_user: number, id_oggetto: number) {
+        // let toSend = {
+        //     "userid": id_user,
+        //     "objectid": id_oggetto
+        // }
+        // let url = "https://awdapi.herokuapp.com/correlation_matrix_object"
+        // return this.http.post(url, toSend).map(
+        //     (res) => res.json()
+        // );
+        return this.http.get('./JSON/JSON_Correlation_Object.json').map(
+            (res) => res.json()
+        )
+    }
+
     /**
      * TODO: fare richiesta post che chieda gli oggetti per l'analsi multipla
+     * TODO: Handling errors!!
      * @returns {Observable<R>}
      */
     getObjects() {
+        //https://awdapi.herokuapp.com/getDataObject
         return this.http.get('./JSON/Primo_analisi_multipla.json').map(
             (res) => res.json()
         );
@@ -129,26 +154,46 @@ export class DataService implements OnInit {
      * Metodo utilizzato per avere a disposizione user e colonne associate ad un oggetto
      * @returns {Observable<R>}
      */
-    getColumnUsers() {
+    getColumnUsers(id_oggetto: number) {
+        // let toSend = {
+        //     "objectid": id_oggetto
+        // }
+        // let url = "https://awdapi.herokuapp.com/correlation_matrix_object"
+        // return this.http.post(url, toSend).map(
+        //     (res) => res.json()
+        // );
+
         return this.http.get('./JSON/Secondo_analisi_multipla.json').map(
             (res) => res.json()
         );
     }
 
-    getObjectCorrelation(id_user: number, id_oggetto: number) {
-        return this.http.get('./JSON/JSON_Correlation_Object.json').map(
-            (res) => res.json()
-        )
-    }
-
-    getUserCorrelation() {
+    // Ci può essere più di un utente
+    // Un singolo oggetto
+    // Data minima e data massima
+    getUserCorrelation(users: any, id_oggetto: number, data_min: string, data_max: string) {
+        // let toSend: any;
+        // if (data_min == null || data_max == null) {
+        //     toSend = {
+        //         "users_id": users,
+        //         "object_id": id_oggetto,
+        //         "data_min": "",
+        //         "data_max": ""
+        //     }
+        // } else {
+        //     toSend = {
+        //         "users_id": users,
+        //         "object_id": id_oggetto,
+        //         "data_min": data_min,
+        //         "data_max": data_max
+        //     }
+        // }
+        // let url = "https://awdapi.herokuapp.com/correlation_matrix_user"
+        // return this.http.post(url, toSend).map(
+        //     (res) => res.json()
+        // );
         return this.http.get('./JSON/Correlazione_con_date_analisi_multipla.json').map(
             (res) => res.json()
         )
-    }
-
-
-    ngOnInit(): void {
-
     }
 }

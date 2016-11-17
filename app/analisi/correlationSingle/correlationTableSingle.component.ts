@@ -5,21 +5,34 @@ import {OnInit, Input, Component, Output, EventEmitter} from "@angular/core";
     templateUrl: './app/analisi/correlationSingle/correlationTableSingle.component.html'
 })
 
+/**
+ * Unisce due tabelle in cui possono essere inserite o tolte le colonne
+ */
 export class correlationTableSingle implements OnInit {
 
-    remove(arr: any, what: any) {
-        var found = arr.indexOf(what);
+    /**
+     * Funzione per rimuovere un elemento da un array
+     * @param arr
+     * @param what
+     */
+    remove(array: any, what: any) {
+        var found = array.indexOf(what);
 
         while (found !== -1) {
-            arr.splice(found, 1);
-            found = arr.indexOf(what);
+            array.splice(found, 1);
+            found = array.indexOf(what);
         }
     }
 
+    /**
+     * Nomi delle colonne delle tabella
+     */
     @Input() nomi_colonne: string[];
     @Output() onSelectedColumnAdd = new EventEmitter();
 
+    // Colonne eliminate
     deleted: Array<any> = [];
+    //Colonne da tenere nella matrice di correlazione
     dati: Array<any> = [];
 
     constructor() {
@@ -34,12 +47,22 @@ export class correlationTableSingle implements OnInit {
         this.dati = _dati
     }
 
+    /**
+     * Metodo per l'aggiunta di una colonna dalla matrice di correlazione presente nel padre
+     * Viene comunicato al padre
+     * @param sel
+     */
     selectColumnAdd(sel: any) {
         this.remove(this.deleted, sel)
         this.dati.push(sel)
         this.onSelectedColumnAdd.emit({dati: this.dati, deleted: this.deleted})
     }
 
+    /**
+     * Metodo per la rimozione di una colonna dalla matrice di correlazione presente nel padre
+     * Viene comunicato al padre
+     * @param sel
+     */
     selectColumnRemove(sel: any) {
         this.remove(this.dati, sel)
         this.deleted.push(sel)

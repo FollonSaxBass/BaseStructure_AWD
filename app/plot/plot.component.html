@@ -12,7 +12,7 @@
 <!--Pannello contenente la lista di oggetti-->
 <!--Mostrato solo se l'utente viene selezionato, cambia per ogni utente-->
 <div *ngIf="selectedUser" class="panel panel-default col-lg-2">
-    <div class="panel-heading">Object for selected user</div>
+    <div class="panel-heading">Oggetti riferiti a {{selectedUser.nome_user}}</div>
     <div class="panel-body">
         <object-list-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
                           (onSelectedPlotta)="onSelectedPlotta($event)">Loading...

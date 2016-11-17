@@ -14,6 +14,7 @@ import {CalendarModule} from "primeng/components/calendar/calendar";
 import {GrowlModule} from "primeng/components/growl/growl";
 import {LaddaModule} from "angular2-ladda";
 import {FilterPipe} from "./filter.pipe";
+import {TooltipModule} from "primeng/components/tooltip/tooltip";
 @NgModule({
     declarations: [AppComponent, routingComponents,FilterPipe],
     imports: [
@@ -29,7 +30,8 @@ import {FilterPipe} from "./filter.pipe";
         SharedModule,
         CalendarModule,
         GrowlModule,
-        LaddaModule
+        LaddaModule,
+        TooltipModule
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

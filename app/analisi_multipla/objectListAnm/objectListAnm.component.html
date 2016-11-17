@@ -1,9 +1,9 @@
 <div *ngIf="objects">
     <ul class="list-group">
-        <a class="list-group-item" *ngFor="let object of objects" (click)="onSelect(object)"
+        <a class="list-group-item" *ngFor="let object of objects" (click)="onSelectObject(object)"
            [class.active]="object === selectedObject">
             {{object.nome_oggetto}}
         </a>
     </ul>
 </div>
-<button *ngIf="selectedObject" (click)="clickedInvia(selectedObject)" class="btn btn-primary">Invia</button>
+<button *ngIf="selectedObject" (click)="clickedInvia()" class="btn btn-primary">Invia</button>

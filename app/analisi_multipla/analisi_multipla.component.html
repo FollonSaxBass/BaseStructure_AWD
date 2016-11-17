@@ -22,14 +22,15 @@
     <div *ngIf="users" class="panel panel-default">
         <div class="panel-heading">Users aventi l'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
-            <user-list-an-mul [selColumn]="selectedColumn" [users]="users"
+            <user-list-an-mul [isLoading]="isLoading" [selColumn]="selectedColumn" [users]="users"
                               (onInvia)="onInvia($event)"></user-list-an-mul>
         </div>
     </div>
 </div>
-<dynamic-anm-component [componentData]="componentData"
+<dynamic-anm-component *ngIf="componentData" [componentData]="componentData"
 ></dynamic-anm-component>
-<div *ngIf="componentData" style="text-align: center" class="panel panel-default col-lg-8">
+<div *ngIf="componentData" style="text-align: center"
+     class="panel panel-default col-lg-8">
     <div class="panel-heading">Nuova anlisi - Seleziona le date di riferimento</div>
     <div class="panel-body">
         <div>
@@ -47,10 +48,11 @@
         <br>
         <br>
         <div>
-            <button (click)="aggiornaDate()"
+            <button  style="background-color: #337AB7" data-size="s" [ladda]="isLoading" (click)="aggiornaDate()"
                     class="btn btn-primary">
                 Invia richiesta
             </button>
         </div>
     </div>
 </div>
+<p-growl [value]="message_error"></p-growl>

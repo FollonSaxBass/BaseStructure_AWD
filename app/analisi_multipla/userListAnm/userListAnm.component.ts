@@ -18,6 +18,7 @@ export class userListAnm implements OnInit,OnChanges {
             found = arr.indexOf(what);
         }
     }
+    @Input() isLoading:boolean
 
     @Input() users: any;
     selectedColumn: any;

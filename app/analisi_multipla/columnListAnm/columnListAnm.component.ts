@@ -9,15 +9,15 @@ import {Column} from "primeng/components/common/shared";
 
 export class columnListAnm implements OnInit {
 
-    @Input()
-    columns: Colonna;
+    @Input() columns: Colonna;
+
     selectedColumn: Column;
 
     @Output() onSelectedColumn = new EventEmitter();
 
     onSelect(colonna: Column): void {
         this.selectedColumn = colonna;
-        this.onSelectedColumn.emit()
+        this.onSelectedColumn.emit(this.selectedColumn)
     }
 
     constructor(private dataService: DataService) {

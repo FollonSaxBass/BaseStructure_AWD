@@ -6,26 +6,19 @@ import {DataService, User, Oggetto} from "../../data.service";
     templateUrl: './app/analisi_multipla/objectListAnm/objectListAnm.component.html'
 })
 
-export class objectListAnm implements OnInit {
+export class objectListAnm {
 
-    @Input()
-    objects: any;
+    @Input() objects: any;
 
     selectedObject: Oggetto
 
     @Output() onSelectedObject = new EventEmitter();
 
-    onSelect(oggetto: Oggetto): void {
+    onSelectObject(oggetto: Oggetto): void {
         this.selectedObject = oggetto;
     }
 
-    constructor(private dataService: DataService) {
-    }
-
-    ngOnInit(): void {
-    }
-
-    clickedInvia(oggetto: Oggetto) {
+    clickedInvia() {
         this.onSelectedObject.emit(this.selectedObject)
     }
 }

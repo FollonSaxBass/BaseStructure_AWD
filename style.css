@@ -45,3 +45,7 @@ p-dataTable {
 p-dataTable .col-button {
     width: 20%;
 }
+
+button{
+    overflow: hidden;
+}
