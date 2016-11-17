@@ -64,8 +64,7 @@ export class DataService {
      * sia la richiesta di plot che la richiesta di analisi singola
      * Si prendono, in particolare, Utenti e oggetti associati
      * @param http
-     */
-    constructor(private http: Http) {
+     */    constructor(private http: Http) {
         //https://awdapi.herokuapp.com/getUser
         //./JSON/plot_prima_risposta.json
         this.http.get('https://awdapi.herokuapp.com/getUser').map(
@@ -126,17 +125,17 @@ export class DataService {
     }
 
     getObjectCorrelation(id_user: number, id_oggetto: number) {
-        // let toSend = {
-        //     "userid": id_user,
-        //     "objectid": id_oggetto
-        // }
-        // let url = "https://awdapi.herokuapp.com/correlation_matrix_object"
-        // return this.http.post(url, toSend).map(
-        //     (res) => res.json()
-        // );
-        return this.http.get('./JSON/JSON_Correlation_Object.json').map(
+        let toSend = {
+            "userid": id_user,
+            "objectid": id_oggetto
+        }
+        let url = "https://awdapi.herokuapp.com/correlation_matrix_object"
+        return this.http.post(url, toSend).map(
             (res) => res.json()
-        )
+        );
+        // return this.http.get('./JSON/JSON_Correlation_Object.json').map(
+        //     (res) => res.json()
+        // )
     }
 
     /**
