@@ -21,6 +21,11 @@ import {userListAnm} from "./analisi_multipla/userListAnm/userListAnm.component"
 import {correlationMultiple} from "./analisi_multipla/correlationMultiple/correlationMultiple.component";
 import DynamicComponentAnm from "./analisi_multipla/correlationMultiple/dynamic_anm.component";
 
+/**
+ * Vengono definiti tutti i path ai componenti principali
+ * Routing di Angular 2
+ *
+ * */
 const routes: Routes = [
     {
         path: '',
@@ -53,6 +58,10 @@ const routes: Routes = [
 export class AppRoutingModule {
 }
 
+/**
+ * Componenti da importare in app.module.ts
+ *
+ * */
 export const routingComponents = [HomeComponent, PlotComponent, AnalisiComponent,
     userList, objectList, ChartComponent, DynamicComponent, userListAns, objectListAns,
     correlationSingle, DynamicComponentAns, correlationTableSingle, AnalisiMultiplaComponent,

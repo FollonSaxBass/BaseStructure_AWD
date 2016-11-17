@@ -41,12 +41,30 @@ export class User {
  */
 @Injectable()
 export class DataService implements OnInit {
-    //Arrai di utenti fi
+
+    /**
+     * Prova di caricamenti
+     * @param ms
+     * @returns {Promise<T>}
+     */
+
+
+        //Array di utenti per il plot, salvati qui in caso di nuova richiesta (Cache)
     users: User[] = new Array();
+
+    //Array di utenti per il plot, salvati qui in caso di nuova richiesta (Cache)
+    oggetti: Oggetto[] = new Array();
+
 
     contentSource = new Subject();
     content$ = this.contentSource.asObservable();
 
+    /**
+     * La prima cosa che fa questo componente è andare a prendere i dati degli utenti perchè caratterizza
+     * sia la richiesta di plot che la richiesta di analisi singola
+     * Si prendono, in particolare, Utenti e oggetti associati
+     * @param http
+     */
     constructor(private http: Http) {
         this.http.get('./JSON/plot_prima_risposta.json').map(
             (res) => res.json()
@@ -68,8 +86,23 @@ export class DataService implements OnInit {
         );
     }
 
+    /**
+     * Metodo utilizzato quando si hanno già a disposizione gli Users
+     * @returns {User[]}
+     */
+    getUsers() {
+        return this.users;
+    }
+
     //TODO: fare richiesta post dove dice Artio
+    /**
+     * Richiesta per plottaggio
+     * @param id_user
+     * @param id_oggetto
+     * @returns {Observable<R>}
+     */
     getColumns(id_user: number, id_oggetto: number) {
+
         if (id_oggetto == 1) {
             return this.http.get('./JSON/plot_seconda_risposta.json').map(
                 (res) => res.json()
@@ -81,23 +114,28 @@ export class DataService implements OnInit {
         }
     }
 
+    /**
+     * TODO: fare richiesta post che chieda gli oggetti per l'analsi multipla
+     * @returns {Observable<R>}
+     */
     getObjects() {
         return this.http.get('./JSON/Primo_analisi_multipla.json').map(
             (res) => res.json()
         );
     }
 
-    getUsers() {
-        return this.users;
-    }
-
+    /**
+     * TODO: invia richiesta post ad artio con Oggetto di riferimento
+     * Metodo utilizzato per avere a disposizione user e colonne associate ad un oggetto
+     * @returns {Observable<R>}
+     */
     getColumnUsers() {
         return this.http.get('./JSON/Secondo_analisi_multipla.json').map(
             (res) => res.json()
         );
     }
 
-    getObjectCorrelation() {
+    getObjectCorrelation(id_user: number, id_oggetto: number) {
         return this.http.get('./JSON/JSON_Correlation_Object.json').map(
             (res) => res.json()
         )

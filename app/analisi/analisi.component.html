@@ -4,7 +4,7 @@
 <div class="panel panel-default col-lg-2">
     <div class="panel-heading">Users</div>
     <div class="panel-body">
-        <user-list-ans-plot (onSelectUser)="onSelectedUser($event)"></user-list-ans-plot>
+        <user-list-ans-plot [users]="users" (onSelectedUser)="onSelectedUser($event)"></user-list-ans-plot>
     </div>
 </div>
 
@@ -12,7 +12,8 @@
     <div class="panel-heading">Object for selected user</div>
     <div class="panel-body">
         <object-list-ans-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
-                              (onSelectedPlotta)="onSelectedPlotta($event)"></object-list-ans-plot>
+                              (onSelectedAnalizza)="onSelectedAnalizza($event)"></object-list-ans-plot>
     </div>
 </div>
 <dynamic-ans-component [componentData]="componentData"></dynamic-ans-component>
+<p-growl [value]="message_error"></p-growl>

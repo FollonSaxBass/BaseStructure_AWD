@@ -1,6 +1,6 @@
 import {
     Component, OnInit, Input, Output, EventEmitter, trigger, state, style, transition,
-    animate
+    animate, Injector
 } from '@angular/core';
 import {DataService, User, Oggetto} from "../../data.service";
 
@@ -11,26 +11,51 @@ import {DataService, User, Oggetto} from "../../data.service";
         trigger('visibilityChanged', [
             state('shown', style({opacity: 1})),
             state('hidden', style({opacity: 0})),
-            transition('hidden => shown', animate('300ms'))
+            // transition('hidden => shown', animate('400ms ease-in')),
+            transition('hidden => shown', [
+                style({transform: 'translateY(+100%)'}),
+                animate(400)
+            ]),
         ])]
 })
 
 export class correlationSingle implements OnInit {
-    Title = "Matrice di correlazione"
-
+    // Nomi delle colonne da visualizzare
     nomi_colonne: Array<any> = [];
+
+    // Righe da visualizzare
     righe: Array<any> = [];
+
+    // Nomi e righe totali, usato per essere disponibili nel caso in cui l'utente selezioni di togliere o mettere un valore
     real_nomi_colonne: Array<any> = [];
     real_righe: Array<any> = [];
+
+    // Vettore di correlazioni usato per costruire la matrice,
+    //il vettore rappresenta i componenti in ordine della matrice triangolare alta
+    // [0 c0  c1 c2
+    //  0  0  c3 c4
+    //  0  0  0  c5
+    //  0  0  0   0]
+    //Vettore di correlazione--> [c0,c1,c2,c3,c4,c5]
     correlation_vector: Array<any> = [];
-    loaded: Boolean;
+
+    // Indice se tutto  è stato caricato
+    loaded: boolean;
     visibility = 'hidden';
 
-    constructor(private dataService: DataService) {
+    selectedUser: User
+    selectedObject: Oggetto
+
+    constructor(private dataService: DataService, private injector: Injector) {
+        this.selectedUser = this.injector.get('selectedUser');
+        this.selectedObject = this.injector.get('selectedObject');
     }
 
+    /**
+     * Vado a prendere gli oggetti che mi servono durante l'inizializzazione
+     */
     ngOnInit(): void {
-        this.dataService.getObjectCorrelation().subscribe(
+        this.dataService.getObjectCorrelation(this.selectedUser.id_user, this.selectedObject.id_oggetto).subscribe(
             (data) => {
                 for (let nome_colonna of data.colonne) {
                     this.real_nomi_colonne.push(nome_colonna.toString());
@@ -66,10 +91,16 @@ export class correlationSingle implements OnInit {
                 this.righe = righe_da_considerare
                 this.loaded = true
                 this.visibility = 'shown'
+                this.dataService.contentSource.next();
             }
         );
     }
 
+    /**
+     * Metodo chiamato da uno degli elementi figli
+     * se viene aggiunta o tolta una colonna
+     * @param e
+     */
     onSelectedColumnAdd(e: any) {
         let nomi_passati: Array<any> = [];
         for (let dato of e.dati) {

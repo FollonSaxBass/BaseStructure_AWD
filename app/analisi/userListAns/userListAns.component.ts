@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {DataService, User} from "../../data.service";
 
 @Component({
@@ -6,22 +6,16 @@ import {DataService, User} from "../../data.service";
     templateUrl: './app/analisi/userListAns/userListAns.component.html'
 })
 
-export class userListAns implements OnInit {
-    Title = "Plot component"
-    users: User[]
+export class userListAns {
+
+    @Input() users: User[]
+
     selectedUser: User
 
-    @Output() onSelectUser = new EventEmitter();
+    @Output() onSelectedUser = new EventEmitter();
 
     onSelect(user: User): void {
         this.selectedUser = user;
-        this.onSelectUser.emit(this.selectedUser)
-    }
-
-    constructor(private dataService: DataService) {
-    }
-
-    ngOnInit() {
-        this.users = this.dataService.getUsers()
+        this.onSelectedUser.emit(this.selectedUser)
     }
 }

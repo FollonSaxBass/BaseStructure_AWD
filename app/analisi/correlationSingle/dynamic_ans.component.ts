@@ -49,7 +49,6 @@ export default class DynamicComponentAns {
         if (this.currentComponent) {
             this.currentComponent.destroy();
         }
-
         this.currentComponent = component;
     }
 

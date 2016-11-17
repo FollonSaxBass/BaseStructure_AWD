@@ -6,4 +6,4 @@
         </a>
     </ul>
 </div>
-<button *ngIf="selectedObject" (click)="clickedAnalizza(object)" class="btn btn-primary">Analizza</button>
+<button *ngIf="selectedObject" (click)="clickedAnalizza()" [ladda]='isLoading' style="background-color: #337AB7" data-size="s" class="btn btn-primary">Analizza</button>
