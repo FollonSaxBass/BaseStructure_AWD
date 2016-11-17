@@ -7,7 +7,6 @@ export class Valore {
     val: number;
     timestamp: string;
 }
-
 export class Colonna {
     id_colonna: number;
     nome_colonna: string;
@@ -17,7 +16,6 @@ export class Colonna {
         this.values = new Array();
     }
 }
-
 export class Oggetto {
     id_oggetto: number;
     nome_oggetto: string;
@@ -27,9 +25,7 @@ export class Oggetto {
         this.columns = new Array();
     }
 }
-
 export class User {
-
     id_user: number;
     nome_user: string;
     oggetti: Oggetto[];
@@ -39,8 +35,13 @@ export class User {
     }
 }
 
+/**
+ * Modello di tutta l'applicazione
+ * Possibilmente condiviso da tutti aiuta per le richieste http
+ */
 @Injectable()
 export class DataService implements OnInit {
+    //Arrai di utenti fi
     users: User[] = new Array();
 
     contentSource = new Subject();
@@ -67,6 +68,7 @@ export class DataService implements OnInit {
         );
     }
 
+    //TODO: fare richiesta post dove dice Artio
     getColumns(id_user: number, id_oggetto: number) {
         if (id_oggetto == 1) {
             return this.http.get('./JSON/plot_seconda_risposta.json').map(

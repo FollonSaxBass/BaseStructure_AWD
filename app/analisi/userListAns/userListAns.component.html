@@ -1,6 +1,6 @@
 <form id="filter">
-    <label>Filter by name:</label>
-    <input type="text" [(ngModel)]="daFiltrare" [ngModelOptions]="{standalone: true}"/>
+    <label style="width: 100%; text-align: center">Filter by name:</label>
+    <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" [ngModelOptions]="{standalone: true}"/>
 </form>
 <ul class="list-group">
     <a class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"

@@ -1,4 +1,7 @@
-<div [@visibilityChanged]="visibility" class="panel panel-default col-lg-8">
+<div [@visibilityChanged]="visibility" class="panel panel-default col-lg-8" style="padding-left: 0;padding-right: 0">
+    <div class="panel-heading">Grafico rappresentante l'oggetto {{selectedObject.nome_oggetto}} riferito all'utente
+        {{selectedUser.nome_user}}
+    </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
@@ -15,9 +18,8 @@
                 </div>
                 <p-growl [value]="message_ok"></p-growl>
             </div>
-
         </div>
-        <div>
+        <div class="col-lg-10">
             <div>
                 <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="chartMin" [max]="chartMax"
                           (onChange)="onChange($event)"></p-slider>

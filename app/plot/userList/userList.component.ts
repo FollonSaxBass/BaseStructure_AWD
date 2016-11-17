@@ -7,12 +7,10 @@ import {DataService, User} from "../../data.service";
 })
 
 export class userList implements OnInit {
-    Title = "Plot component"
     users: User[]
     selectedUser: User
 
     daFiltrare: string
-
 
     @Output() onSelectUser = new EventEmitter();
 

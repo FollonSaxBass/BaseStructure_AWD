@@ -6,29 +6,33 @@ import {DataService, User, Oggetto} from "../../data.service";
     templateUrl: './app/plot/objectList/objectList.component.html'
 })
 
-export class objectList implements OnInit {
+export class objectList {
 
-    @Input()
-    user: User;
+    //User ricevuto dal padre
+    @Input() user: User;
+
     selectedObject: Oggetto
 
-    @Input() isLoading:boolean
-
+    //Elementi per comunicare col padre
     @Output() onSelectedObject = new EventEmitter();
     @Output() onSelectedPlotta = new EventEmitter();
 
+    /***
+     * Ogni volta che seleziono un oggetto lo dico al padre
+     * @param oggetto
+     */
     onSelect(oggetto: Oggetto): void {
         this.selectedObject = oggetto;
         this.onSelectedObject.emit(this.selectedObject)
     }
 
-    constructor(private dataService: DataService) {
+    constructor() {
     }
 
-    ngOnInit(): void {
-    }
-
-    clickedPlotta(object: any) {
+    /***
+     * Comunico al padre che è stato cliccato il plot
+     */
+    clickedPlotta() {
         this.onSelectedPlotta.emit()
     }
 }
