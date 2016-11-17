@@ -1,15 +1,15 @@
 {
-  "colonne":[
+  "colonne": [
     {
-  "id_colonna": 3,
-  "nome_colonna": "pressione_max",
-  "valori": [
-    130,
-    150,
-    160,
-    160
-  ]
-},
+      "id_colonna": 3,
+      "nome_colonna": "pressione_max",
+      "valori": [
+        130,
+        150,
+        160,
+        160
+      ]
+    },
     {
       "id_colonna": 1,
       "nome_colonna": "globuli rossi",

@@ -67,7 +67,8 @@ export class DataService {
      */
     constructor(private http: Http) {
         //https://awdapi.herokuapp.com/getUser
-        this.http.get('./JSON/plot_prima_risposta.json').map(
+        //./JSON/plot_prima_risposta.json
+        this.http.get('https://awdapi.herokuapp.com/getUser').map(
             (res) => res.json()
         ).subscribe(
             (data) => {
@@ -103,24 +104,25 @@ export class DataService {
      * @returns {Observable<R>}
      */
     getColumns(id_user: number, id_oggetto: number) {
-        // let toSend = {
-        //     "userid": id_user,
-        //     "objectid": id_oggetto
-        // }
-        // let url = "https://awdapi.herokuapp.com/getTable"
-        // return this.http.post(url, toSend).map(
-        //     (res) => res.json()
-        // );
-
-        if (id_oggetto == 1) {
-            return this.http.get('./JSON/plot_seconda_risposta.json').map(
-                (res) => res.json()
-            );
-        } else {
-            return this.http.get('./JSON/plot_seconda_risposta2.json').map(
-                (res) => res.json()
-            );
+        let toSend = {
+            "userid": id_user,
+            "objectid": id_oggetto
         }
+        console.log(toSend)
+        let url = "https://awdapi.herokuapp.com/getTable"
+        return this.http.post(url, toSend).map(
+            (res) => res.json()
+        );
+
+        // if (id_oggetto == 1) {
+        //     return this.http.get('./JSON/plot_seconda_risposta.json').map(
+        //         (res) => res.json()
+        //     );
+        // } else {
+        //     return this.http.get('./JSON/plot_seconda_risposta2.json').map(
+        //         (res) => res.json()
+        //     );
+        // }
     }
 
     getObjectCorrelation(id_user: number, id_oggetto: number) {

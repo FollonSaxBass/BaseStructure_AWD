@@ -99,6 +99,7 @@ export class ChartComponent implements OnInit {
     ngOnInit() {
         this.dataService.getColumns(this.selectedUser.id_user, this.selectedObject.id_oggetto).subscribe(
             (data: any) => {
+                console.log(data)
                 for (let column of data.colonne) {
                     let new_column = new Colonna();
                     new_column.id_colonna = column.id_colonna;
