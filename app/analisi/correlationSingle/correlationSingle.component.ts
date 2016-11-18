@@ -20,6 +20,8 @@ import {DataService, User, Oggetto} from "../../data.service";
 })
 
 export class correlationSingle implements OnInit {
+
+
     // Nomi delle colonne da visualizzare
     nomi_colonne: Array<any> = [];
 

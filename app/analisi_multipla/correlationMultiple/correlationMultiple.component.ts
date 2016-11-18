@@ -15,9 +15,8 @@ import {DataService, User, Oggetto} from "../../data.service";
         ])]
 })
 
-export class correlationMultiple implements OnInit {
+export class correlationMultiple  {
     value: Date;
-
     Title = "Matrice di correlazione calcolata fra il " + this.data_min_calc + " e il " + this.data_max_calc
 
     nomi_colonne: Array<any> = [];
@@ -45,9 +44,6 @@ export class correlationMultiple implements OnInit {
         this.nomi_colonne = this.real_nomi_colonne
         this.loaded = true
         this.visibility = 'shown'
-    }
-
-    ngOnInit(): void {
     }
 
     onSelectedColumnAdd(e: any) {

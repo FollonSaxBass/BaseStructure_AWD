@@ -1,6 +1,11 @@
 <div *ngIf="columns">
+    <form id="filter">
+        <label style="width: 100%; text-align: center">Filter by name:</label>
+        <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" pTooltip="Inserisci username da filtrare"
+               [ngModelOptions]="{standalone: true}"/>
+    </form>
     <ul class="list-group double-list">
-        <a class="list-group-item" *ngFor="let colonna of columns" (click)="onSelect(colonna)"
+        <a class="list-group-item" *ngFor="let colonna of columns|filter:daFiltrare" (click)="onSelect(colonna)"
            [class.active]="colonna === selectedColumn">
             {{colonna.nome_colonna}}
         </a>

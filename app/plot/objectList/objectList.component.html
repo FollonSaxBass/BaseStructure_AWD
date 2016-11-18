@@ -1,10 +1,16 @@
 <div *ngIf="user">
+    <form id="filter">
+        <label style="width: 100%; text-align: center">Filter by name:</label>
+        <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" pTooltip="Inserisci username da filtrare"
+               [ngModelOptions]="{standalone: true}"/>
+    </form>
     <ul class="list-group">
-        <a class="list-group-item" *ngFor="let object of user.oggetti" (click)="onSelect(object)"
+        <a class="list-group-item" *ngFor="let object of user.oggetti|filter:daFiltrare" (click)="onSelect(object)"
            [class.active]="object === selectedObject">
             {{object.nome_oggetto}}
         </a>
     </ul>
 </div>
 <button *ngIf="selectedObject" [ladda]='isLoading' (click)="clickedPlotta(object)" class="btn btn-primary"
-      style="background-color: #337AB7" data-size="s">Plotta</button>
+        style="background-color: #337AB7" data-size="s">Plotta
+</button>

@@ -1,8 +1,9 @@
+<form id="filter">
+    <label style="width: 100%; text-align: center">Filter by name:</label>
+    <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" pTooltip="Inserisci username da filtrare"
+           [ngModelOptions]="{standalone: true}"/>
+</form>
 <ul class="list-group ">
-    <form id="filter">
-        <label style="width: 100%; text-align: center">Filter by name:</label>
-        <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare"  pTooltip="Inserisci username da filtrare" [ngModelOptions]="{standalone: true}"/>
-    </form>
     <a class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
        [class.active]="user === selectedUser">
         {{user.nome_user}}

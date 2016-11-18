@@ -2,16 +2,31 @@ import {PipeTransform, Pipe} from "@angular/core";
 @Pipe({
     name: 'filter'
 })
-
+/**
+ * Filtro che ordina e filtra per inserimento
+ */
 export class FilterPipe implements PipeTransform {
 
-    transform(users: any, daFiltrare: any): any {
+    transform(array: any, daFiltrare: any): any {
+        if (daFiltrare === undefined) return array;
 
-        if (daFiltrare === undefined) return users;
+        if (array.length == 0) return
 
-        return users.filter(function (user: any) {
-            return user.nome_user.toLowerCase().includes(daFiltrare.toLowerCase());
+        array.sort((a: any, b: any) => {
+            if (a.string_name().toLowerCase() < b.string_name().toLowerCase()) {
+                return -1;
+            } else if (a.string_name().toLowerCase() > b.string_name().toLowerCase()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+        if (daFiltrare === undefined) return array;
+
+        return array.filter(function (user: any) {
+            return user.string_name().toLowerCase().includes(daFiltrare.toLowerCase());
 
         })
+
     }
 }
