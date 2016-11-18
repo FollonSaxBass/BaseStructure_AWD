@@ -11,13 +11,11 @@ import {DataService, User, Oggetto} from "../../data.service";
         trigger('visibilityChanged', [
             state('shown', style({opacity: 1})),
             state('hidden', style({opacity: 0})),
-            transition('hidden => shown', animate('300ms'))
+            transition('hidden => shown', animate('400ms'))
         ])]
 })
 
-export class correlationMultiple  {
-    value: Date;
-    Title = "Matrice di correlazione calcolata fra il " + this.data_min_calc + " e il " + this.data_max_calc
+export class correlationMultiple {
 
     nomi_colonne: Array<any> = [];
     righe: Array<any> = [];
@@ -39,8 +37,8 @@ export class correlationMultiple  {
         this.righe = this.injector.get('righe_da_considerare');
         this.correlation_vector = this.injector.get('correlation_vector');
         this.data_min_calc = this.injector.get('data_min_calc');
-
         this.data_max_calc = this.injector.get('data_max_calc');
+
         this.nomi_colonne = this.real_nomi_colonne
         this.loaded = true
         this.visibility = 'shown'

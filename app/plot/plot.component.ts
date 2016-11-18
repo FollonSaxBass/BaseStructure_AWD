@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, Input, ElementRef} from '@angular/core';
+import {Component, OnInit, Output, Input, ElementRef, AfterViewChecked} from '@angular/core';
 import {DataService, User, Oggetto} from "../data.service";
 import {ChartComponent} from "./chart/chart.component";
 import {Message} from "primeng/components/common/api";
@@ -8,7 +8,7 @@ import {Message} from "primeng/components/common/api";
     templateUrl: './app/plot/plot.component.html'
 })
 
-export class PlotComponent implements OnInit {
+export class PlotComponent {
     //Lista di utenti da far vedere
     users: User[]
 
@@ -20,6 +20,10 @@ export class PlotComponent implements OnInit {
 
     //Usato per la visualizzazione del bottone ladda per il caricamento
     isLoading = false
+
+    // isLoadingUsers=false
+    // isLoadingUsers=false
+    // isLoadingUsers=false
 
     //Utilizzato per mandare tutti i dati per il plot al componente chartComponent
     componentData: any = null;

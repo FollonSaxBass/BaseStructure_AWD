@@ -1,7 +1,8 @@
 import {Injectable, OnInit} from '@angular/core'
-import {Http} from '@angular/http'
-import 'rxjs/Rx';
 import {Subject}    from 'rxjs/Subject';
+import {Http, Response} from '@angular/http'
+import 'rxjs/Rx';
+import {Observable} from "rxjs/Observable";
 
 export class Valore {
     val: number;
@@ -12,9 +13,11 @@ export class Colonna {
     id_colonna: number;
     nome_colonna: string;
     values: Valore[];
-    string_name(){
+
+    string_name() {
         return this.nome_colonna;
     }
+
     constructor() {
         this.values = new Array();
     }
@@ -23,9 +26,11 @@ export class Oggetto {
     id_oggetto: number;
     nome_oggetto: string;
     columns: Colonna[];
-    string_name(){
+
+    string_name() {
         return this.nome_oggetto;
     }
+
     constructor() {
         this.columns = new Array();
     }
@@ -34,9 +39,11 @@ export class User {
     id_user: number;
     nome_user: string;
     oggetti: Oggetto[];
-    string_name(){
+
+    string_name() {
         return this.nome_user;
     }
+
     constructor() {
         this.oggetti = new Array();
     }
@@ -48,20 +55,11 @@ export class User {
  */
 @Injectable()
 export class DataService {
-
-    /**
-     * Prova di caricamenti
-     * @param ms
-     * @returns {Promise<T>}
-     */
-
-
-        //Array di utenti per il plot, salvati qui in caso di nuova richiesta (Cache)
+    //Array di utenti per il plot, salvati qui in caso di nuova richiesta (Cache)
     users: User[] = new Array();
 
     //Array di utenti per il plot, salvati qui in caso di nuova richiesta (Cache)
     oggetti: Oggetto[] = new Array();
-
 
     contentSource = new Subject();
     content$ = this.contentSource.asObservable();
@@ -71,12 +69,11 @@ export class DataService {
      * sia la richiesta di plot che la richiesta di analisi singola
      * Si prendono, in particolare, Utenti e oggetti associati
      * @param http
-     */    constructor(private http: Http) {
-        //https://awdapi.herokuapp.com/getUser
-        //./JSON/plot_prima_risposta.json
+     */
+    constructor(private http: Http) {
         this.http.get('https://awdapi.herokuapp.com/getUser').map(
             (res) => res.json()
-        ).subscribe(
+        ).catch(this.handleError).subscribe(
             (data) => {
                 for (let user of data) {
                     let new_user = new User();
@@ -90,8 +87,25 @@ export class DataService {
                     }
                     this.users.push(new_user);
                 }
-            }
-        );
+            },
+            (error) => {
+                console.log("Erroraccio")
+                console.log(error)
+            });
+    }
+
+    private handleError(error: Response | any) {
+        // In a real world app, we might use a remote logging infrastructure
+        let errMsg: string;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Observable.throw(errMsg);
     }
 
     /**
@@ -101,6 +115,7 @@ export class DataService {
     getUsers() {
         return this.users;
     }
+
 
     //TODO: fare richiesta post dove dice Artio
     /**
@@ -119,16 +134,6 @@ export class DataService {
         return this.http.post(url, toSend).map(
             (res) => res.json()
         );
-
-        // if (id_oggetto == 1) {
-        //     return this.http.get('./JSON/plot_seconda_risposta.json').map(
-        //         (res) => res.json()
-        //     );
-        // } else {
-        //     return this.http.get('./JSON/plot_seconda_risposta2.json').map(
-        //         (res) => res.json()
-        //     );
-        // }
     }
 
     getObjectCorrelation(id_user: number, id_oggetto: number) {
@@ -140,9 +145,6 @@ export class DataService {
         return this.http.post(url, toSend).map(
             (res) => res.json()
         );
-        // return this.http.get('./JSON/JSON_Correlation_Object.json').map(
-        //     (res) => res.json()
-        // )
     }
 
     /**
@@ -151,8 +153,6 @@ export class DataService {
      * @returns {Observable<R>}
      */
     getObjects() {
-        //https://awdapi.herokuapp.com/getDataObject
-        //./JSON/Primo_analisi_multipla.json
         return this.http.get('https://awdapi.herokuapp.com/getDataObject').map(
             (res) => res.json()
         );
@@ -170,11 +170,7 @@ export class DataService {
         let url = "https://awdapi.herokuapp.com/getDataUser"
         return this.http.post(url, toSend).map(
             (res) => res.json()
-        );
-
-        // return this.http.get('./JSON/Secondo_analisi_multipla.json').map(
-        //     (res) => res.json()
-        // );
+        ).catch(this.handleError);
     }
 
     // Ci può essere più di un utente
@@ -209,8 +205,5 @@ export class DataService {
         return this.http.post(url, toSend).map(
             (res) => res.json()
         );
-        // return this.http.get('./JSON/Correlazione_con_date_analisi_multipla.json').map(
-        //     (res) => res.json()
-        // )
     }
 }
