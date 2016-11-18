@@ -145,7 +145,8 @@ export class DataService {
      */
     getObjects() {
         //https://awdapi.herokuapp.com/getDataObject
-        return this.http.get('./JSON/Primo_analisi_multipla.json').map(
+        //./JSON/Primo_analisi_multipla.json
+        return this.http.get('https://awdapi.herokuapp.com/getDataObject').map(
             (res) => res.json()
         );
     }
@@ -156,45 +157,53 @@ export class DataService {
      * @returns {Observable<R>}
      */
     getColumnUsers(id_oggetto: number) {
-        // let toSend = {
-        //     "objectid": id_oggetto
-        // }
-        // let url = "https://awdapi.herokuapp.com/correlation_matrix_object"
-        // return this.http.post(url, toSend).map(
-        //     (res) => res.json()
-        // );
-
-        return this.http.get('./JSON/Secondo_analisi_multipla.json').map(
+        let toSend = {
+            "objectid": id_oggetto
+        }
+        let url = "https://awdapi.herokuapp.com/getDataUser"
+        return this.http.post(url, toSend).map(
             (res) => res.json()
         );
+
+        // return this.http.get('./JSON/Secondo_analisi_multipla.json').map(
+        //     (res) => res.json()
+        // );
     }
 
     // Ci può essere più di un utente
     // Un singolo oggetto
     // Data minima e data massima
-    getUserCorrelation(users: any, id_oggetto: number, data_min: string, data_max: string) {
-        // let toSend: any;
-        // if (data_min == null || data_max == null) {
-        //     toSend = {
-        //         "users_id": users,
-        //         "object_id": id_oggetto,
-        //         "data_min": "",
-        //         "data_max": ""
-        //     }
-        // } else {
-        //     toSend = {
-        //         "users_id": users,
-        //         "object_id": id_oggetto,
-        //         "data_min": data_min,
-        //         "data_max": data_max
-        //     }
-        // }
-        // let url = "https://awdapi.herokuapp.com/correlation_matrix_user"
-        // return this.http.post(url, toSend).map(
-        //     (res) => res.json()
-        // );
-        return this.http.get('./JSON/Correlazione_con_date_analisi_multipla.json').map(
+    getUserCorrelation(users: any, id_oggetto: number, id_colonna: number, data_min: string, data_max: string) {
+        let toSend: any;
+        let id_utenti: any = []
+        for (let user of users) {
+            id_utenti.push(user.id_user)
+        }
+        if (data_min == null || data_max == null) {
+            toSend = {
+                "utenti": id_utenti,
+                "objectid": id_oggetto,
+                "colid": id_colonna,
+                "data_min": "",
+                "data_max": ""
+            }
+        } else {
+            toSend = {
+                "utenti": id_utenti,
+                "objectid": id_oggetto,
+                "colid": id_colonna,
+                "data_min": data_min,
+                "data_max": data_max
+            }
+        }
+        let url = "https://awdapi.herokuapp.com/correlation_matrix_user"
+
+        console.log(toSend)
+        return this.http.post(url, toSend).map(
             (res) => res.json()
-        )
+        );
+        // return this.http.get('./JSON/Correlazione_con_date_analisi_multipla.json').map(
+        //     (res) => res.json()
+        // )
     }
 }

@@ -9,7 +9,7 @@ import {DataService, User, Oggetto, Colonna} from "../../data.service";
     templateUrl: './app/analisi_multipla/userListAnm/userListAnm.component.html'
 })
 
-export class userListAnm implements OnInit,OnChanges {
+export class userListAnm {
     remove(arr: any, what: any) {
         var found = arr.indexOf(what);
 
@@ -18,7 +18,8 @@ export class userListAnm implements OnInit,OnChanges {
             found = arr.indexOf(what);
         }
     }
-    @Input() isLoading:boolean
+
+    @Input() isLoading: boolean
 
     @Input() users: any;
     selectedColumn: any;
@@ -31,27 +32,17 @@ export class userListAnm implements OnInit,OnChanges {
         this.selectedColumn = (colonna) || null;
     }
 
-
     onSelect(user: User): void {
         if (this.selectedUsers.indexOf(user) >= 0) {
             this.remove(this.selectedUsers, user)
         } else {
             this.selectedUsers.push(user)
         }
-    }
-
-    constructor(private dataService: DataService) {
+        console.log(this.selectedUsers)
     }
 
     clickedInvia() {
         this.onInvia.emit(this.selectedUsers)
-    }
-
-    ngOnInit(): void {
-    }
-
-    ngOnChanges(changes: any): void {
-        console.log(changes)
     }
 
 }

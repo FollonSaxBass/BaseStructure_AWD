@@ -6,4 +6,6 @@
         </a>
     </ul>
 </div>
-<button *ngIf="selectedObject" (click)="clickedInvia()" class="btn btn-primary">Invia</button>
+<button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s" *ngIf="selectedObject"
+        (click)="clickedInvia()" class="btn btn-primary">Invia
+</button>

@@ -18,7 +18,7 @@ import {DataService, User, Oggetto} from "../../data.service";
 export class correlationMultiple implements OnInit {
     value: Date;
 
-    Title = "Matrice di correlazione"
+    Title = "Matrice di correlazione calcolata fra il " + this.data_min_calc + " e il " + this.data_max_calc
 
     nomi_colonne: Array<any> = [];
     righe: Array<any> = [];
@@ -31,12 +31,17 @@ export class correlationMultiple implements OnInit {
     @Input() componentData: any
     @Output() onSelectedInvia = new EventEmitter()
 
+    data_min_calc: string;
+    data_max_calc: string;
+
     constructor(private dataService: DataService, private injector: Injector) {
         this.real_nomi_colonne = this.injector.get('real_nomi_colonne');
         this.real_righe = this.injector.get('righe_da_considerare');
         this.righe = this.injector.get('righe_da_considerare');
         this.correlation_vector = this.injector.get('correlation_vector');
+        this.data_min_calc = this.injector.get('data_min_calc');
 
+        this.data_max_calc = this.injector.get('data_max_calc');
         this.nomi_colonne = this.real_nomi_colonne
         this.loaded = true
         this.visibility = 'shown'

@@ -47,7 +47,7 @@ export class AnalisiMultiplaComponent implements OnInit {
                 for (let oggetto of data) {
                     let new_oggetto = new Oggetto();
                     new_oggetto.id_oggetto = oggetto.id;
-                    new_oggetto.nome_oggetto = oggetto.nome;
+                    new_oggetto.nome_oggetto = oggetto.name;
                     tempObj.push(new_oggetto)
                 }
                 this.objects = tempObj;
@@ -61,6 +61,14 @@ export class AnalisiMultiplaComponent implements OnInit {
 
     onSelectedObject(oggetto: Oggetto) {
         this.selectedObject = oggetto
+
+        this.isLoading = true
+        this.data_max_tosend = null
+        this.data_min_tosend = null
+        this.data_min = null
+        this.data_max = null
+        this.selectedUsers = []
+        this.selectedColumn = null
 
         this.dataService.getColumnUsers(this.selectedObject.id_oggetto).subscribe(
             (data) => {
@@ -81,6 +89,7 @@ export class AnalisiMultiplaComponent implements OnInit {
                     tempUsers.push(new_user);
                 }
                 this.users = tempUsers
+                this.isLoading = false
             }
         );
     }
@@ -119,11 +128,12 @@ export class AnalisiMultiplaComponent implements OnInit {
                 "data_max_tosend": this.data_max_tosend,
                 "selectedColumn": this.selectedColumn
             }
-            this.dataService.getUserCorrelation(this.users, this.selectedObject.id_oggetto, this.data_min, this.data_max).subscribe(
+            this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
+                , this.data_min_tosend, this.data_max_tosend).subscribe(
                 (data) => {
                     let real_nomi_colonne: Array<any> = [];
                     let correlation_vector: Array<any> = [];
-                    for (let nome_colonna of data.colonne) {
+                    for (let nome_colonna of data.users) {
                         real_nomi_colonne.push(nome_colonna.toString());
                     }
                     for (let corr of data.correlazioni) {
@@ -150,6 +160,13 @@ export class AnalisiMultiplaComponent implements OnInit {
                         _rigaTemp = []
                     }
 
+                    this.data_min = new Date(data.data_min_calc)
+                    this.data_max = new Date(data.data_max_calc)
+                    this.minDateValue = new Date(data.data_min)
+                    this.maxDateValue = new Date(data.data_max)
+                    this.data_min_tosend = this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth() + 1, this.data_min.getDate())
+                    this.data_max_tosend = this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
+
                     this.componentData = {
                         component: correlationMultiple,
                         inputs: {
@@ -158,14 +175,11 @@ export class AnalisiMultiplaComponent implements OnInit {
                             selectedColumn: this.selectedColumn,
                             real_nomi_colonne: real_nomi_colonne,
                             righe_da_considerare: righe_da_considerare,
-                            correlation_vector: correlation_vector
+                            correlation_vector: correlation_vector,
+                            data_min_calc: this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth() + 1, this.data_min.getDate()),
+                            data_max_calc: this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
                         }
                     }
-
-                    this.data_min = new Date(data.data_min)
-                    this.data_max = new Date(data.data_max)
-                    this.minDateValue = this.data_min
-                    this.maxDateValue = this.data_max
                 }
             );
             this.selectedAnalizza = true
@@ -192,8 +206,8 @@ export class AnalisiMultiplaComponent implements OnInit {
     }
 
     aggiornaDate() {
-        this.data_min_tosend = this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth(), this.data_min.getDay())
-        this.data_max_tosend = this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth(), this.data_max.getDay())
+        this.data_min_tosend = this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth() + 1, this.data_min.getDate())
+        this.data_max_tosend = this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
         this.selectedAnalizza = false
         this.onInvia(null)
         console.log(this.data_min_tosend)
