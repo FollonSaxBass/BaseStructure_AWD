@@ -1,12 +1,13 @@
 <div *ngIf="users">
     <form id="filter">
-        <label style="width: 100%; text-align: center">Filter by name:</label>
+        <label style="width: 100%; text-align: center">Filter:</label>
         <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" [ngModelOptions]="{standalone: true}"/>
     </form>
     <ul class="list-group double-list">
 
         <a class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
            [class.active]="selectedUsers.indexOf(user)>=0">
+
             {{user.nome_user}}
         </a>
     </ul>

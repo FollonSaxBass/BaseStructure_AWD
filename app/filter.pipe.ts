@@ -8,9 +8,7 @@ import {PipeTransform, Pipe} from "@angular/core";
 export class FilterPipe implements PipeTransform {
 
     transform(array: any, daFiltrare: any): any {
-        if (daFiltrare === undefined) return array;
 
-        if (array.length == 0) return
 
         array.sort((a: any, b: any) => {
             if (a.string_name().toLowerCase() < b.string_name().toLowerCase()) {
@@ -21,6 +19,9 @@ export class FilterPipe implements PipeTransform {
                 return 0;
             }
         });
+        if (daFiltrare === undefined) return array;
+        if (array.length == 0) return array
+
         if (daFiltrare === undefined) return array;
 
         return array.filter(function (user: any) {
