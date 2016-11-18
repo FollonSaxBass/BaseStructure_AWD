@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import {DataService, User, Oggetto} from "../../data.service";
 
 @Component({
@@ -6,7 +6,7 @@ import {DataService, User, Oggetto} from "../../data.service";
     templateUrl: './app/analisi/objectListAns/objectListAns.component.html'
 })
 
-export class objectListAns{
+export class objectListAns implements OnChanges {
 
     @Input() user: User;
 
@@ -23,4 +23,9 @@ export class objectListAns{
     clickedAnalizza() {
         this.onSelectedAnalizza.emit()
     }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.selectedObject = null
+    }
+
 }

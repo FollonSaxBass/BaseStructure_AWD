@@ -9,7 +9,9 @@ import {DataService, User, Oggetto, Colonna} from "../../data.service";
     templateUrl: './app/analisi_multipla/userListAnm/userListAnm.component.html'
 })
 
-export class userListAnm {
+export class userListAnm implements OnChanges {
+
+
     remove(arr: any, what: any) {
         var found = arr.indexOf(what);
 
@@ -20,17 +22,16 @@ export class userListAnm {
     }
 
     @Input() isLoading: boolean
-
     @Input() users: any;
-    selectedColumn: any;
+    @Input() selectedColumn: any;
+
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log(changes)
+    }
+
     selectedUsers: User[] = []
 
     @Output() onInvia = new EventEmitter();
-
-    @Input()
-    set selColumn(colonna: Colonna) {
-        this.selectedColumn = (colonna) || null;
-    }
 
     onSelect(user: User): void {
         if (this.selectedUsers.indexOf(user) >= 0) {

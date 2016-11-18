@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import {DataService, User, Oggetto} from "../../data.service";
 
 @Component({
@@ -6,7 +6,7 @@ import {DataService, User, Oggetto} from "../../data.service";
     templateUrl: './app/plot/objectList/objectList.component.html'
 })
 
-export class objectList {
+export class objectList implements OnChanges {
 
     //User ricevuto dal padre
     @Input() user: User;
@@ -26,13 +26,14 @@ export class objectList {
         this.onSelectedObject.emit(this.selectedObject)
     }
 
-    constructor() {
-    }
-
     /***
      * Comunico al padre che è stato cliccato il plot
      */
     clickedPlotta() {
         this.onSelectedPlotta.emit()
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.selectedObject = null
     }
 }

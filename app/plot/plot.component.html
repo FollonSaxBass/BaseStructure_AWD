@@ -1,14 +1,16 @@
 <!--Pannello di titolo Componente Plot-->
 <div class="panel panel-default col-lg-12 header-title">
     <h2>Plot Analysis</h2>
-
+    <img *ngIf="isLoadingPlotta" src="../../public/loading_small_1.gif">
+    <br *ngIf="isLoadingPlotta">
+    <br *ngIf="isLoadingPlotta">
 </div>
 <!--Pannello contenente la lista di utenti-->
 <div class="panel panel-default col-lg-2">
     <div class="panel-heading">Users</div>
     <div class="panel-body">
         <user-list-plot (onSelectUser)="onSelectedUser($event)">
-            <img src="../../public/loading_small_1.gif">
+
         </user-list-plot>
     </div>
 </div>

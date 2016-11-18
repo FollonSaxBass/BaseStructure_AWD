@@ -33,13 +33,19 @@
 </head>
 
 <body>
-<div class="panel panel-default">
-    <div class="panel-body">
-        <my-app style="-webkit-user-select: none; /* Chrome/Safari */
+
+<my-app style="-webkit-user-select: none; /* Chrome/Safari */
 -moz-user-select: none; /* Firefox */
--ms-user-select: none; /* IE10+ */">Loading...
-        </my-app>
+-ms-user-select: none; /* IE10+ */">
+    <div class="myLoading">
+        <div [@visibilityChanged]="visibility" style="text-align: center; ">
+            <h2 style="font-size: 300%">Welcome to...</h2>
+            <h1 style="font-size: 500%">Data Analysis!</h1>
+            <img *ngIf="isLoadingPlotta" src="../../public/loading_small.gif">
+            <h2 style="font-size: 300%"><img *ngIf="isLoadingPlotta" src="../../public/loading_text.gif"></h2>
+        </div>
     </div>
-</div>
+</my-app>
+
 </body>
 </html>

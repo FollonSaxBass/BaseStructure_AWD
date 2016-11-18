@@ -53,3 +53,9 @@ button {
 .list-group-item {
     padding: 5px 10px;
 }
+
+.myLoading {
+
+    width: 100%;
+    text-align: center;
+}

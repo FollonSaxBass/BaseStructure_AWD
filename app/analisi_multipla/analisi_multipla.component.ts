@@ -19,6 +19,8 @@ export class AnalisiMultiplaComponent implements OnInit {
     selectedColumn: Colonna;
     selectedUsers: User[];
 
+    objectSended: Oggetto;
+
     selectedAnalizza: any;
     componentData: any = null;
     dataSended: any = null
@@ -55,43 +57,55 @@ export class AnalisiMultiplaComponent implements OnInit {
         );
     }
 
+    changedObject(oggetto: Oggetto) {
+        if (this.selectedObject != oggetto) {
+            this.selectedObject = oggetto;
+            // this.columns = null
+            // this.users = null
+        }
+    }
+
     onSelectedColumn(colonna: Colonna) {
         this.selectedColumn = colonna
     }
 
     onSelectedObject(oggetto: Oggetto) {
-        this.selectedObject = oggetto
+        if (this.objectSended == oggetto) {
+            console.log("Non mando la richiesta")
+        } else {
+            this.selectedObject = oggetto
+            this.objectSended = oggetto
+            this.isLoading = true
+            this.data_max_tosend = null
+            this.data_min_tosend = null
+            this.data_min = null
+            this.data_max = null
+            this.selectedUsers = []
+            this.selectedColumn = null
 
-        this.isLoading = true
-        this.data_max_tosend = null
-        this.data_min_tosend = null
-        this.data_min = null
-        this.data_max = null
-        this.selectedUsers = []
-        this.selectedColumn = null
+            this.dataService.getColumnUsers(this.selectedObject.id_oggetto).subscribe(
+                (data) => {
+                    let tempCol: any = [];
+                    for (let colonna of data.colonne) {
+                        let new_colonna = new Colonna();
+                        new_colonna.id_colonna = colonna.id;
+                        new_colonna.nome_colonna = colonna.nome;
+                        tempCol.push(new_colonna);
+                    }
+                    this.columns = tempCol
 
-        this.dataService.getColumnUsers(this.selectedObject.id_oggetto).subscribe(
-            (data) => {
-                let tempCol: any = [];
-                for (let colonna of data.colonne) {
-                    let new_colonna = new Colonna();
-                    new_colonna.id_colonna = colonna.id;
-                    new_colonna.nome_colonna = colonna.nome;
-                    tempCol.push(new_colonna);
+                    let tempUsers: any = [];
+                    for (let user of data.utenti) {
+                        let new_user = new User();
+                        new_user.id_user = user.id;
+                        new_user.nome_user = user.nome;
+                        tempUsers.push(new_user);
+                    }
+                    this.users = tempUsers
+                    this.isLoading = false
                 }
-                this.columns = tempCol
-
-                let tempUsers: any = [];
-                for (let user of data.utenti) {
-                    let new_user = new User();
-                    new_user.id_user = user.id;
-                    new_user.nome_user = user.nome;
-                    tempUsers.push(new_user);
-                }
-                this.users = tempUsers
-                this.isLoading = false
-            }
-        );
+            );
+        }
     }
 
     arraysEqual(a: any, b: any) {

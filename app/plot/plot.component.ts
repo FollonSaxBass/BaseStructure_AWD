@@ -8,7 +8,7 @@ import {Message} from "primeng/components/common/api";
     templateUrl: './app/plot/plot.component.html'
 })
 
-export class PlotComponent {
+export class PlotComponent implements OnInit {
     //Lista di utenti da far vedere
     users: User[]
 
@@ -20,10 +20,8 @@ export class PlotComponent {
 
     //Usato per la visualizzazione del bottone ladda per il caricamento
     isLoading = false
+    isLoadingPlotta = true
 
-    // isLoadingUsers=false
-    // isLoadingUsers=false
-    // isLoadingUsers=false
 
     //Utilizzato per mandare tutti i dati per il plot al componente chartComponent
     componentData: any = null;
@@ -37,6 +35,7 @@ export class PlotComponent {
                 //Non mi interessa del contenuto di content
                 //Viene usato solamente per fermare il tasto caricamento in plotta
                 this.isLoading = false
+                this.isLoadingPlotta = false
             });
     }
 
@@ -45,6 +44,9 @@ export class PlotComponent {
      */
     ngOnInit() {
         this.users = this.dataService.getUsers()
+        if (this.users.length > 0) {
+            this.isLoadingPlotta = false
+        }
     }
 
     onSelectedUser(user: User) {

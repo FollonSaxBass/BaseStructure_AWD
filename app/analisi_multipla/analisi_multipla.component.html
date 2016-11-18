@@ -7,29 +7,34 @@
         Loading...
     </div>
     <div class="panel-body" *ngIf="objects">
-        <object-list-mul-plot [objects]="objects" (onSelectedObject)="onSelectedObject($event)"></object-list-mul-plot>
+        <object-list-mul-plot [objects]="objects" (changedObject)="changedObject($event)"
+                              (onSelectedObject)="onSelectedObject($event)"></object-list-mul-plot>
     </div>
 </div>
 <div class="col-lg-2">
-    <div *ngIf="columns" class="panel panel-default" style="margin-bottom: 0">
+    <div *ngIf="(objectSended&&selectedObject==objectSended)" class="panel panel-default" style="margin-bottom: 0">
         <div class="panel-heading">Attributi dell'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
             <column-list-mul-plot [columns]="columns"
                                   (onSelectedColumn)="onSelectedColumn($event)"></column-list-mul-plot>
         </div>
     </div>
+    <!--<div *ngIf="columns||(objectSended&&selectedObject==objectSended)" class="panel panel-default"-->
+    <!--style="margin-bottom: 0">-->
+    <!--<div *ngIf="users||(objectSended&&selectedObject==objectSended)" class="panel panel-default">-->
 
-    <div *ngIf="users" class="panel panel-default">
+
+    <div *ngIf="(objectSended&&selectedObject==objectSended)" class="panel panel-default">
         <div class="panel-heading">Users aventi l'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
-            <user-list-an-mul [isLoading]="isLoading" [selColumn]="selectedColumn" [users]="users"
+            <user-list-an-mul [isLoading]="isLoading" [selectedColumn]="selectedColumn" [users]="users"
                               (onInvia)="onInvia($event)"></user-list-an-mul>
         </div>
     </div>
 </div>
-<dynamic-anm-component *ngIf="componentData" [componentData]="componentData"
+<dynamic-anm-component *ngIf="componentData&&!isLoading" [componentData]="componentData"
 ></dynamic-anm-component>
-<div *ngIf="componentData" style="text-align: center"
+<div *ngIf="componentData&&!isLoading" style="text-align: center"
      class="panel panel-default col-lg-8">
     <div class="panel-heading">Nuova anlisi - Seleziona le date di riferimento</div>
     <div class="panel-body">

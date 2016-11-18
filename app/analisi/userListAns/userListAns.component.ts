@@ -1,5 +1,5 @@
-import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
-import {DataService, User} from "../../data.service";
+import {Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {DataService, User, Colonna} from "../../data.service";
 
 @Component({
     selector: 'user-list-ans-plot',

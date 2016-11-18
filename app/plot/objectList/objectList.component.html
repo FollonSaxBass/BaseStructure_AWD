@@ -1,7 +1,7 @@
 <div *ngIf="user">
     <form id="filter">
         <label style="width: 100%; text-align: center">Filter:</label>
-        <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" pTooltip="Inserisci username da filtrare"
+        <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" pTooltip="Inserisci oggetto da filtrare"
                [ngModelOptions]="{standalone: true}"/>
     </form>
     <ul class="list-group">
@@ -13,4 +13,4 @@
 </div>
 <button *ngIf="selectedObject" [ladda]='isLoading' (click)="clickedPlotta(object)" class="btn btn-primary"
         style="background-color: #337AB7" data-size="s">Plotta
-</button>
+</button><img *ngIf="isLoading" src="../../public/loading_small_1.gif">

@@ -13,9 +13,11 @@ export class objectListAnm {
     selectedObject: Oggetto
 
     @Output() onSelectedObject = new EventEmitter();
+    @Output() changedObject = new EventEmitter();
 
     onSelectObject(oggetto: Oggetto): void {
         this.selectedObject = oggetto;
+        this.changedObject.emit(oggetto)
     }
 
     clickedInvia() {

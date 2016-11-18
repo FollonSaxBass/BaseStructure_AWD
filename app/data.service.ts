@@ -87,6 +87,7 @@ export class DataService {
                     }
                     this.users.push(new_user);
                 }
+                this.contentSource.next()
             },
             (error) => {
                 console.log("Erroraccio")
@@ -133,7 +134,7 @@ export class DataService {
         let url = "https://awdapi.herokuapp.com/getTable"
         return this.http.post(url, toSend).map(
             (res) => res.json()
-        );
+        ).catch(this.handleError);
     }
 
     getObjectCorrelation(id_user: number, id_oggetto: number) {
@@ -144,7 +145,7 @@ export class DataService {
         let url = "https://awdapi.herokuapp.com/correlation_matrix_object"
         return this.http.post(url, toSend).map(
             (res) => res.json()
-        );
+        ).catch(this.handleError);
     }
 
     /**
@@ -155,7 +156,7 @@ export class DataService {
     getObjects() {
         return this.http.get('https://awdapi.herokuapp.com/getDataObject').map(
             (res) => res.json()
-        );
+        ).catch(this.handleError);
     }
 
     /**
