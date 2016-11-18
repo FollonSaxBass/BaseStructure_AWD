@@ -46,6 +46,10 @@ p-dataTable .col-button {
     width: 20%;
 }
 
-button{
+button {
     overflow: hidden;
+}
+
+.list-group-item {
+    padding: 5px 10px;
 }

@@ -5,9 +5,9 @@
                [ngModelOptions]="{standalone: true}"/>
     </form>
     <ul class="list-group double-list">
-        <a class="list-group-item" *ngFor="let colonna of columns|filter:daFiltrare" (click)="onSelect(colonna)"
+        <li class="list-group-item" *ngFor="let colonna of columns|filter:daFiltrare" (click)="onSelect(colonna)"
            [class.active]="colonna === selectedColumn">
             {{colonna.nome_colonna}}
-        </a>
+        </li>
     </ul>
 </div>

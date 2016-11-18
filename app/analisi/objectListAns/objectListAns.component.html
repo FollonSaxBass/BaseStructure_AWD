@@ -5,10 +5,10 @@
                [ngModelOptions]="{standalone: true}"/>
     </form>
     <ul class="list-group">
-        <a class="list-group-item" *ngFor="let object of user.oggetti|filter:daFiltrare" (click)="onSelect(object)"
+        <li class="list-group-item" *ngFor="let object of user.oggetti|filter:daFiltrare" (click)="onSelect(object)"
            [class.active]="object === selectedObject">
             {{object.nome_oggetto}}
-        </a>
+        </li>
     </ul>
 </div>
 <button *ngIf="selectedObject" (click)="clickedAnalizza()" [ladda]='isLoading' style="background-color: #337AB7" data-size="s" class="btn btn-primary">Analizza</button>

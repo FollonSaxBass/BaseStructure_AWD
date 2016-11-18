@@ -4,10 +4,10 @@
         <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" [ngModelOptions]="{standalone: true}"/>
     </form>
     <ul class="list-group">
-        <a class="list-group-item" *ngFor="let object of objects|filter:daFiltrare" (click)="onSelectObject(object)"
+        <li class="list-group-item" *ngFor="let object of objects|filter:daFiltrare" (click)="onSelectObject(object)"
            [class.active]="object === selectedObject">
             {{object.nome_oggetto}}
-        </a>
+        </li>
     </ul>
 </div>
 <button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s" *ngIf="selectedObject"

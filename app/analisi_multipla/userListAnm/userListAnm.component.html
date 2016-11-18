@@ -5,11 +5,11 @@
     </form>
     <ul class="list-group double-list">
 
-        <a class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
+        <li class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
            [class.active]="selectedUsers.indexOf(user)>=0">
 
             {{user.nome_user}}
-        </a>
+        </li>
     </ul>
 </div>
 <button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s"

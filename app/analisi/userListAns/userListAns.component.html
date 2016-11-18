@@ -3,10 +3,10 @@
     <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" [ngModelOptions]="{standalone: true}"/>
 </form>
 <ul class="list-group">
-    <a class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
+    <li class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
        [class.active]="user === selectedUser">
         {{user.nome_user}}
-    </a>
+    </li>
 </ul>
 
 

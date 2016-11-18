@@ -4,11 +4,11 @@
            [ngModelOptions]="{standalone: true}"/>
 </form>
 <ul class="list-group ">
-    <a class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
-       [class.active]="user === selectedUser">
-        <span class="badge">{{user.oggetti.length}}</span>
+    <li class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
+        [class.active]="user === selectedUser">
+        <span style="background-color: #337AB7" class="badge">{{user.oggetti.length}}</span>
         {{user.nome_user}}
-    </a>
+    </li>
 </ul>
 
 
