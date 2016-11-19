@@ -20,7 +20,7 @@
     <div class="panel-heading">Oggetti riferiti a {{selectedUser.nome_user}}</div>
     <div class="panel-body">
         <object-list-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
-                          (onSelectedPlotta)="onSelectedPlotta($event)">Loading...
+                          (onSelectedPlotta)="onSelectedPlotta($event)" (onReload)="onReload($event)">Loading...
         </object-list-plot>
     </div>
 </div>

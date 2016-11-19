@@ -15,6 +15,7 @@ import {GrowlModule} from "primeng/components/growl/growl";
 import {LaddaModule} from "angular2-ladda";
 import {FilterPipe} from "./filter.pipe";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
+import {MessagesModule} from "primeng/components/messages/messages";
 @NgModule({
     declarations: [AppComponent, routingComponents,FilterPipe],
     imports: [
@@ -31,7 +32,8 @@ import {TooltipModule} from "primeng/components/tooltip/tooltip";
         CalendarModule,
         GrowlModule,
         LaddaModule,
-        TooltipModule
+        TooltipModule,
+        MessagesModule
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

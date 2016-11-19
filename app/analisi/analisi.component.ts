@@ -73,7 +73,11 @@ export class AnalisiComponent implements OnInit {
                 }
             };
             this.selectedAnalizza = true
-            this.isLoading=true
+            this.isLoading = true
         }
+    }
+
+    onReload() {
+        this.componentData = null
     }
 }

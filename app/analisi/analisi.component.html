@@ -14,7 +14,7 @@
     <div class="panel-heading">Oggetti riferiti a {{selectedUser.nome_user}}</div>
     <div class="panel-body">
         <object-list-ans-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
-                              (onSelectedAnalizza)="onSelectedAnalizza($event)">
+                              (onSelectedAnalizza)="onSelectedAnalizza($event)" (onReload)="onReload($event)">
             Loading...
         </object-list-ans-plot>
     </div>

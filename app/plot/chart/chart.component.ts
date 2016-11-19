@@ -143,6 +143,15 @@ export class ChartComponent implements OnInit {
                 this.visibility = 'shown';
                 this.message_ok.push({severity: 'success', summary: 'Plotted!', detail: 'Plot avvenuto con successo'})
                 this.dataService.contentSource.next();
+            },
+            (error) => {
+                if (error.status == "0") {
+                    //No connettività
+                    this.dataService.plotSource.next("Errore0")
+                } else {
+                    //Altro tipo di errore
+                    this.dataService.plotSource.next("Errore")
+                }
             });
     }
 

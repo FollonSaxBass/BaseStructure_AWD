@@ -12,3 +12,11 @@
     </ul>
 </div>
 <button *ngIf="selectedObject" (click)="clickedAnalizza()" [ladda]='isLoading' style="background-color: #337AB7" data-size="s" class="btn btn-primary">Analizza</button>
+
+<img *ngIf="isLoading" src="../../public/loading_small_1.gif">
+<p-messages [value]="msgs"></p-messages>
+<div class="myLoading">
+    <button *ngIf="error" (click)="reLoad()" class="btn btn-primary"
+            style="background-color: #337AB7" data-size="s">Reload
+    </button>
+</div>

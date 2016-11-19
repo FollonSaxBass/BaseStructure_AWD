@@ -63,6 +63,10 @@ export class DataService {
 
     contentSource = new Subject();
     content$ = this.contentSource.asObservable();
+    userSource = new Subject();
+    userSource$ = this.userSource.asObservable();
+    plotSource = new Subject();
+    plotSource$ = this.plotSource.asObservable();
 
     /**
      * La prima cosa che fa questo componente è andare a prendere i dati degli utenti perchè caratterizza
@@ -71,6 +75,29 @@ export class DataService {
      * @param http
      */
     constructor(private http: Http) {
+        this.loadUsers()
+    }
+
+    private handleError(error: Response | any) {
+        let errMsg: any;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            // errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+            errMsg = {
+                "errorString": `${error.statusText || ''}`,
+                "status": `${error.status}`
+            }
+        } else {
+            errMsg = {
+                "errorString": error.message ? error.message : error.toString(),
+                "status": error.status
+            }
+        }
+        return Observable.throw(errMsg, error.status);
+    }
+
+    loadUsers() {
         this.http.get('https://awdapi.herokuapp.com/getUser').map(
             (res) => res.json()
         ).catch(this.handleError).subscribe(
@@ -88,25 +115,17 @@ export class DataService {
                     this.users.push(new_user);
                 }
                 this.contentSource.next()
+                this.userSource.next("Loaded")
             },
             (error) => {
-                console.log("Erroraccio")
-                console.log(error)
+                if (error.status == "0") {
+                    //No connettività
+                    this.userSource.next("Errore0")
+                } else {
+                    //Altro tipo di errore
+                    this.userSource.next("Errore")
+                }
             });
-    }
-
-    private handleError(error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
-        let errMsg: string;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return Observable.throw(errMsg);
     }
 
     /**
@@ -114,6 +133,10 @@ export class DataService {
      * @returns {User[]}
      */
     getUsers() {
+        if (this.users.length == 0) {
+            //No connettività
+            this.userSource.next("Errore0")
+        }
         return this.users;
     }
 

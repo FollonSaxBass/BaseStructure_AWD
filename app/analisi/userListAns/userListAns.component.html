@@ -4,9 +4,16 @@
 </form>
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
-       [class.active]="user === selectedUser">
+        [class.active]="user === selectedUser">
+        <span style="background-color: #337AB7" class="badge">{{user.oggetti.length}}</span>
         {{user.nome_user}}
     </li>
 </ul>
+<p-messages [value]="msgs"></p-messages>
+<div class="myLoading">
+    <button *ngIf="error" (click)="reLoad()" class="btn btn-primary"
+            style="background-color: #337AB7" data-size="s">Reload
+    </button>
+</div>
 
 

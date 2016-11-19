@@ -13,3 +13,9 @@
 <button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s" *ngIf="selectedObject"
         (click)="clickedInvia()" class="btn btn-primary">Invia
 </button>
+<p-messages [value]="msgs"></p-messages>
+<div *ngIf="error" class="myLoading">
+    <button  (click)="reLoad()" class="btn btn-primary"
+             style="background-color: #337AB7" data-size="s">Reload
+    </button>
+</div>

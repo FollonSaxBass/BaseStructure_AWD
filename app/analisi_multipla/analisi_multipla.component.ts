@@ -173,7 +173,6 @@ export class AnalisiMultiplaComponent implements OnInit {
                             righe_da_considerare.push(_rigaTemp)
                         _rigaTemp = []
                     }
-
                     this.data_min = new Date(data.data_min_calc)
                     this.data_max = new Date(data.data_max_calc)
                     this.minDateValue = new Date(data.data_min)
@@ -224,8 +223,5 @@ export class AnalisiMultiplaComponent implements OnInit {
         this.data_max_tosend = this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
         this.selectedAnalizza = false
         this.onInvia(null)
-        console.log(this.data_min_tosend)
-        console.log(this.data_max_tosend)
-
     }
 }

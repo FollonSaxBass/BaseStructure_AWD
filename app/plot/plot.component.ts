@@ -50,7 +50,11 @@ export class PlotComponent implements OnInit {
     }
 
     onSelectedUser(user: User) {
-        this.selectedUser = user
+        if (user == null) {
+            this.isLoadingPlotta = false
+        }
+        else
+            this.selectedUser = user
     }
 
     onSelectedObject(oggetto: Oggetto) {
@@ -82,6 +86,10 @@ export class PlotComponent implements OnInit {
             this.selectedPlotta = true
             this.isLoading = true
         }
+    }
+
+    onReload() {
+        this.componentData = null
     }
 
 }
