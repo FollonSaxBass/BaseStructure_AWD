@@ -30,6 +30,9 @@ export class AnalisiComponent implements OnInit {
     //Utilizzato per inviare messaggio in caso di errore
     message_error: Message[] = [];
 
+    data_min: any;
+    data_max: any;
+
     constructor(private dataService: DataService, private ref: ElementRef) {
         dataService.content$.subscribe(
             content => {
@@ -69,7 +72,9 @@ export class AnalisiComponent implements OnInit {
                 component: correlationSingle,
                 inputs: {
                     selectedUser: this.selectedUser,
-                    selectedObject: this.selectedObject
+                    selectedObject: this.selectedObject,
+                    data_min: this.data_min,
+                    data_max: this.data_max
                 }
             };
             this.selectedAnalizza = true

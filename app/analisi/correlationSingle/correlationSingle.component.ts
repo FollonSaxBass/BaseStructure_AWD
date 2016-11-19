@@ -20,8 +20,14 @@ import {DataService, User, Oggetto} from "../../data.service";
 })
 
 export class correlationSingle implements OnInit {
-
-
+    // Range values inizializzati a 0,1 per creare la vista,
+    // Al caricamento dei dati vengono sostituiti dai valori ritornati dal padre
+    // Range values iniziale e finale della range bar per definire il numero di possibili step
+    rangeValues: number[] = [0, 1];
+    timestamps: string[]
+    timestampsTotal: string[]
+    chartMin = 0
+    chartMax = 1
     // Nomi delle colonne da visualizzare
     nomi_colonne: Array<any> = [];
 
@@ -48,19 +54,31 @@ export class correlationSingle implements OnInit {
     selectedUser: User
     selectedObject: Oggetto
 
+    data_min: string;
+    data_max: string
+    data_min_calc: string;
+    data_max_calc: string
+
+
     constructor(private dataService: DataService, private injector: Injector) {
         this.selectedUser = this.injector.get('selectedUser');
         this.selectedObject = this.injector.get('selectedObject');
+        this.data_min = this.injector.get('data_min');
+        this.data_max = this.injector.get('data_max');
     }
 
     /**
      * Vado a prendere gli oggetti che mi servono durante l'inizializzazione
      */
     ngOnInit(): void {
-        this.dataService.getObjectCorrelation(this.selectedUser.id_user, this.selectedObject.id_oggetto).subscribe(
+        this.dataService.getObjectCorrelation(this.selectedUser.id_user, this.selectedObject.id_oggetto, this.data_min, this.data_max).subscribe(
             (data) => {
                 for (let nome_colonna of data.colonne) {
                     this.real_nomi_colonne.push(nome_colonna.toString());
+                }
+                let _tempTimestamps: Array<any> = [];
+                for (let time of data.timestamps) {
+                    _tempTimestamps.push(time)
                 }
 
                 for (let corr of data.correlazioni) {
@@ -88,12 +106,32 @@ export class correlationSingle implements OnInit {
                         righe_da_considerare.push(_rigaTemp)
                     _rigaTemp = []
                 }
+
+                this.data_min_calc = data.data_min_calc
+                this.data_max_calc = data.data_min_calc
+
+                this.rangeValues = [0, _tempTimestamps.length - 1]
+                this.chartMin = 0
+                this.chartMax = _tempTimestamps.length - 1
+                this.timestamps = _tempTimestamps
+                this.timestampsTotal = _tempTimestamps
+
                 this.nomi_colonne = this.real_nomi_colonne
                 this.real_righe = righe_da_considerare
                 this.righe = righe_da_considerare
                 this.loaded = true
                 this.visibility = 'shown'
                 this.dataService.contentSource.next();
+            },
+            (error) => {
+                console.log("ERRORE")
+                if (error.status == "0") {
+                    //No connettività
+                    this.dataService.objectSource.next("Errore0")
+                } else {
+                    //Altro tipo di errore
+                    this.dataService.objectSource.next("Errore")
+                }
             }
         );
     }
@@ -137,4 +175,15 @@ export class correlationSingle implements OnInit {
         this.righe = righe_da_considerare
         this.nomi_colonne = nomi_da_considerare
     }
+
+    // Quando lo slider viene mosso viene chiamato questo metodo che cambia le label ed i dati del grafico
+    // (Fantastico :) )
+    onChange(e: any) {
+        let _tempTimestamps: Array<any> = [];
+        for (let i = this.rangeValues[0]; i <= this.rangeValues[1]; i++) {
+            _tempTimestamps.push(this.timestampsTotal[i])
+        }
+        this.timestamps = _tempTimestamps;
+    }
+
 }

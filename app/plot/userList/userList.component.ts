@@ -12,6 +12,8 @@ export class userList implements OnInit {
     msgs: Message[] = [];
     error = false
 
+    itsFirst = true
+
     users: User[]
     selectedUser: User
 

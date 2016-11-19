@@ -6,13 +6,13 @@
     <ul class="list-group double-list">
 
         <li class="list-group-item" *ngFor="let user of users|filter:daFiltrare" (click)="onSelect(user)"
-           [class.active]="selectedUsers.indexOf(user)>=0">
+            [class.active]="selectedUsers.indexOf(user)>=0">
 
             {{user.nome_user}}
         </li>
     </ul>
 </div>
 <button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s"
-        *ngIf="selectedUsers.length>0" (click)="clickedInvia()">
+        *ngIf="selectedUsers.length>0&&selectedColumn" (click)="clickedInvia()">
     Invia
 </button>

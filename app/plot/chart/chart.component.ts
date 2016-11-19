@@ -99,7 +99,6 @@ export class ChartComponent implements OnInit {
     ngOnInit() {
         this.dataService.getColumns(this.selectedUser.id_user, this.selectedObject.id_oggetto).subscribe(
             (data: any) => {
-                console.log(data)
                 for (let column of data.colonne) {
                     let new_column = new Colonna();
                     new_column.id_colonna = column.id_colonna;
@@ -114,9 +113,9 @@ export class ChartComponent implements OnInit {
                         new_column.values[i].timestamp = time;
                         i = i + 1;
                     }
+                    new_column.desc = column.desc
                     this.colonne.push(new_column);
                 }
-
                 let _lineChartData: Array<any> = new Array(this.colonne.length);
                 let _lineChartLabels: Array<any> = [];
                 let n = 0
@@ -129,7 +128,7 @@ export class ChartComponent implements OnInit {
                             _lineChartLabels.push(valore.timestamp)
                         k = k + 1
                     }
-                    let label = colonna.nome_colonna.toString()
+                    let label = colonna.nome_colonna.toString() + " (" + colonna.desc.toString() + ")"
                     _lineChartData[n] = {data: dati, label: label, fill: false}
                     n = n + 1
                 }

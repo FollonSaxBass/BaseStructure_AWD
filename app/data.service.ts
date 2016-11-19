@@ -12,6 +12,7 @@ export class Valore {
 export class Colonna {
     id_colonna: number;
     nome_colonna: string;
+    desc: string;
     values: Valore[];
 
     string_name() {
@@ -67,6 +68,8 @@ export class DataService {
     userSource$ = this.userSource.asObservable();
     plotSource = new Subject();
     plotSource$ = this.plotSource.asObservable();
+    objectSource = new Subject();
+    objectSource$ = this.objectSource.asObservable();
 
     /**
      * La prima cosa che fa questo componente è andare a prendere i dati degli utenti perchè caratterizza
@@ -94,7 +97,7 @@ export class DataService {
                 "status": error.status
             }
         }
-        return Observable.throw(errMsg, error.status);
+        return Observable.throw(errMsg);
     }
 
     loadUsers() {
@@ -118,6 +121,7 @@ export class DataService {
                 this.userSource.next("Loaded")
             },
             (error) => {
+                console.log("ERRORE")
                 if (error.status == "0") {
                     //No connettività
                     this.userSource.next("Errore0")
@@ -153,17 +157,29 @@ export class DataService {
             "userid": id_user,
             "objectid": id_oggetto
         }
-        console.log(toSend)
         let url = "https://awdapi.herokuapp.com/getTable"
         return this.http.post(url, toSend).map(
             (res) => res.json()
         ).catch(this.handleError);
     }
 
-    getObjectCorrelation(id_user: number, id_oggetto: number) {
-        let toSend = {
-            "userid": id_user,
-            "objectid": id_oggetto
+    getObjectCorrelation(id_user: number, id_oggetto: number, data_min: string, data_max: string) {
+        let toSend: any;
+        if (data_min == null || data_max == null) {
+            toSend = {
+                "userid": id_user,
+                "objectid": id_oggetto,
+                "data_min": "",
+                "data_max": ""
+            }
+        }
+        else {
+            toSend = {
+                "userid": id_user,
+                "objectid": id_oggetto,
+                "data_min": data_min,
+                "data_max": data_max
+            }
         }
         let url = "https://awdapi.herokuapp.com/correlation_matrix_object"
         return this.http.post(url, toSend).map(
@@ -224,10 +240,8 @@ export class DataService {
             }
         }
         let url = "https://awdapi.herokuapp.com/correlation_matrix_user"
-
-        console.log(toSend)
         return this.http.post(url, toSend).map(
             (res) => res.json()
-        );
+        ).catch(this.handleError);
     }
 }

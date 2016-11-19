@@ -6,7 +6,8 @@
     </form>
     <ul class="list-group double-list">
         <li class="list-group-item" *ngFor="let colonna of columns|filter:daFiltrare" (click)="onSelect(colonna)"
-           [class.active]="colonna === selectedColumn">
+            [class.active]="colonna === selectedColumn">
+            <span style="background-color: #337AB7" class="badge">{{colonna.desc}}</span>
             {{colonna.nome_colonna}}
         </li>
     </ul>

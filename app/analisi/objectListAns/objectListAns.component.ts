@@ -33,8 +33,9 @@ export class objectListAns implements OnChanges {
     }
 
     constructor(private dataService: DataService) {
-        dataService.plotSource$.subscribe(
+        dataService.objectSource$.subscribe(
             content => {
+                console.log(content)
                 if (content == "Errore0") {
                     this.error = true
                     this.msgs.push({
@@ -46,7 +47,6 @@ export class objectListAns implements OnChanges {
                     this.error = true
                     this.msgs.push({severity: 'error', summary: 'Server error', detail: 'Something\'s gone wrong'});
                 }
-
             });
     }
 

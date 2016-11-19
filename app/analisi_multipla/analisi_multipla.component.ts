@@ -90,6 +90,7 @@ export class AnalisiMultiplaComponent implements OnInit {
                         let new_colonna = new Colonna();
                         new_colonna.id_colonna = colonna.id;
                         new_colonna.nome_colonna = colonna.nome;
+                        new_colonna.desc = colonna.desc;
                         tempCol.push(new_colonna);
                     }
                     this.columns = tempCol
