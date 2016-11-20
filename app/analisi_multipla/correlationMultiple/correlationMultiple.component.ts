@@ -65,6 +65,7 @@ export class correlationMultiple {
     blocked = false;
 
     isLoadingAnalisi = 'false'
+    opacity = 1
 
     constructor(private dataService: DataService, private injector: Injector) {
         this.real_nomi_colonne = this.injector.get('real_nomi_colonne');
@@ -82,13 +83,14 @@ export class correlationMultiple {
 
         dataService.startBlock$.subscribe(
             content => {
-                console.log(content)
                 //Non mi interessa del contenuto di content
                 //Viene usato solamente per fermare il tasto caricamento in analizza
                 if (content == "Blocked") {
                     this.isLoadingAnalisi = 'true'
+                    this.opacity = 0.3
                 } else {
                     this.isLoadingAnalisi = 'false'
+                    this.opacity = 1
                 }
 
             });

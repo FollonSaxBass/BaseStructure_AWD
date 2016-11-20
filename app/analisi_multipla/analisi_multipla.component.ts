@@ -300,6 +300,7 @@ export class AnalisiMultiplaComponent implements OnInit {
     }
 
     onSlideEnd() {
+        this.dataService.startBlock.next("Blocked")
         this.onInvia(null, true)
     }
 
