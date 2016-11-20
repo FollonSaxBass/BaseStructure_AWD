@@ -5,6 +5,9 @@ import {
 import {DataService, User, Oggetto} from "../../data.service";
 import {Subscription} from "rxjs";
 
+// import json2csv = require("json2csv");
+
+
 @Component({
     selector: 'correlation-single',
     templateUrl: './app/analisi/correlationSingle/correlationSingle.component.html',
@@ -245,5 +248,11 @@ export class correlationSingle implements OnInit {
         }
         console.log(fields)
         console.log(myData)
+        // console.log(typeof json2csv === 'function'); // true
+        //
+        // var result = json2csv({data: myData, fields: fields});
+        // console.log(result);
+        // require('json2csv');
+        // var fs = require('fs');
     }
 }
