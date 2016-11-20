@@ -22,7 +22,6 @@ export class AnalisiMultiplaComponent implements OnInit {
 
     objectSended: Oggetto;
 
-    selectedAnalizza: any;
     componentData: any = null;
     dataSended: any = null
 
@@ -49,6 +48,8 @@ export class AnalisiMultiplaComponent implements OnInit {
 
     msgs: Message[] = [];
     error = false
+
+    opacity = 1;
 
     constructor(private dataService: DataService, private ref: ElementRef) {
     }
@@ -159,7 +160,7 @@ export class AnalisiMultiplaComponent implements OnInit {
     }
 
     onInvia(users: any, reload: boolean) {
-        this.isLoadingAnalisi = true;
+        // this.isLoadingAnalisi = true;
         let temp1: any
         let temp2: any
         if (reload) {
@@ -174,119 +175,106 @@ export class AnalisiMultiplaComponent implements OnInit {
         if (users != null)
             this.selectedUsers = users
 
-        if (this.dataSended != null &&
-            this.arraysEqual(this.dataSended.selectedUsers, this.selectedUsers) &&
-            this.dataSended.selectedObject == this.selectedObject &&
-            this.dataSended.selectedColumn == this.selectedColumn &&
-            this.dataSended.data_min == temp1 &&
-            this.dataSended.data_max == temp2) {
+        if (this.selectedUsers.length == 1) {
             this.message_error.push({
-                severity: 'error', summary: 'AAAAhhh!!', detail: 'Per inviare una nuova richiesta devi ' +
-                'selezionare un utente, oggetto, attributi o date differenti'
+                severity: 'error',
+                summary: 'Attento!',
+                detail: 'La correlazione fra un utente e sé stesso è sempre uno,' +
+                'ti conviene selezionarne più di uno per avere un risultato utile'
             })
+            this.isLoadingAnalisi = false
         } else {
-            this.dataSended = {
-                "selectedUsers": this.selectedUsers.slice(),
-                "selectedObject": this.selectedObject,
-                "data_min": temp1,
-                "data_max": temp2,
-                "selectedColumn": this.selectedColumn
-            }
-            this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
-                , temp1, temp2).subscribe(
-                (data) => {
-                    this.dataService.startBlock.next("Blocked")
-                    let real_nomi_colonne: Array<any> = [];
-                    let correlation_vector: Array<any> = [];
-                    for (let nome_colonna of data.users) {
-                        real_nomi_colonne.push(nome_colonna.toString());
-                    }
-                    for (let corr of data.correlazioni) {
-                        correlation_vector.push(corr);
-                    }
+            if (this.dataSended != null &&
+                this.arraysEqual(this.dataSended.selectedUsers, this.selectedUsers) &&
+                this.dataSended.selectedObject == this.selectedObject &&
+                this.dataSended.selectedColumn == this.selectedColumn &&
+                this.dataSended.data_min == temp1 &&
+                this.dataSended.data_max == temp2) {
+                this.message_error.push({
+                    severity: 'error', summary: 'AAAAhhh!!', detail: 'Per inviare una nuova richiesta devi ' +
+                    'selezionare un utente, oggetto, attributi o date differenti'
+                })
+                this.isLoadingAnalisi = false
+            } else {
+                this.dataSended = {
+                    "selectedUsers": this.selectedUsers.slice(),
+                    "selectedObject": this.selectedObject,
+                    "data_min": temp1,
+                    "data_max": temp2,
+                    "selectedColumn": this.selectedColumn
+                }
+                this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
+                    , temp1, temp2).subscribe(
+                    (data) => {
+                        this.isLoadingAnalisi = true;
+                        this.opacity = 0.2
+                        this.dataService.startBlock.next("Blocked")
+                        let real_nomi_colonne: Array<any> = [];
+                        let correlation_vector: Array<any> = [];
+                        for (let nome_colonna of data.users) {
+                            real_nomi_colonne.push(nome_colonna.toString());
+                        }
+                        for (let corr of data.correlazioni) {
+                            correlation_vector.push(corr);
+                        }
 
-                    let _tempTimestamps: Array<any> = [];
-                    for (let time of data.timestamps) {
-                        _tempTimestamps.push(time)
-                    }
+                        let _tempTimestamps: Array<any> = [];
+                        for (let time of data.timestamps) {
+                            _tempTimestamps.push(time)
+                        }
 
-                    let righe_da_considerare: Array<any> = [];
-                    let _rigaTemp: Array<any> = [];
+                        let righe_da_considerare: Array<any> = [];
+                        let _rigaTemp: Array<any> = [];
 
-                    let n = real_nomi_colonne.length;
-                    for (let _y = 0; _y < real_nomi_colonne.length; _y++) {
-                        for (let _x = 0; _x < real_nomi_colonne.length; _x++) {
-                            if (_x == _y) {
-                                _rigaTemp.push(1)
-                            } else {
-                                if (_x > _y) {
-                                    _rigaTemp.push(correlation_vector[(n * (n - 1) / 2) - (n - _y) * ((n - _y) - 1) / 2 + _x - _y - 1])
-                                }
-                                if (_x < _y) {
-                                    _rigaTemp.push(correlation_vector[(n * (n - 1) / 2) - (n - _x) * ((n - _x) - 1) / 2 + _y - _x - 1])
+                        let n = real_nomi_colonne.length;
+                        for (let _y = 0; _y < real_nomi_colonne.length; _y++) {
+                            for (let _x = 0; _x < real_nomi_colonne.length; _x++) {
+                                if (_x == _y) {
+                                    _rigaTemp.push(1)
+                                } else {
+                                    if (_x > _y) {
+                                        _rigaTemp.push(correlation_vector[(n * (n - 1) / 2) - (n - _y) * ((n - _y) - 1) / 2 + _x - _y - 1])
+                                    }
+                                    if (_x < _y) {
+                                        _rigaTemp.push(correlation_vector[(n * (n - 1) / 2) - (n - _x) * ((n - _x) - 1) / 2 + _y - _x - 1])
+                                    }
                                 }
                             }
+                            if (_rigaTemp.length != 0)
+                                righe_da_considerare.push(_rigaTemp)
+                            _rigaTemp = []
                         }
-                        if (_rigaTemp.length != 0)
-                            righe_da_considerare.push(_rigaTemp)
-                        _rigaTemp = []
-                    }
-                    this.data_min_calc = data.data_min_calc
-                    this.data_max_calc = data.data_max_calc
+                        this.data_min_calc = data.data_min_calc
+                        this.data_max_calc = data.data_max_calc
 
-                    this.chartMin = 0
-                    this.chartMax = _tempTimestamps.length - 1
+                        this.chartMin = 0
+                        this.chartMax = _tempTimestamps.length - 1
 
-                    this.rangeValues = [_tempTimestamps.indexOf(this.data_min_calc), _tempTimestamps.indexOf(this.data_max_calc)]
+                        this.rangeValues = [_tempTimestamps.indexOf(this.data_min_calc), _tempTimestamps.indexOf(this.data_max_calc)]
 
-                    this.timestamps = _tempTimestamps
-                    this.timestampsTotal = _tempTimestamps
+                        this.timestamps = _tempTimestamps
+                        this.timestampsTotal = _tempTimestamps
 
-                    this.componentData = {
-                        component: correlationMultiple,
-                        inputs: {
-                            selectedUsers: this.selectedUsers,
-                            selectedObject: this.selectedObject,
-                            selectedColumn: this.selectedColumn,
-                            real_nomi_colonne: real_nomi_colonne,
-                            righe_da_considerare: righe_da_considerare,
-                            correlation_vector: correlation_vector,
-                            data_min_calc: this.data_min_calc,
-                            data_max_calc: this.data_max_calc
+                        this.componentData = {
+                            component: correlationMultiple,
+                            inputs: {
+                                selectedUsers: this.selectedUsers,
+                                selectedObject: this.selectedObject,
+                                selectedColumn: this.selectedColumn,
+                                real_nomi_colonne: real_nomi_colonne,
+                                righe_da_considerare: righe_da_considerare,
+                                correlation_vector: correlation_vector,
+                                data_min_calc: this.data_min_calc,
+                                data_max_calc: this.data_max_calc
+                            }
                         }
+                        this.isLoadingAnalisi = false;
+                        this.dataService.startBlock.next("UnBlocked")
+                        this.opacity = 1
                     }
-                    this.isLoadingAnalisi = false;
-                    this.dataService.startBlock.next("UnBlocked")
-                }
-            );
-            this.selectedAnalizza = true
+                );
+            }
         }
-
-    }
-
-
-    formatDate(yearToFormat: number, monthToFormat: number, dayToFormat: number,) {
-        let year = yearToFormat.toString()
-        let month: string;
-        if (monthToFormat < 10) {
-            month = "0" + monthToFormat.toString()
-        } else {
-            month = monthToFormat.toString()
-        }
-        let day: string;
-        if (dayToFormat < 10) {
-            day = "0" + dayToFormat.toString()
-        } else {
-            day = dayToFormat.toString()
-        }
-        return year + "-" + month + "-" + day
-    }
-
-    aggiornaDate() {
-        this.data_min_tosend = this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth() + 1, this.data_min.getDate())
-        this.data_max_tosend = this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
-        this.selectedAnalizza = false
-        this.onInvia(null, true)
     }
 
     // Quando lo slider viene mosso viene chiamato questo metodo che cambia le label ed i dati del grafico

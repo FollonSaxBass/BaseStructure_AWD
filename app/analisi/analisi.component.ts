@@ -19,8 +19,8 @@ export class AnalisiComponent implements OnInit {
     selectedUser: User;
     selectedObject: Oggetto;
 
-    // Posto a true quando in oggetti si seleziona di analizzare la selezione
-    selectedAnalizza: boolean;
+    // // Posto a true quando in oggetti si seleziona di analizzare la selezione
+    // selectedAnalizza: boolean;
 
     //Dati da inviare all'oggetto di visualizzazione dell'analisi
     componentData: any = null;
@@ -80,7 +80,6 @@ export class AnalisiComponent implements OnInit {
                     data_max: this.data_max
                 }
             };
-            this.selectedAnalizza = true
             this.isLoading = true
         }
     }
