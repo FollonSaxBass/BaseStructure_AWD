@@ -9,7 +9,7 @@
 <div class="panel panel-default col-lg-2">
     <div class="panel-heading">Users</div>
     <div class="panel-body">
-        <user-list-plot (onSelectUser)="onSelectedUser($event)">
+        <user-list-plot [isLoadingPlotta]="isLoadingPlotta" (onSelectUser)="onSelectedUser($event)">
             Loading...
         </user-list-plot>
     </div>
@@ -25,4 +25,5 @@
     </div>
 </div>
 <p-growl [value]="message_error"></p-growl>
+<img *ngIf="isLoading" src="../../public/loading_small_1.gif">
 <dynamic-component *ngIf="selectedObject" [componentData]="componentData">Loading...</dynamic-component>

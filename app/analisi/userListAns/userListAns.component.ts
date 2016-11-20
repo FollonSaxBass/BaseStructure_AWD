@@ -10,6 +10,7 @@ import {Message} from "primeng/components/common/api";
 export class userListAns {
     msgs: Message[] = [];
     error = false
+    itsFirst = true
 
     @Input() users: User[]
 
@@ -44,7 +45,9 @@ export class userListAns {
                 } else if (content == "Loaded") {
                     this.msgs = []
                     this.error = false
+
                 }
+                this.itsFirst=false
             });
     }
 

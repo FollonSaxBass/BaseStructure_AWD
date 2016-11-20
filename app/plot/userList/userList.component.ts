@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {DataService, User} from "../../data.service";
 import {Message} from "primeng/components/common/api";
 import {$SEMICOLON} from "@angular/compiler/src/chars";
@@ -12,15 +12,13 @@ export class userList implements OnInit {
     msgs: Message[] = [];
     error = false
 
-    itsFirst = true
-
     users: User[]
     selectedUser: User
 
     daFiltrare: string
 
+    @Input() isLoadingPlotta: boolean
     @Output() onSelectUser = new EventEmitter();
-
 
     onSelect(user: User): void {
         this.selectedUser = user;
@@ -29,7 +27,6 @@ export class userList implements OnInit {
 
     ngOnInit() {
         this.users = this.dataService.getUsers()
-
     }
 
     constructor(private dataService: DataService) {
@@ -39,7 +36,7 @@ export class userList implements OnInit {
                 if (content == "Errore0") {
                     this.error = true
                     //No connettività
-                    if (this.msgs.length == 0)
+                    if (this.msgs.length == 0 && !this.isLoadingPlotta)
                         this.msgs.push({
                             severity: 'error',
                             summary: 'Connectivity error',
@@ -47,7 +44,7 @@ export class userList implements OnInit {
                         });
                 } else if (content == "Errore") {
                     this.error = true
-                    if (this.msgs.length == 0)
+                    if (this.msgs.length == 0 && !this.isLoadingPlotta)
                         this.msgs.push({
                             severity: 'error',
                             summary: 'Server error',
@@ -56,6 +53,7 @@ export class userList implements OnInit {
                 } else if (content == "Loaded") {
                     this.msgs = []
                     this.error = false
+
                 }
             });
     }

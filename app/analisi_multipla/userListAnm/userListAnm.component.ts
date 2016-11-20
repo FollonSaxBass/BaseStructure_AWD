@@ -9,7 +9,7 @@ import {DataService, User, Oggetto, Colonna} from "../../data.service";
     templateUrl: './app/analisi_multipla/userListAnm/userListAnm.component.html'
 })
 
-export class userListAnm implements OnChanges {
+export class userListAnm {
 
 
     remove(arr: any, what: any) {
@@ -25,10 +25,6 @@ export class userListAnm implements OnChanges {
     @Input() users: any;
     @Input() selectedColumn: any;
 
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes)
-    }
-
     selectedUsers: User[] = []
 
     @Output() onInvia = new EventEmitter();
@@ -39,7 +35,6 @@ export class userListAnm implements OnChanges {
         } else {
             this.selectedUsers.push(user)
         }
-        console.log(this.selectedUsers)
     }
 
     clickedInvia() {

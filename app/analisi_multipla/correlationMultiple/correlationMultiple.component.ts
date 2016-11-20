@@ -16,7 +16,6 @@ import {DataService, User, Oggetto, Colonna} from "../../data.service";
 })
 
 export class correlationMultiple {
-
     nomi_colonne: Array<any> = [];
     righe: Array<any> = [];
     real_nomi_colonne: Array<any> = [];
@@ -41,7 +40,6 @@ export class correlationMultiple {
         this.correlation_vector = this.injector.get('correlation_vector');
         this.data_min_calc = this.injector.get('data_min_calc');
         this.data_max_calc = this.injector.get('data_max_calc');
-
         this.selectedColumn = this.injector.get('selectedColumn');
         this.selectedObject = this.injector.get('selectedObject');
 

@@ -24,7 +24,6 @@ export class correlationSingle implements OnInit {
 
     busy: Subscription;
 
-
     // Range values inizializzati a 0,1 per creare la vista,
     // Al caricamento dei dati vengono sostituiti dai valori ritornati dal padre
     // Range values iniziale e finale della range bar per definire il numero di possibili step
@@ -76,15 +75,15 @@ export class correlationSingle implements OnInit {
      * Vado a prendere gli oggetti che mi servono durante l'inizializzazione
      */
     ngOnInit(): void {
-        this.loadData()
+        this.loadData(false)
     }
 
     datiInviati: any
 
-    loadData() {
+    loadData(reload: boolean) {
         let temp1: any
         let temp2: any
-        if (this.rangeValues[0]) {
+        if (reload) {
             temp1 = this.timestampsTotal[this.rangeValues[0]]
             temp2 = this.timestampsTotal[this.rangeValues[1]]
         }
@@ -107,7 +106,6 @@ export class correlationSingle implements OnInit {
             this.busy = this.dataService.getObjectCorrelation(this.selectedUser.id_user, this.selectedObject.id_oggetto,
                 temp1, temp2).subscribe(
                 (data) => {
-                    console.log(data)
                     this.real_nomi_colonne = []
                     for (let nome_colonna of data.colonne) {
                         this.real_nomi_colonne.push(nome_colonna);
@@ -145,14 +143,12 @@ export class correlationSingle implements OnInit {
 
                     this.data_min_calc = data.data_min_calc
                     this.data_max_calc = data.data_max_calc
-
-                    // this.rangeValues = [0, _tempTimestamps.length - 1]
+                    this.datiInviati.data_max = this.data_max_calc
+                    this.datiInviati.data_max = this.data_min_calc
                     this.chartMin = 0
                     this.chartMax = _tempTimestamps.length - 1
 
-                    // this.chartMin = _tempTimestamps.indexOf(this.data_min_calc)
-                    // this.chartMax = _tempTimestamps.indexOf(this.data_max_calc)
-                    this.rangeValues = [ _tempTimestamps.indexOf(this.data_min_calc), _tempTimestamps.indexOf(this.data_max_calc)]
+                    this.rangeValues = [_tempTimestamps.indexOf(this.data_min_calc), _tempTimestamps.indexOf(this.data_max_calc)]
 
                     this.timestamps = _tempTimestamps
                     this.timestampsTotal = _tempTimestamps
@@ -228,6 +224,6 @@ export class correlationSingle implements OnInit {
     }
 
     onSlideEnd() {
-        this.loadData()
+        this.loadData(true)
     }
 }

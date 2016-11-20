@@ -32,10 +32,6 @@ export class AnalisiMultiplaComponent implements OnInit {
     data_min_tosend: any
     data_max_tosend: any
 
-    //Valori di esempio che vengono rimpiazzati al caricamento prima della visualizzazione del component
-    minDateValue = new Date(2016, 11, 09)
-    maxDateValue = new Date(2016, 11, 09)
-
     //Utilizzato per inviare messaggio in caso di errore
     message_error: Message[] = [];
 
@@ -62,6 +58,7 @@ export class AnalisiMultiplaComponent implements OnInit {
     changedObject(oggetto: Oggetto) {
         if (this.selectedObject != oggetto) {
             this.selectedObject = oggetto;
+            this.componentData = null
             // this.columns = null
             // this.users = null
         }
@@ -126,8 +123,31 @@ export class AnalisiMultiplaComponent implements OnInit {
         return true;
     }
 
-    onInvia(users: any) {
+    // Range values inizializzati a 0,1 per creare la vista,
+    // Al caricamento dei dati vengono sostituiti dai valori ritornati dal padre
+    // Range values iniziale e finale della range bar per definire il numero di possibili step
+    rangeValues: number[] = [0, 1];
+    timestamps: string[]
+    timestampsTotal: string[]
+    chartMin = 0
+    chartMax = 1
+    data_min_calc: string;
+    data_max_calc: string
+
+    onInvia(users: any, reload: boolean) {
         this.isLoading = true
+
+        let temp1: any
+        let temp2: any
+        if (reload) {
+            temp1 = this.timestampsTotal[this.rangeValues[0]]
+            temp2 = this.timestampsTotal[this.rangeValues[1]]
+        }
+        else {
+            temp1 = null
+            temp2 = null
+        }
+
         if (users != null)
             this.selectedUsers = users
 
@@ -135,8 +155,8 @@ export class AnalisiMultiplaComponent implements OnInit {
             this.arraysEqual(this.dataSended.selectedUsers, this.selectedUsers) &&
             this.dataSended.selectedObject == this.selectedObject &&
             this.dataSended.selectedColumn == this.selectedColumn &&
-            this.dataSended.data_min_tosend == this.data_min_tosend &&
-            this.dataSended.data_max_tosend == this.data_max_tosend) {
+            this.dataSended.data_min == temp1 &&
+            this.dataSended.data_max == temp2) {
             this.message_error.push({
                 severity: 'error', summary: 'AAAAhhh!!', detail: 'Per inviare una nuova richiesta devi ' +
                 'selezionare un utente, oggetto, attributi o date differenti'
@@ -145,13 +165,14 @@ export class AnalisiMultiplaComponent implements OnInit {
             this.dataSended = {
                 "selectedUsers": this.selectedUsers.slice(),
                 "selectedObject": this.selectedObject,
-                "data_min_tosend": this.data_min_tosend,
-                "data_max_tosend": this.data_max_tosend,
+                "data_min": temp1,
+                "data_max": temp2,
                 "selectedColumn": this.selectedColumn
             }
             this.busy = this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
-                , this.data_min_tosend, this.data_max_tosend).subscribe(
+                , temp1, temp2).subscribe(
                 (data) => {
+                    console.log(data)
                     let real_nomi_colonne: Array<any> = [];
                     let correlation_vector: Array<any> = [];
                     for (let nome_colonna of data.users) {
@@ -160,8 +181,15 @@ export class AnalisiMultiplaComponent implements OnInit {
                     for (let corr of data.correlazioni) {
                         correlation_vector.push(corr);
                     }
+
+                    let _tempTimestamps: Array<any> = [];
+                    for (let time of data.timestamps) {
+                        _tempTimestamps.push(time)
+                    }
+
                     let righe_da_considerare: Array<any> = [];
                     let _rigaTemp: Array<any> = [];
+
                     let n = real_nomi_colonne.length;
                     for (let _y = 0; _y < real_nomi_colonne.length; _y++) {
                         for (let _x = 0; _x < real_nomi_colonne.length; _x++) {
@@ -180,12 +208,16 @@ export class AnalisiMultiplaComponent implements OnInit {
                             righe_da_considerare.push(_rigaTemp)
                         _rigaTemp = []
                     }
-                    this.data_min = new Date(data.data_min_calc)
-                    this.data_max = new Date(data.data_max_calc)
-                    this.minDateValue = new Date(data.data_min)
-                    this.maxDateValue = new Date(data.data_max)
-                    this.data_min_tosend = this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth() + 1, this.data_min.getDate())
-                    this.data_max_tosend = this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
+                    this.data_min_calc = data.data_min_calc
+                    this.data_max_calc = data.data_max_calc
+
+                    this.chartMin = 0
+                    this.chartMax = _tempTimestamps.length - 1
+
+                    this.rangeValues = [_tempTimestamps.indexOf(this.data_min_calc), _tempTimestamps.indexOf(this.data_max_calc)]
+
+                    this.timestamps = _tempTimestamps
+                    this.timestampsTotal = _tempTimestamps
 
                     this.componentData = {
                         component: correlationMultiple,
@@ -196,8 +228,8 @@ export class AnalisiMultiplaComponent implements OnInit {
                             real_nomi_colonne: real_nomi_colonne,
                             righe_da_considerare: righe_da_considerare,
                             correlation_vector: correlation_vector,
-                            data_min_calc: this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth() + 1, this.data_min.getDate()),
-                            data_max_calc: this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
+                            data_min_calc: this.data_min_calc,
+                            data_max_calc: this.data_max_calc
                         }
                     }
                 }
@@ -229,6 +261,20 @@ export class AnalisiMultiplaComponent implements OnInit {
         this.data_min_tosend = this.formatDate(this.data_min.getFullYear(), this.data_min.getMonth() + 1, this.data_min.getDate())
         this.data_max_tosend = this.formatDate(this.data_max.getFullYear(), this.data_max.getMonth() + 1, this.data_max.getDate())
         this.selectedAnalizza = false
-        this.onInvia(null)
+        this.onInvia(null, true)
+    }
+
+    // Quando lo slider viene mosso viene chiamato questo metodo che cambia le label ed i dati del grafico
+    // (Fantastico :) )
+    onChange(e: any) {
+        let _tempTimestamps: Array<any> = [];
+        for (let i = this.rangeValues[0]; i <= this.rangeValues[1]; i++) {
+            _tempTimestamps.push(this.timestampsTotal[i])
+        }
+        this.timestamps = _tempTimestamps;
+    }
+
+    onSlideEnd() {
+        this.onInvia(null, true)
     }
 }

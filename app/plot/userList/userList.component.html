@@ -10,8 +10,9 @@
         {{user.nome_user}}
     </li>
 </ul>
-<p-messages [value]="msgs"></p-messages>
-<div *ngIf="error&&!itsFirst" class="myLoading">
+<img *ngIf="isLoadingPlotta" src="../../public/loading_small_1.gif">
+<div *ngIf="error" class="myLoading">
+    <p-messages [value]="msgs"></p-messages>
     <button (click)="reLoad()" class="btn btn-primary"
             style="background-color: #337AB7" data-size="s">Reload
     </button>

@@ -40,11 +40,6 @@ export class AnalisiComponent implements OnInit {
                 //Viene usato solamente per fermare il tasto caricamento in analizza
                 this.isLoading = false
             });
-        dataService.changedDataAns$.subscribe(
-            content => {
-                this.data_min = content.data_min
-                this.data_max = content.data_max
-            });
     }
 
     ngOnInit() {

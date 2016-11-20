@@ -19,11 +19,6 @@
                                   (onSelectedColumn)="onSelectedColumn($event)"></column-list-mul-plot>
         </div>
     </div>
-    <!--<div *ngIf="columns||(objectSended&&selectedObject==objectSended)" class="panel panel-default"-->
-    <!--style="margin-bottom: 0">-->
-    <!--<div *ngIf="users||(objectSended&&selectedObject==objectSended)" class="panel panel-default">-->
-
-
     <div *ngIf="(objectSended&&selectedObject==objectSended)" class="panel panel-default">
         <div class="panel-heading">Users aventi l'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
@@ -32,31 +27,23 @@
         </div>
     </div>
 </div>
-<dynamic-anm-component *ngIf="componentData&&!isLoading" [componentData]="componentData"
-></dynamic-anm-component>
+<div *ngIf="componentData&&!isLoading">
+    <dynamic-anm-component [componentData]="componentData"
+    ></dynamic-anm-component>
+</div>
 <div *ngIf="componentData&&!isLoading" style="text-align: center"
      class="panel panel-default col-lg-8">
     <div class="panel-heading">Nuova anlisi - Seleziona le date di riferimento</div>
     <div class="panel-body">
-        <div>
-            <div class="col-lg-6">
-                <div>Data inizio</div>
-                <p-calendar [minDate]="minDateValue" [maxDate]="maxDateValue" dateFormat="dd/mm/yy"
-                            [(ngModel)]="data_min"></p-calendar>
+        <div style="margin-top: 35px;" class="col-lg-12">
+
+            <div>
+                <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="chartMin" [max]="chartMax"
+                          (onChange)="onChange($event)" (onSlideEnd)="onSlideEnd($event)"></p-slider>
             </div>
-            <div class="col-lg-6">
-                <div>Data fine</div>
-                <p-calendar [minDate]="minDateValue" [maxDate]="maxDateValue" dateFormat="dd/mm/yy"
-                            [(ngModel)]="data_max"></p-calendar>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div>
-            <button style="background-color: #337AB7" data-size="s" [ladda]="isLoading" (click)="aggiornaDate()"
-                    class="btn btn-primary">
-                Invia richiesta
-            </button>
+            <br>
+            <div><h4 style="float: left;">Range: {{timestampsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
+                {{timestampsTotal[rangeValues[1]]}}</h4></div>
         </div>
     </div>
 </div>

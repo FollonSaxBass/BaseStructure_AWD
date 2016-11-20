@@ -41,7 +41,6 @@ export class objectList implements OnChanges {
         this.selectedObject = null
     }
 
-
     constructor(private dataService: DataService) {
         dataService.plotSource$.subscribe(
             content => {
