@@ -62,7 +62,7 @@ export class correlationSingle implements OnInit {
     data_max: string
     data_min_calc: string;
     data_max_calc: string
-
+    datiInviati: any
 
     constructor(private dataService: DataService, private injector: Injector) {
         this.selectedUser = this.injector.get('selectedUser');
@@ -78,7 +78,7 @@ export class correlationSingle implements OnInit {
         this.loadData(false)
     }
 
-    datiInviati: any
+
 
     loadData(reload: boolean) {
         let temp1: any

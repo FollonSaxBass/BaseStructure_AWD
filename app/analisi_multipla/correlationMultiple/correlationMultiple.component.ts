@@ -2,36 +2,46 @@ import {
     Component, OnInit, Input, Output, EventEmitter, trigger, state, style, transition,
     animate, OnChanges, Injector
 } from '@angular/core';
-import {DataService, User, Oggetto, Colonna} from "../../data.service";
+import {DataService, Oggetto, Colonna} from "../../data.service";
 
 @Component({
     selector: 'correlation-mul',
     templateUrl: './app/analisi_multipla/correlationMultiple/correlationMultiple.component.html',
+    // animations: [
+    //     // trigger('visibilityChanged', [
+    //     //         state('shown', style({opacity: 1})),
+    //     //         state('hidden', style({opacity: 0})),
+    //     //         transition('hidden => shown', animate('400ms ease-in'))
+    //     //     ],
+    //     // ),
+    //     trigger('visibilityChanged', [
+    //         state('shown', style({opacity: 1})),
+    //         state('hidden', style({opacity: 0})),
+    //         // transition('hidden => shown', animate('400ms ease-in')),
+    //         transition('hidden => shown', [
+    //             style({transform: 'ease-in'}),
+    //             animate('400ms')
+    //         ]),
+    //     ])
+    //     ,
+    //     trigger('hiddenChanged', [
+    //             state('true', style({opacity: 0.2})),
+    //             state('false', style({opacity: 1})),
+    //             transition('true => false', animate('50ms ease-out')),
+    //             transition('false => true', animate('50ms ease-in'))
+    //         ],
+    //     )
+    // ]
     animations: [
-        // trigger('visibilityChanged', [
-        //         state('shown', style({opacity: 1})),
-        //         state('hidden', style({opacity: 0})),
-        //         transition('hidden => shown', animate('400ms ease-in'))
-        //     ],
-        // ),
         trigger('visibilityChanged', [
             state('shown', style({opacity: 1})),
             state('hidden', style({opacity: 0})),
             // transition('hidden => shown', animate('400ms ease-in')),
             transition('hidden => shown', [
-                style({transform: 'ease-in'}),
-                animate('400ms')
+                style({transform: 'translateY(+100%)'}),
+                animate(400)
             ]),
-        ])
-        ,
-        trigger('hiddenChanged', [
-                state('true', style({opacity: 0.2})),
-                state('false', style({opacity: 1})),
-                transition('true => false', animate('50ms ease-out')),
-                transition('false => true', animate('50ms ease-in'))
-            ],
-        )
-    ]
+        ])]
 })
 
 export class correlationMultiple {
