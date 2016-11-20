@@ -49,8 +49,6 @@ export class AnalisiMultiplaComponent implements OnInit {
     msgs: Message[] = [];
     error = false
 
-    opacity = 1;
-
     constructor(private dataService: DataService, private ref: ElementRef) {
     }
 
@@ -207,7 +205,6 @@ export class AnalisiMultiplaComponent implements OnInit {
                     , temp1, temp2).subscribe(
                     (data) => {
                         this.isLoadingAnalisi = true;
-                        this.opacity = 0.2
                         this.dataService.startBlock.next("Blocked")
                         let real_nomi_colonne: Array<any> = [];
                         let correlation_vector: Array<any> = [];
@@ -270,7 +267,6 @@ export class AnalisiMultiplaComponent implements OnInit {
                         }
                         this.isLoadingAnalisi = false;
                         this.dataService.startBlock.next("UnBlocked")
-                        this.opacity = 1
                     }
                 );
             }
