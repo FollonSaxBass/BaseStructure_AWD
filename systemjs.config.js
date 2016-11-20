@@ -19,12 +19,12 @@
         'rxjs': 'node_modules/rxjs',
         'ng2-charts': 'node_modules/ng2-charts',
         'primeng': 'node_modules/primeng',
-        // 'angular2-ladda':             'node_modules/angular2-ladda',
-        // 'ladda':                      'node_modules/angular2-ladda/node_modules/ladda/js',
-        // 'spin':                       'node_modules/angular2-ladda/node_modules/ladda/js/spin.js',
-        'angular2-ladda': 'node_modules/angular2-ladda',
-        'ladda': 'node_modules/ladda/js',
-        'spin': 'node_modules/ladda/js/spin.js',
+        'angular2-ladda':             'node_modules/angular2-ladda',
+        'ladda':                      'node_modules/angular2-ladda/node_modules/ladda/js',
+        'spin':                       'node_modules/angular2-ladda/node_modules/ladda/js/spin.js',
+        // 'angular2-ladda': 'node_modules/angular2-ladda',
+        // 'ladda': 'node_modules/ladda/js',
+        // 'spin': 'node_modules/ladda/js/spin.js',
         'ts-metadata-helper': 'node_modules/ts-metadata-helper',
         'angular2-dynamic-component': 'node_modules/angular2-dynamic-component',
         'angular2-busy': 'node_modules/angular2-busy'
@@ -55,7 +55,7 @@
             main: './index.js',
             defaultExtension: 'js'
         },
-        'core-js': {defaultExtension: 'js'},
+        // 'core-js': {defaultExtension: 'js'},
     };
     var ngPackageNames = [
         'common',

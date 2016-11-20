@@ -28,6 +28,21 @@ export class userListAnm {
 
     @Output() onInvia = new EventEmitter();
 
+    constructor(private dataService: DataService) {
+
+        dataService.startBlock$.subscribe(
+            content => {
+                //Non mi interessa del contenuto di content
+                //Viene usato solamente per fermare il tasto caricamento in analizza
+                if (content == "Blocked") {
+                    this.isLoadingAnalisi = true
+                } else {
+                    this.isLoadingAnalisi = false
+                }
+            });
+    }
+
+
     onSelect(user: User): void {
         if (this.selectedUsers.indexOf(user) >= 0) {
             this.remove(this.selectedUsers, user)
@@ -37,7 +52,7 @@ export class userListAnm {
     }
 
     clickedInvia() {
-        this.isLoadingAnalisi = true
+        // this.isLoadingAnalisi = true
         this.onInvia.emit(this.selectedUsers)
     }
 
