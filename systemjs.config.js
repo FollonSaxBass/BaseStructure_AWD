@@ -6,7 +6,8 @@
     paths = {
         // paths serve as alias
         'npm:': 'node_modules/',
-        "ng2-charts/ng2-charts": "node_modules/ng2-charts/ng2-charts"
+        "ng2-charts/ng2-charts": "node_modules/ng2-charts/ng2-charts",
+        'core-js': 'node_modules/core-js',
     };
     // map tells the System loader where to look for things
     var map = {
@@ -24,6 +25,9 @@
         'angular2-ladda': 'node_modules/angular2-ladda',
         'ladda': 'node_modules/ladda/js',
         'spin': 'node_modules/ladda/js/spin.js',
+        'ts-metadata-helper': 'node_modules/ts-metadata-helper',
+        'angular2-dynamic-component': 'node_modules/angular2-dynamic-component',
+        'angular2-busy': 'node_modules/angular2-busy'
 
     };
     // packages tells the System loader how to load when no filename and/or no extension
@@ -41,6 +45,17 @@
         },
         'angular2-ladda': {main: 'index.js', defaultExtension: 'js'},
         'ladda': {main: 'ladda.js', defaultExtension: 'js'},
+        'ts-metadata-helper': {
+            defaultExtension: 'js'
+        },
+        'angular2-dynamic-component': {
+            defaultExtension: 'js'
+        },
+        'angular2-busy': {
+            main: './index.js',
+            defaultExtension: 'js'
+        },
+        'core-js': {defaultExtension: 'js'},
     };
     var ngPackageNames = [
         'common',

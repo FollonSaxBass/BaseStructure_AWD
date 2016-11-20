@@ -19,13 +19,14 @@
                 <p-growl [value]="message_ok"></p-growl>
             </div>
         </div>
-        <div class="col-lg-10">
+        <div  class="col-lg-10">
             <div>
                 <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="chartMin" [max]="chartMax"
                           (onChange)="onChange($event)"></p-slider>
             </div>
-            <br>
-            <div><h4 style="float: left;">Range: {{lineChartLabelsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
+
+            <div><h4 style="float: left;">Range:
+                {{lineChartLabelsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
                 {{lineChartLabelsTotal[rangeValues[1]]}}</h4></div>
         </div>
     </div>

@@ -35,7 +35,6 @@ export class objectListAns implements OnChanges {
     constructor(private dataService: DataService) {
         dataService.objectSource$.subscribe(
             content => {
-                console.log(content)
                 if (content == "Errore0") {
                     this.error = true
                     this.msgs.push({

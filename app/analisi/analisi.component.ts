@@ -40,6 +40,11 @@ export class AnalisiComponent implements OnInit {
                 //Viene usato solamente per fermare il tasto caricamento in analizza
                 this.isLoading = false
             });
+        dataService.changedDataAns$.subscribe(
+            content => {
+                this.data_min = content.data_min
+                this.data_max = content.data_max
+            });
     }
 
     ngOnInit() {
@@ -60,7 +65,10 @@ export class AnalisiComponent implements OnInit {
     onSelectedAnalizza() {
         if (this.componentData != null &&
             this.componentData.inputs.selectedUser === this.selectedUser &&
-            this.componentData.inputs.selectedObject === this.selectedObject) {
+            this.componentData.inputs.selectedObject === this.selectedObject &&
+            this.componentData.inputs.data_min === this.data_min &&
+            this.componentData.inputs.data_max === this.data_max
+        ) {
             //Non inviare la richiesta, manda un messaggio di
             this.message_error.push({
                 severity: 'error', summary: 'AAAAhhh!!', detail: 'Per inviare una nuova richiesta devi ' +

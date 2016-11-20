@@ -16,6 +16,7 @@ import {LaddaModule} from "angular2-ladda";
 import {FilterPipe} from "./filter.pipe";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {MessagesModule} from "primeng/components/messages/messages";
+import {BusyModule} from "angular2-busy";
 @NgModule({
     declarations: [AppComponent, routingComponents,FilterPipe],
     imports: [
@@ -33,7 +34,8 @@ import {MessagesModule} from "primeng/components/messages/messages";
         GrowlModule,
         LaddaModule,
         TooltipModule,
-        MessagesModule
+        MessagesModule,
+        BusyModule
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

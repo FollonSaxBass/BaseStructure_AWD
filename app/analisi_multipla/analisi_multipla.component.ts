@@ -2,6 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter, ElementRef} from '@angul
 import {Oggetto, DataService, User, Colonna} from "../data.service";
 import {correlationMultiple} from "./correlationMultiple/correlationMultiple.component";
 import {Message} from "primeng/components/common/api";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'analisi-mul-comp',
@@ -9,6 +10,7 @@ import {Message} from "primeng/components/common/api";
 })
 
 export class AnalisiMultiplaComponent implements OnInit {
+    busy: Subscription;
 
     // Liste da mettere nei componenti per poi farle vedere
     objects: Oggetto[];
@@ -71,7 +73,11 @@ export class AnalisiMultiplaComponent implements OnInit {
 
     onSelectedObject(oggetto: Oggetto) {
         if (this.objectSended == oggetto) {
-            console.log("Non mando la richiesta")
+            this.message_error.push({
+                severity: 'error', summary: 'AAAAhhh!!', detail: 'Per inviare una nuova richiesta devi ' +
+                'selezionare un utente differente'
+            })
+
         } else {
             this.selectedObject = oggetto
             this.objectSended = oggetto
@@ -143,7 +149,7 @@ export class AnalisiMultiplaComponent implements OnInit {
                 "data_max_tosend": this.data_max_tosend,
                 "selectedColumn": this.selectedColumn
             }
-            this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
+            this.busy = this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
                 , this.data_min_tosend, this.data_max_tosend).subscribe(
                 (data) => {
                     let real_nomi_colonne: Array<any> = [];

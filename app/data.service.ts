@@ -71,6 +71,9 @@ export class DataService {
     objectSource = new Subject();
     objectSource$ = this.objectSource.asObservable();
 
+    changedDataAns = new Subject();
+    changedDataAns$ = this.changedDataAns.asObservable();
+
     /**
      * La prima cosa che fa questo componente è andare a prendere i dati degli utenti perchè caratterizza
      * sia la richiesta di plot che la richiesta di analisi singola
@@ -121,7 +124,6 @@ export class DataService {
                 this.userSource.next("Loaded")
             },
             (error) => {
-                console.log("ERRORE")
                 if (error.status == "0") {
                     //No connettività
                     this.userSource.next("Errore0")

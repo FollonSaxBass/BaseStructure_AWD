@@ -56,7 +56,6 @@ export class objectList implements OnChanges {
                     this.error = true
                     this.msgs.push({severity: 'error', summary: 'Server error', detail: 'Something\'s gone wrong'});
                 }
-
             });
     }
 

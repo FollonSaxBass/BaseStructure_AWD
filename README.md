@@ -20,3 +20,10 @@ Done
 Good luck with angular2 hacking!
 "# BaseStructure_AWD" 
 # BaseStructure_AWD
+
+
+TO INSTALL
+npm install --save ts-metadata-helper@0.0.3
+npm install --save angular2-dynamic-component@0.0.50
+
+npm install --save angular2-busy@1.0.1

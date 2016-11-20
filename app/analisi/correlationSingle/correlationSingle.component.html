@@ -1,4 +1,4 @@
-<div [@visibilityChanged]="visibility" class="panel panel-default col-lg-8">
+<div [@visibilityChanged]="visibility" [ngBusy]="busy" class="panel panel-default col-lg-8">
     <div class="panel-heading">Tabella di correlazione riferita all'oggetto {{selectedObject.nome_oggetto}} dell'utente
         {{selectedUser.nome_user}} calcolato sulle date {{data_min_calc}} e {{data_max_calc}}
     </div>
@@ -31,10 +31,11 @@
         </div>
 
         <br>
-        <div *ngIf="loaded" class="col-lg-12">
+        <div style="margin-top: 35px;" *ngIf="loaded" class="col-lg-12">
+
             <div>
                 <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="chartMin" [max]="chartMax"
-                          (onChange)="onChange($event)"></p-slider>
+                          (onChange)="onChange($event)" (onSlideEnd)="onSlideEnd($event)"></p-slider>
             </div>
             <br>
             <div><h4 style="float: left;">Range: {{timestampsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">

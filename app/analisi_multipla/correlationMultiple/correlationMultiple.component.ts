@@ -2,7 +2,7 @@ import {
     Component, OnInit, Input, Output, EventEmitter, trigger, state, style, transition,
     animate, OnChanges, Injector
 } from '@angular/core';
-import {DataService, User, Oggetto} from "../../data.service";
+import {DataService, User, Oggetto, Colonna} from "../../data.service";
 
 @Component({
     selector: 'correlation-mul',
@@ -31,6 +31,9 @@ export class correlationMultiple {
     data_min_calc: string;
     data_max_calc: string;
 
+    selectedColumn: Colonna
+    selectedObject: Oggetto
+
     constructor(private dataService: DataService, private injector: Injector) {
         this.real_nomi_colonne = this.injector.get('real_nomi_colonne');
         this.real_righe = this.injector.get('righe_da_considerare');
@@ -38,6 +41,9 @@ export class correlationMultiple {
         this.correlation_vector = this.injector.get('correlation_vector');
         this.data_min_calc = this.injector.get('data_min_calc');
         this.data_max_calc = this.injector.get('data_max_calc');
+
+        this.selectedColumn = this.injector.get('selectedColumn');
+        this.selectedObject = this.injector.get('selectedObject');
 
         this.nomi_colonne = this.real_nomi_colonne
         this.loaded = true
