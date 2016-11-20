@@ -79,7 +79,6 @@ export class correlationSingle implements OnInit {
     }
 
 
-
     loadData(reload: boolean) {
         let temp1: any
         let temp2: any
@@ -225,5 +224,26 @@ export class correlationSingle implements OnInit {
 
     onSlideEnd() {
         this.loadData(true)
+    }
+
+    loadCSV() {
+        let fields: string[] = []
+        fields.push("#")
+        for (let lab of this.nomi_colonne) {
+            fields.push(lab)
+        }
+        let myData: any = [];
+        let temp: any
+        for (let i = 0; i < this.righe.length; i++) {
+            temp = {}
+            temp['#'] = this.nomi_colonne[i]
+            for (let n = 0; n < this.righe[i].length; n++) {
+                temp[this.nomi_colonne[n]] = this.righe[i][n]
+            }
+
+            myData.push(temp)
+        }
+        console.log(fields)
+        console.log(myData)
     }
 }
