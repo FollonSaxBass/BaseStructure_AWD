@@ -1,8 +1,9 @@
-<div [@visibilityChanged]="visibility" [ngBusy]="busy" class="panel panel-default col-lg-8">
+<div [@visibilityChanged]="visibility" class="panel panel-default col-lg-8">
     <div class="panel-heading">Matrice di correlazione calcolata fra il {{data_min_calc}} e il {{data_max_calc}}<br>
         Considerato l'attributo {{selectedColumn.nome_colonna}} dell'oggetto {{selectedObject.nome_oggetto}}
     </div>
-    <div class="panel-body">
+
+    <div class="panel-body" [@hiddenChanged]="isLoadingAnalisi">
 
         <div class="col-lg-8" style="text-align:center;">
             <table class="table table-responsive table-bordered">
@@ -30,5 +31,4 @@
         </div>
 
     </div>
-
 </div>

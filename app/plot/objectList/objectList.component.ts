@@ -13,8 +13,10 @@ export class objectList implements OnChanges {
 
     //User ricevuto dal padre
     @Input() user: User;
+    @Input() isLoading: boolean;
 
     selectedObject: Oggetto
+
 
     //Elementi per comunicare col padre
     @Output() onSelectedObject = new EventEmitter();
@@ -38,7 +40,7 @@ export class objectList implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.selectedObject = null
+        // this.selectedObject = null
     }
 
     constructor(private dataService: DataService) {

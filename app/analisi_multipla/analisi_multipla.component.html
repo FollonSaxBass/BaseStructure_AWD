@@ -7,22 +7,25 @@
         Loading...
     </div>
     <div class="panel-body" *ngIf="objects">
-        <object-list-mul-plot [objects]="objects" (changedObject)="changedObject($event)"
-                              (onSelectedObject)="onSelectedObject($event)"></object-list-mul-plot>
+        <object-list-mul-plot [objects]="objects" [msgs]="msgs" [isLoading]="isLoading"
+                              (changedObject)="changedObject($event)"
+                              (onSelectedObject)="onSelectedObject($event)"
+                              (reload)="reload($event)"></object-list-mul-plot>
     </div>
 </div>
 <div class="col-lg-2">
-    <div *ngIf="(objectSended&&selectedObject==objectSended)" class="panel panel-default" style="margin-bottom: 0">
+    <div *ngIf="(objectSended&&selectedObject==objectSended)&&!isLoading&&!error" class="panel panel-default"
+         style="margin-bottom: 0">
         <div class="panel-heading">Attributi dell'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
             <column-list-mul-plot [columns]="columns"
                                   (onSelectedColumn)="onSelectedColumn($event)"></column-list-mul-plot>
         </div>
     </div>
-    <div *ngIf="(objectSended&&selectedObject==objectSended)" class="panel panel-default">
+    <div *ngIf="(objectSended&&selectedObject==objectSended)&&!isLoading&&!error" class="panel panel-default">
         <div class="panel-heading">Users aventi l'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
-            <user-list-an-mul [isLoading]="isLoading" [selectedColumn]="selectedColumn" [users]="users"
+            <user-list-an-mul [isLoadingAnalisi]="isLoadingAnalisi" [selectedColumn]="selectedColumn" [users]="users"
                               (onInvia)="onInvia($event)"></user-list-an-mul>
         </div>
     </div>

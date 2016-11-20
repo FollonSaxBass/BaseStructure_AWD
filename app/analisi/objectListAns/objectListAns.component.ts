@@ -12,6 +12,7 @@ export class objectListAns implements OnChanges {
     error = false
 
     @Input() user: User;
+    @Input() isLoading:boolean
 
     selectedObject: Oggetto
 
@@ -29,7 +30,6 @@ export class objectListAns implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.selectedObject = null
     }
 
     constructor(private dataService: DataService) {

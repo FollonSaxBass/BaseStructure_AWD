@@ -8,11 +8,30 @@ import {DataService, User, Oggetto, Colonna} from "../../data.service";
     selector: 'correlation-mul',
     templateUrl: './app/analisi_multipla/correlationMultiple/correlationMultiple.component.html',
     animations: [
+        // trigger('visibilityChanged', [
+        //         state('shown', style({opacity: 1})),
+        //         state('hidden', style({opacity: 0})),
+        //         transition('hidden => shown', animate('400ms ease-in'))
+        //     ],
+        // ),
         trigger('visibilityChanged', [
             state('shown', style({opacity: 1})),
             state('hidden', style({opacity: 0})),
-            transition('hidden => shown', animate('400ms'))
-        ])]
+            // transition('hidden => shown', animate('400ms ease-in')),
+            transition('hidden => shown', [
+                style({transform: 'ease-in'}),
+                animate('400ms')
+            ]),
+        ])
+        ,
+        trigger('hiddenChanged', [
+                state('true', style({opacity: 0.2})),
+                state('false', style({opacity: 1})),
+                transition('true => false', animate('50ms ease-out')),
+                transition('false => true', animate('50ms ease-in'))
+            ],
+        )
+    ]
 })
 
 export class correlationMultiple {
@@ -25,6 +44,7 @@ export class correlationMultiple {
     visibility = 'hidden';
 
     @Input() componentData: any
+
     @Output() onSelectedInvia = new EventEmitter()
 
     data_min_calc: string;
@@ -32,6 +52,9 @@ export class correlationMultiple {
 
     selectedColumn: Colonna
     selectedObject: Oggetto
+    blocked = false;
+
+    isLoadingAnalisi = 'false'
 
     constructor(private dataService: DataService, private injector: Injector) {
         this.real_nomi_colonne = this.injector.get('real_nomi_colonne');
@@ -46,6 +69,19 @@ export class correlationMultiple {
         this.nomi_colonne = this.real_nomi_colonne
         this.loaded = true
         this.visibility = 'shown'
+
+        dataService.startBlock$.subscribe(
+            content => {
+                console.log(content)
+                //Non mi interessa del contenuto di content
+                //Viene usato solamente per fermare il tasto caricamento in analizza
+                if (content == "Blocked") {
+                    this.isLoadingAnalisi = 'true'
+                } else {
+                    this.isLoadingAnalisi = 'false'
+                }
+
+            });
     }
 
     onSelectedColumnAdd(e: any) {

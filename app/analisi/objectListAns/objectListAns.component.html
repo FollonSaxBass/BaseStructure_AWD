@@ -6,14 +6,14 @@
     </form>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let object of user.oggetti|filter:daFiltrare" (click)="onSelect(object)"
-           [class.active]="object === selectedObject">
+            [class.active]="object === selectedObject">
             {{object.nome_oggetto}}
         </li>
     </ul>
 </div>
-<button *ngIf="selectedObject" (click)="clickedAnalizza()" [ladda]='isLoading' style="background-color: #337AB7" data-size="s" class="btn btn-primary">Analizza</button>
-
-<img *ngIf="isLoading" src="../../public/loading_small_1.gif">
+<button *ngIf="user.oggetti.indexOf(selectedObject)>-1" (click)="clickedAnalizza()" [ladda]='isLoading'
+        style="background-color: #337AB7" data-size="s" class="btn btn-primary">Analizza
+</button>
 <p-messages [value]="msgs"></p-messages>
 <div class="myLoading">
     <button *ngIf="error" (click)="reLoad()" class="btn btn-primary"

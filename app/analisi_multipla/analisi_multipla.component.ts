@@ -10,7 +10,6 @@ import {Subscription} from "rxjs";
 })
 
 export class AnalisiMultiplaComponent implements OnInit {
-    busy: Subscription;
 
     // Liste da mettere nei componenti per poi farle vedere
     objects: Oggetto[];
@@ -36,6 +35,20 @@ export class AnalisiMultiplaComponent implements OnInit {
     message_error: Message[] = [];
 
     isLoading = false;
+    isLoadingAnalisi = false;
+    // Range values inizializzati a 0,1 per creare la vista,
+    // Al caricamento dei dati vengono sostituiti dai valori ritornati dal padre
+    // Range values iniziale e finale della range bar per definire il numero di possibili step
+    rangeValues: number[] = [0, 1];
+    timestamps: string[]
+    timestampsTotal: string[]
+    chartMin = 0
+    chartMax = 1
+    data_min_calc: string;
+    data_max_calc: string
+
+    msgs: Message[] = [];
+    error = false
 
     constructor(private dataService: DataService, private ref: ElementRef) {
     }
@@ -59,8 +72,6 @@ export class AnalisiMultiplaComponent implements OnInit {
         if (this.selectedObject != oggetto) {
             this.selectedObject = oggetto;
             this.componentData = null
-            // this.columns = null
-            // this.users = null
         }
     }
 
@@ -68,23 +79,26 @@ export class AnalisiMultiplaComponent implements OnInit {
         this.selectedColumn = colonna
     }
 
-    onSelectedObject(oggetto: Oggetto) {
-        if (this.objectSended == oggetto) {
+    onSelectedObject(oggetto: Oggetto, reload: boolean) {
+
+        if (!reload && this.objectSended == oggetto) {
             this.message_error.push({
                 severity: 'error', summary: 'AAAAhhh!!', detail: 'Per inviare una nuova richiesta devi ' +
                 'selezionare un utente differente'
             })
 
         } else {
-            this.selectedObject = oggetto
-            this.objectSended = oggetto
-            this.isLoading = true
-            this.data_max_tosend = null
-            this.data_min_tosend = null
-            this.data_min = null
-            this.data_max = null
-            this.selectedUsers = []
-            this.selectedColumn = null
+            if (!reload) {
+                this.selectedObject = oggetto
+                this.objectSended = oggetto
+                this.isLoading = true
+                this.data_max_tosend = null
+                this.data_min_tosend = null
+                this.data_min = null
+                this.data_max = null
+                this.selectedUsers = []
+                this.selectedColumn = null
+            }
 
             this.dataService.getColumnUsers(this.selectedObject.id_oggetto).subscribe(
                 (data) => {
@@ -107,6 +121,27 @@ export class AnalisiMultiplaComponent implements OnInit {
                     }
                     this.users = tempUsers
                     this.isLoading = false
+                },
+                (error) => {
+                    this.isLoading = false
+                    if (error.status == "0") {
+                        this.error = true
+                        //No connettività
+                        if (this.msgs.length == 0)
+                            this.msgs.push({
+                                severity: 'error',
+                                summary: 'Connectivity error',
+                                detail: 'Check your connectivity and retry'
+                            });
+                    } else {
+                        this.error = true
+                        if (this.msgs.length == 0)
+                            this.msgs.push({
+                                severity: 'error',
+                                summary: 'Server error',
+                                detail: 'Something\'s gone wrong, try to reload or change data'
+                            });
+                    }
                 }
             );
         }
@@ -123,20 +158,8 @@ export class AnalisiMultiplaComponent implements OnInit {
         return true;
     }
 
-    // Range values inizializzati a 0,1 per creare la vista,
-    // Al caricamento dei dati vengono sostituiti dai valori ritornati dal padre
-    // Range values iniziale e finale della range bar per definire il numero di possibili step
-    rangeValues: number[] = [0, 1];
-    timestamps: string[]
-    timestampsTotal: string[]
-    chartMin = 0
-    chartMax = 1
-    data_min_calc: string;
-    data_max_calc: string
-
     onInvia(users: any, reload: boolean) {
-        this.isLoading = true
-
+        this.isLoadingAnalisi = true;
         let temp1: any
         let temp2: any
         if (reload) {
@@ -169,10 +192,10 @@ export class AnalisiMultiplaComponent implements OnInit {
                 "data_max": temp2,
                 "selectedColumn": this.selectedColumn
             }
-            this.busy = this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
+            this.dataService.getUserCorrelation(this.selectedUsers, this.selectedObject.id_oggetto, this.selectedColumn.id_colonna
                 , temp1, temp2).subscribe(
                 (data) => {
-                    console.log(data)
+                    this.dataService.startBlock.next("Blocked")
                     let real_nomi_colonne: Array<any> = [];
                     let correlation_vector: Array<any> = [];
                     for (let nome_colonna of data.users) {
@@ -232,11 +255,13 @@ export class AnalisiMultiplaComponent implements OnInit {
                             data_max_calc: this.data_max_calc
                         }
                     }
+                    this.isLoadingAnalisi = false;
+                    this.dataService.startBlock.next("UnBlocked")
                 }
             );
             this.selectedAnalizza = true
         }
-        this.isLoading = false
+
     }
 
 
@@ -276,5 +301,9 @@ export class AnalisiMultiplaComponent implements OnInit {
 
     onSlideEnd() {
         this.onInvia(null, true)
+    }
+
+    reload() {
+        this.onSelectedObject(null, true)
     }
 }

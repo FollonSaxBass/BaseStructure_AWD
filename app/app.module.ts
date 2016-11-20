@@ -17,8 +17,10 @@ import {FilterPipe} from "./filter.pipe";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {MessagesModule} from "primeng/components/messages/messages";
 import {BusyModule} from "angular2-busy";
+import {BlockUIModule} from "primeng/components/blockui/blockui";
+import {PanelModule} from "primeng/components/panel/panel";
 @NgModule({
-    declarations: [AppComponent, routingComponents,FilterPipe],
+    declarations: [AppComponent, routingComponents, FilterPipe],
     imports: [
         BrowserModule,
         FormsModule,

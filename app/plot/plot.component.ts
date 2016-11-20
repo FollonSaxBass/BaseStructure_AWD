@@ -85,7 +85,6 @@ export class PlotComponent implements OnInit {
             };
             this.selectedPlotta = true
             this.isLoading = true
-            // this.isLoadingPlotta = true
         }
     }
 

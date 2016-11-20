@@ -4,18 +4,19 @@
         <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" [ngModelOptions]="{standalone: true}"/>
     </form>
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let object of objects|filter:daFiltrare" (click)="onSelectObject(object)"
-           [class.active]="object === selectedObject">
+        <li class="list-group-item" *ngFor="let object of objects|filter:daFiltrare"
+            (click)="onSelectObject(object,false)"
+            [class.active]="object === selectedObject">
             {{object.nome_oggetto}}
         </li>
     </ul>
 </div>
-<button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s" *ngIf="selectedObject"
+<button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s" *ngIf="selectedObject&&!msgs.length>0"
         (click)="clickedInvia()" class="btn btn-primary">Invia
 </button>
 <p-messages [value]="msgs"></p-messages>
-<div *ngIf="error" class="myLoading">
-    <button  (click)="reLoad()" class="btn btn-primary"
-             style="background-color: #337AB7" data-size="s">Reload
+<div *ngIf="msgs.length>0" class="myLoading">
+    <button (click)="reLoad()" class="btn btn-primary"
+            style="background-color: #337AB7" data-size="s">Reload
     </button>
 </div>

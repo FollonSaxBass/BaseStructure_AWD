@@ -9,11 +9,14 @@ import {DataService, User, Oggetto} from "../../data.service";
 export class objectListAnm {
 
     @Input() objects: any;
+    @Input() isLoading: boolean
+    @Input() msgs: any
 
     selectedObject: Oggetto
 
     @Output() onSelectedObject = new EventEmitter();
     @Output() changedObject = new EventEmitter();
+    @Output() reload = new EventEmitter();
 
     onSelectObject(oggetto: Oggetto): void {
         this.selectedObject = oggetto;
@@ -22,5 +25,9 @@ export class objectListAnm {
 
     clickedInvia() {
         this.onSelectedObject.emit(this.selectedObject)
+    }
+
+    reLoad() {
+        this.reload.emit()
     }
 }

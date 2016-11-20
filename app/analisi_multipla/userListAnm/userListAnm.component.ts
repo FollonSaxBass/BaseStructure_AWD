@@ -11,7 +11,6 @@ import {DataService, User, Oggetto, Colonna} from "../../data.service";
 
 export class userListAnm {
 
-
     remove(arr: any, what: any) {
         var found = arr.indexOf(what);
 
@@ -21,7 +20,7 @@ export class userListAnm {
         }
     }
 
-    @Input() isLoading: boolean
+    @Input() isLoadingAnalisi: boolean
     @Input() users: any;
     @Input() selectedColumn: any;
 
@@ -38,6 +37,7 @@ export class userListAnm {
     }
 
     clickedInvia() {
+        this.isLoadingAnalisi = true
         this.onInvia.emit(this.selectedUsers)
     }
 
