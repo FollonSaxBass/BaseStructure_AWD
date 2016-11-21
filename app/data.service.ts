@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core'
 import {Subject}    from 'rxjs/Subject';
-import {Http, Response} from '@angular/http'
+import {Http, Response, URLSearchParams} from '@angular/http'
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
 
@@ -252,7 +252,13 @@ export class DataService {
             "data_min": data_min,
             "data_max": data_max
         }
-        return this.http.get("https://awdapi.herokuapp.com/tableCSV").map(
+        // Parameters obj-
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('userid', userid);
+        params.set('objectid', objectid);
+        params.set('data_min', data_min);
+        params.set('data_max', data_max);
+        return this.http.get("https://awdapi.herokuapp.com/tableCSV", {search: params}).map(
             (res) => res
         ).catch(this.handleError);
     }

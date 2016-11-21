@@ -43,9 +43,9 @@ export class UploadComponent implements OnInit {
         let found = false
         if (this.users) {
             for (let u of this.users) {
-                if (u.nome_user.toLowerCase().replace(/\s/g, '') == this.nome_user.toLowerCase()) {
+                if (u.nome_user.toLowerCase().replace(/\s/g, '') == this.nome_user.toLowerCase().replace(/\s/g, '')) {
                     for (let o of u.oggetti) {
-                        if (this.nome_oggetto.toLowerCase().replace(/\s/g, '') == o.nome_oggetto.toLowerCase()) {
+                        if (this.nome_oggetto.toLowerCase().replace(/\s/g, '') == o.nome_oggetto.toLowerCase().replace(/\s/g, '')) {
                             found = true
                             break;
                         }
