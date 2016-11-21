@@ -9,6 +9,7 @@ export class AppComponent {
     isDropdownActive = false;
     isAnalisisActive = false;
     isAnalisimActive = false;
+    isUploadActive = false;
 
     constructor() {
     }
@@ -18,6 +19,7 @@ export class AppComponent {
         this.isAnalisisActive = false
         this.isAnalisimActive = false
         this.isDropdownActive = false
+        this.isUploadActive = false;
     }
 
     activateAnalisi1() {
@@ -25,6 +27,7 @@ export class AppComponent {
         this.isAnalisisActive = true
         this.isAnalisimActive = false
         this.isDropdownActive = true
+        this.isUploadActive = false;
     }
 
     activateAnalisi2() {
@@ -32,6 +35,15 @@ export class AppComponent {
         this.isAnalisisActive = false
         this.isAnalisimActive = true
         this.isDropdownActive = true
+        this.isUploadActive = false;
+    }
+
+    activateUpload() {
+        this.isPlotActive = false
+        this.isAnalisisActive = false
+        this.isAnalisimActive = false
+        this.isDropdownActive = false
+        this.isUploadActive = true
     }
 
     deactivateAll() {
@@ -39,5 +51,6 @@ export class AppComponent {
         this.isAnalisisActive = false
         this.isAnalisimActive = false
         this.isDropdownActive = false
+        this.isUploadActive = false
     }
 }

@@ -180,4 +180,24 @@ export class ChartComponent implements OnInit {
         this.lineChartData = _lineChartData;
     }
 
+    loadCSV() {
+        this.dataService.getCSVLink(this.selectedUser.id_user, this.selectedObject.id_oggetto,
+            this.lineChartLabelsTotal[this.rangeValues[0]], this.lineChartLabelsTotal[this.rangeValues[1]]).subscribe(
+            (data) => {
+                var link = document.createElement("a");
+                link.download = name;
+                link.href = data.url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            },
+            (error) => {
+                console.log("Caught error!")
+                this.message_ok.push({
+                    severity: 'error',
+                    summary: 'CSV non scaricato!',
+                    detail: 'Problema nel donwnload dei dati'
+                })
+            });
+    }
 }

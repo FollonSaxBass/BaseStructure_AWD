@@ -4,9 +4,7 @@ import {
 } from '@angular/core';
 import {DataService, User, Oggetto} from "../../data.service";
 import {Subscription} from "rxjs";
-
-// import json2csv = require("json2csv");
-
+var json2csv = require('../../../node_modules/json2csv/dist/json2csv.js');
 
 @Component({
     selector: 'correlation-single',
@@ -246,13 +244,21 @@ export class correlationSingle implements OnInit {
 
             myData.push(temp)
         }
-        console.log(fields)
-        console.log(myData)
-        // console.log(typeof json2csv === 'function'); // true
-        //
-        // var result = json2csv({data: myData, fields: fields});
-        // console.log(result);
-        // require('json2csv');
-        // var fs = require('fs');
+        var result = json2csv({data: myData, fields: fields});
+        console.log(typeof result);
+        this.saveData(result, "correlazioneSingola" + this.selectedObject.nome_oggetto + ".csv")
     }
+
+    saveData(data: any, filename: any) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        // a.style = "display: none";
+        var blob = new Blob([data], {type: "octet/stream"}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+
 }

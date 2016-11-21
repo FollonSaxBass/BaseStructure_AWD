@@ -5,7 +5,7 @@
     <div class="panel-heading">Users</div>
     <div class="panel-body">
         <user-list-ans-plot [users]="users" (onSelectedUser)="onSelectedUser($event)">
-            Loading...
+            <div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
         </user-list-ans-plot>
     </div>
 </div>
@@ -16,11 +16,11 @@
         <object-list-ans-plot [user]="selectedUser" (onSelectedObject)="onSelectedObject($event)"
                               [isLoading]="isLoading"
                               (onSelectedAnalizza)="onSelectedAnalizza($event)" (onReload)="onReload($event)">
-            Loading...
+            <div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
         </object-list-ans-plot>
     </div>
 </div>
 <dynamic-ans-component [componentData]="componentData">
-    Loading...
+    <div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
 </dynamic-ans-component>
 <p-growl [value]="message_error"></p-growl>

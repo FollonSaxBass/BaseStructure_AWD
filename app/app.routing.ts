@@ -20,6 +20,7 @@ import {columnListAnm} from "./analisi_multipla/columnListAnm/columnListAnm.comp
 import {userListAnm} from "./analisi_multipla/userListAnm/userListAnm.component";
 import {correlationMultiple} from "./analisi_multipla/correlationMultiple/correlationMultiple.component";
 import DynamicComponentAnm from "./analisi_multipla/correlationMultiple/dynamic_anm.component";
+import {UploadComponent} from "./upload/upload.component";
 
 /**
  * Vengono definiti tutti i path ai componenti principali
@@ -47,6 +48,9 @@ const routes: Routes = [
     {
         path: 'analisi_multipla',
         component: AnalisiMultiplaComponent
+    }, {
+        path: 'upload',
+        component: UploadComponent
     },
 ]
 
@@ -65,4 +69,4 @@ export class AppRoutingModule {
 export const routingComponents = [HomeComponent, PlotComponent, AnalisiComponent,
     userList, objectList, ChartComponent, DynamicComponent, userListAns, objectListAns,
     correlationSingle, DynamicComponentAns, correlationTableSingle, AnalisiMultiplaComponent,
-    objectListAnm, columnListAnm, userListAnm, correlationMultiple, DynamicComponentAnm]
+    objectListAnm, columnListAnm, userListAnm, correlationMultiple, DynamicComponentAnm, UploadComponent]

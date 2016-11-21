@@ -1,0 +1,15 @@
+<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-3"></div>
+<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-6">
+    <h3>{{upload_text}}</h3>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">@</span>
+        <input [(ngModel)]="nome_user" type="text" class="form-control" placeholder="Username"
+               aria-describedby="basic-addon1">
+        <input [(ngModel)]="nome_oggetto" type="text" class="form-control" placeholder="Nome oggetto"
+               aria-describedby="sizing-addon1">
+    </div>
+    <p-messages [value]="msgs"></p-messages>
+    <p-fileUpload name="myfile[]" accept=".csv" maxFileSize="1000000"
+                  url="http://localhost:3000/myupload" (onBeforeUpload)="onBeforeUpload($event)"></p-fileUpload>
+</div>
+<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-3"></div>

@@ -3,35 +3,11 @@ import {
     animate, OnChanges, Injector
 } from '@angular/core';
 import {DataService, Oggetto, Colonna} from "../../data.service";
+var json2csv = require('../../../node_modules/json2csv/dist/json2csv.js');
 
 @Component({
     selector: 'correlation-mul',
     templateUrl: './app/analisi_multipla/correlationMultiple/correlationMultiple.component.html',
-    // animations: [
-    //     // trigger('visibilityChanged', [
-    //     //         state('shown', style({opacity: 1})),
-    //     //         state('hidden', style({opacity: 0})),
-    //     //         transition('hidden => shown', animate('400ms ease-in'))
-    //     //     ],
-    //     // ),
-    //     trigger('visibilityChanged', [
-    //         state('shown', style({opacity: 1})),
-    //         state('hidden', style({opacity: 0})),
-    //         // transition('hidden => shown', animate('400ms ease-in')),
-    //         transition('hidden => shown', [
-    //             style({transform: 'ease-in'}),
-    //             animate('400ms')
-    //         ]),
-    //     ])
-    //     ,
-    //     trigger('hiddenChanged', [
-    //             state('true', style({opacity: 0.2})),
-    //             state('false', style({opacity: 1})),
-    //             transition('true => false', animate('50ms ease-out')),
-    //             transition('false => true', animate('50ms ease-in'))
-    //         ],
-    //     )
-    // ]
     animations: [
         trigger('visibilityChanged', [
             state('shown', style({opacity: 1})),
@@ -130,5 +106,39 @@ export class correlationMultiple {
         this.righe = righe_da_considerare
         this.nomi_colonne = nomi_da_considerare
     }
+
+    loadCSV() {
+        let fields: string[] = []
+        fields.push("#")
+        for (let lab of this.nomi_colonne) {
+            fields.push(lab)
+        }
+        let myData: any = [];
+        let temp: any
+        for (let i = 0; i < this.righe.length; i++) {
+            temp = {}
+            temp['#'] = this.nomi_colonne[i]
+            for (let n = 0; n < this.righe[i].length; n++) {
+                temp[this.nomi_colonne[n]] = this.righe[i][n]
+            }
+
+            myData.push(temp)
+        }
+        var result = json2csv({data: myData, fields: fields});
+        console.log(typeof result);
+        this.saveData(result, "correlazioneMultipla" + this.selectedObject.nome_oggetto + ".csv")
+    }
+
+    saveData(data: any, filename: any) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        // a.style = "display: none";
+        var blob = new Blob([data], {type: "octet/stream"}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
 
 }

@@ -4,13 +4,15 @@
 <div class="panel panel-default col-lg-2">
     <div class="panel-heading">Oggetti</div>
     <div class="panel-body" *ngIf="!objects">
-        Loading...
+        <div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
     </div>
     <div class="panel-body" *ngIf="objects">
         <object-list-mul-plot [objects]="objects" [msgs]="msgs" [isLoading]="isLoading"
                               (changedObject)="changedObject($event)"
                               (onSelectedObject)="onSelectedObject($event)"
-                              (reload)="reload($event)"></object-list-mul-plot>
+                              (reload)="reload($event)">
+            <div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
+        </object-list-mul-plot>
     </div>
 </div>
 <div class="col-lg-2">
@@ -19,14 +21,18 @@
         <div class="panel-heading">Attributi dell'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
             <column-list-mul-plot [columns]="columns"
-                                  (onSelectedColumn)="onSelectedColumn($event)"></column-list-mul-plot>
+                                  (onSelectedColumn)="onSelectedColumn($event)">
+                <div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
+            </column-list-mul-plot>
         </div>
     </div>
     <div *ngIf="(objectSended&&selectedObject==objectSended)&&!isLoading&&!error" class="panel panel-default">
         <div class="panel-heading">Users aventi l'oggetto {{selectedObject.nome_oggetto}}</div>
         <div class="panel-body">
             <user-list-an-mul [isLoadingAnalisi]="isLoadingAnalisi" [selectedColumn]="selectedColumn" [users]="users"
-                              (onInvia)="onInvia($event)"></user-list-an-mul>
+                              (onInvia)="onInvia($event)">
+                <div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
+            </user-list-an-mul>
         </div>
     </div>
 </div>

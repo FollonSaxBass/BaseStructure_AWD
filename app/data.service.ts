@@ -243,4 +243,18 @@ export class DataService {
             (res) => res.json()
         ).catch(this.handleError);
     }
+
+
+    getCSVLink(userid: any, objectid: any, data_min: any, data_max: any) {
+        let toSend = {
+            "userid": userid,
+            "objectid": objectid,
+            "data_min": data_min,
+            "data_max": data_max
+        }
+        let url = "https://awdapi.herokuapp.com/getCSV_plot"
+        return this.http.post(url, toSend).map(
+            (res) => res.json()
+        ).catch(this.handleError);
+    }
 }

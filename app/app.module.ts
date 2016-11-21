@@ -17,8 +17,7 @@ import {FilterPipe} from "./filter.pipe";
 import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {MessagesModule} from "primeng/components/messages/messages";
 import {BusyModule} from "angular2-busy";
-import {BlockUIModule} from "primeng/components/blockui/blockui";
-import {PanelModule} from "primeng/components/panel/panel";
+import {FileUploadModule} from "primeng/components/fileupload/fileupload";
 @NgModule({
     declarations: [AppComponent, routingComponents, FilterPipe],
     imports: [
@@ -37,7 +36,8 @@ import {PanelModule} from "primeng/components/panel/panel";
         LaddaModule,
         TooltipModule,
         MessagesModule,
-        BusyModule
+        BusyModule,
+        FileUploadModule
     ],
     providers: [DataService],
     bootstrap: [AppComponent]

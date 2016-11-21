@@ -45,9 +45,17 @@ export class userListAns {
                 } else if (content == "Loaded") {
                     this.msgs = []
                     this.error = false
-
+                    this.users.sort((a: any, b: any) => {
+                        if (a.string_name().toLowerCase() < b.string_name().toLowerCase()) {
+                            return -1;
+                        } else if (a.string_name().toLowerCase() > b.string_name().toLowerCase()) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
                 }
-                this.itsFirst=false
+                this.itsFirst = false
             });
     }
 
