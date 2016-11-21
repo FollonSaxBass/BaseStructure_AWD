@@ -10,8 +10,10 @@
     </div>
     <p-messages [value]="msgs"></p-messages>
     <div [ngStyle]="{'display': disabled ? 'none' : 'block'}">
-        <p-fileUpload name="myfile[]" accept=".csv" maxFileSize="1000000" [disabled]="disabled ? true : null"
-                      url="http://localhost:3000/myupload" (onBeforeUpload)="onBeforeUpload($event)"></p-fileUpload>
+        <p-fileUpload name="file[]" accept=".csv" maxFileSize="1000000" [disabled]="disabled ? true : null"
+                      url="https://awdapi.herokuapp.com/uploadCSV" (onBeforeUpload)="onBeforeUpload($event)"
+                      (onUpload)="onUpload($event)" (onError)="onError($event)"></p-fileUpload>
     </div>
 </div>
+<p-growl [value]="message_success"></p-growl>
 <div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-3"></div>

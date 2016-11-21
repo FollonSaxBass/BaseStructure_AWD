@@ -19,9 +19,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li [ngClass]="{'active': isUploadActive }" (click)="activateUpload()">
-                        <a routerLink="/upload">Upload
-                        </a></li>
+
                     <li [ngClass]="{'active': isPlotActive }" (click)="activatePlot()"><a routerLink="/plot">Plotta
                     </a></li>
 
@@ -37,7 +35,9 @@
                                 multipla</a></li>
                         </ul>
                     </li>
-
+                    <li [ngClass]="{'active': isUploadActive }" (click)="activateUpload()">
+                        <a routerLink="/upload">Upload
+                        </a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

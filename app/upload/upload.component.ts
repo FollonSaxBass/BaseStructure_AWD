@@ -1,6 +1,6 @@
 import {
     Component, OnInit, Input, Output, EventEmitter, animate, transition, style, state,
-    trigger, AfterViewInit
+    trigger
 } from '@angular/core';
 import {Message} from "primeng/components/common/api";
 import {DataService, User} from "../data.service";
@@ -13,7 +13,8 @@ import {DataService, User} from "../data.service";
         trigger('visibilityChanged', [
             state('shown', style({opacity: 1})),
             state('hidden', style({opacity: 0})),
-            transition('hidden => shown', animate('3000ms'))
+            transition('hidden => shown', animate('300ms ease-in')),
+            transition('shown => hidden', animate('300ms ease-out'))
         ])]
 })
 
@@ -25,6 +26,7 @@ export class UploadComponent implements OnInit {
     nome_oggetto: string = ""
 
     msgs: Message[] = []
+    message_success: Message[] = []
     users: User[]
 
     disabled = false
@@ -36,9 +38,6 @@ export class UploadComponent implements OnInit {
     controlUserObjects(e: any) {
         this.msgs = []
         this.disabled = false
-        console.log(e)
-        console.log(this.nome_user.toLowerCase())
-        console.log(this.nome_oggetto.toLowerCase())
 
         let found = false
         if (this.users) {
@@ -66,10 +65,32 @@ export class UploadComponent implements OnInit {
     ngOnInit() {
         this.users = this.dataService.getUsers()
         this.visibility = 'shown'
+    }
 
+    onUpload(e: any) {
+        this.visibility = 'shown';
+        this.dataService.loadUsers()
+        this.nome_oggetto = ""
+        this.nome_user = ""
+        this.message_success.push({
+            severity: 'success',
+            summary: 'Upload riuscito!',
+            detail: 'Utente ed oggetti inseriti, vai in "Plotta" per visualizzare i dati inseriti :D'
+        });
+    }
+
+    onError(e: any) {
+        this.visibility = 'shown';
+        console.log(e)
+        this.message_success.push({
+            severity: 'error',
+            summary: 'OOOOOooooopsssssss!',
+            detail: 'Qualcosa è andato storto, ritenta l\'upload'
+        });
     }
 
     onBeforeUpload(e: any) {
+        this.visibility = 'hidden';
         let found = false
 
         if (this.users) {
@@ -95,8 +116,8 @@ export class UploadComponent implements OnInit {
             if (!this.nome_user || this.nome_user.length == 0
                 || !this.nome_oggetto || this.nome_oggetto.length == 0) {
             } else {
-                e.formData.append('nome_user', this.nome_user);
-                e.formData.append('nome_oggetto', this.nome_oggetto);
+                e.formData.append('username', this.nome_user);
+                e.formData.append('objectname', this.nome_oggetto);
             }
         }
     }
