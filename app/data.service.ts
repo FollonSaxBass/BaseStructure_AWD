@@ -252,9 +252,9 @@ export class DataService {
             "data_min": data_min,
             "data_max": data_max
         }
-        let url = "https://awdapi.herokuapp.com/getCSV_plot"
-        return this.http.post(url, toSend).map(
-            (res) => res.json()
+        return this.http.get("https://awdapi.herokuapp.com/tableCSV").map(
+            (res) => res
         ).catch(this.handleError);
     }
+
 }

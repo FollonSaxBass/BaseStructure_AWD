@@ -181,6 +181,7 @@ export class ChartComponent implements OnInit {
     }
 
     loadCSV() {
+
         this.dataService.getCSVLink(this.selectedUser.id_user, this.selectedObject.id_oggetto,
             this.lineChartLabelsTotal[this.rangeValues[0]], this.lineChartLabelsTotal[this.rangeValues[1]]).subscribe(
             (data) => {
@@ -192,7 +193,7 @@ export class ChartComponent implements OnInit {
                 document.body.removeChild(link);
             },
             (error) => {
-                console.log("Caught error!")
+                console.log(error)
                 this.message_ok.push({
                     severity: 'error',
                     summary: 'CSV non scaricato!',
@@ -200,4 +201,5 @@ export class ChartComponent implements OnInit {
                 })
             });
     }
+
 }
