@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2016-02-15",
+    "Emissioni": 200.0,
+    "Cilindrata": 3.3,
+    "Carburante": 21.0
+  },
+  {
+    "date": "2016-02-16",
+    "Emissioni": 280.0,
+    "Cilindrata": 3.1,
+    "Carburante": 18.0
+  },
+  {
+    "date": "2016-02-17",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-18",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-19",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-20",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-21",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-22",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-23",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-24",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-25",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-26",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-27",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-28",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  },
+  {
+    "date": "2016-02-29",
+    "Emissioni": "...",
+    "Cilindrata": "...",
+    "Carburante": "..."
+  }
+]

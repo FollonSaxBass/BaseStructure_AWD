@@ -252,7 +252,6 @@ export class correlationSingle implements OnInit {
     saveData(data: any, filename: any) {
         var a = document.createElement("a");
         document.body.appendChild(a);
-        // a.style = "display: none";
         var blob = new Blob([data], {type: "octet/stream"}),
             url = window.URL.createObjectURL(blob);
         a.href = url;

@@ -100,11 +100,11 @@ export class DataService {
                 "status": error.status
             }
         }
-        // console.log(errMsg)
         return Observable.throw(errMsg);
     }
 
     loadUsers() {
+        this.users = []
         this.http.get('https://awdapi.herokuapp.com/getUser').map(
             (res) => res.json()
         ).catch(this.handleError).subscribe(
@@ -124,7 +124,6 @@ export class DataService {
                 this.userSource.next("Loaded")
             },
             (error) => {
-
                 if (error.status == "0") {
                     //No connettività
                     this.userSource.next("Errore0")
@@ -142,7 +141,6 @@ export class DataService {
     getUsers() {
         return this.users;
     }
-
 
     //TODO: fare richiesta post dove dice Artio
     /**
@@ -162,6 +160,14 @@ export class DataService {
         ).catch(this.handleError);
     }
 
+    /**
+     * Metodo per la richiesta della tabella di correlazione tra oggetti
+     * @param id_user
+     * @param id_oggetto
+     * @param data_min
+     * @param data_max
+     * @returns {Observable<R>}
+     */
     getObjectCorrelation(id_user: number, id_oggetto: number, data_min: string, data_max: string) {
         let toSend: any;
         if (data_min == null || data_max == null) {
@@ -187,8 +193,7 @@ export class DataService {
     }
 
     /**
-     * TODO: fare richiesta post che chieda gli oggetti per l'analsi multipla
-     * TODO: Handling errors!!
+     * Richiesta per ricevere oggetti in analisi correlazione multipla
      * @returns {Observable<R>}
      */
     getObjects() {
@@ -198,7 +203,6 @@ export class DataService {
     }
 
     /**
-     * TODO: invia richiesta post ad artio con Oggetto di riferimento
      * Metodo utilizzato per avere a disposizione user e colonne associate ad un oggetto
      * @returns {Observable<R>}
      */
@@ -212,9 +216,16 @@ export class DataService {
         ).catch(this.handleError);
     }
 
-    // Ci può essere più di un utente
-    // Un singolo oggetto
-    // Data minima e data massima
+    /**
+     * Metodo per ricevere la tabella di correlazione fra gli utenti indicati,
+     * l'oggetto e l'attributo preso in considerazione
+     * @param users
+     * @param id_oggetto
+     * @param id_colonna
+     * @param data_min
+     * @param data_max
+     * @returns {Observable<R>}
+     */
     getUserCorrelation(users: any, id_oggetto: number, id_colonna: number, data_min: string, data_max: string) {
         let toSend: any;
         let id_utenti: any = []
@@ -244,15 +255,21 @@ export class DataService {
         ).catch(this.handleError);
     }
 
-
+    /**
+     * Metodo per ricevere il csv con i valori di quella tabella
+     * @param userid
+     * @param objectid
+     * @param data_min
+     * @param data_max
+     * @returns {Observable<R>}
+     */
     getCSVLink(userid: any, objectid: any, data_min: any, data_max: any) {
-        let toSend = {
-            "userid": userid,
-            "objectid": objectid,
-            "data_min": data_min,
-            "data_max": data_max
-        }
-        // Parameters obj-
+        // let toSend = {
+        //     "userid": userid,
+        //     "objectid": objectid,
+        //     "data_min": data_min,
+        //     "data_max": data_max
+        // }
         let params: URLSearchParams = new URLSearchParams();
         params.set('userid', userid);
         params.set('objectid', objectid);
@@ -260,6 +277,12 @@ export class DataService {
         params.set('data_max', data_max);
         return this.http.get("https://awdapi.herokuapp.com/tableCSV", {search: params}).map(
             (res) => res
+        ).catch(this.handleError);
+    }
+
+    getDati() {
+        return this.http.get("../JSON/dati.json").map(
+            (res) => res.json()
         ).catch(this.handleError);
     }
 

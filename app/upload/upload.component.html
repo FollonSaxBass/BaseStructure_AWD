@@ -1,5 +1,29 @@
-<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-3"></div>
-<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-6">
+<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-1"></div>
+<div [@visibilityChanged]="visibility" style="text-align: center;" class=" col-lg-4">
+    <h3>Istruzioni</h3>
+    <h4>Struttura del file CSV</h4>
+    <p>Il file csv deve indicare nell'header i nomi delle colonne opportunemente attribuite all'oggetto. E' possibile
+        dotare l'attributo di una descrizione, inserendola oportunamente a fianco
+        dell'oggetto e tra parentesi. E.g. Emissioni(g/km). Deve
+        essere presente almeno un attributo e la colonna "date" che indica le date in ordine crescente.</p>
+    <h4>ATTENZIONE: tutti i valori devono essere numerici, altrimenti il file non verrà accettato dal sistema</h4>
+    <p-dataTable #dt [value]="dato" exportFilename="cars" [editable]="true">
+        <header>
+            <div class="ui-helper-clearfix" style="text-align: center">
+                <button type="button" pButton icon="fa-file-o" iconPos="left"
+                        label="Scarica esempio!"
+                        (click)="dt.exportCSV()"
+                        style="float:top"></button>
+            </div>
+        </header>
+        <p-column field="date" header="date"></p-column>
+        <p-column field="Emissioni" header="Emissioni(g/km)" [editable]="true"></p-column>
+        <p-column field="Cilindrata" header="Cilindrata(cm3)" [editable]="true"></p-column>
+        <p-column field="Carburante" header="Carburante(km/l)" [editable]="true"></p-column>
+    </p-dataTable>
+</div>
+<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-1"></div>
+<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-5">
     <h3>{{upload_text}}</h3>
     <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">@</span>
@@ -16,4 +40,4 @@
     </div>
 </div>
 <p-growl [value]="message_success"></p-growl>
-<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-3"></div>
+<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-1"></div>

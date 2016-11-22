@@ -1,6 +1,6 @@
 import {
     Component, OnInit, Input, Output, EventEmitter, animate, transition, style, state,
-    trigger
+    trigger, AfterViewInit
 } from '@angular/core';
 import {Message} from "primeng/components/common/api";
 import {DataService, User} from "../data.service";
@@ -10,15 +10,25 @@ import {DataService, User} from "../data.service";
     selector: 'app-home',
     templateUrl: './app/upload/upload.component.html',
     animations: [
+        // trigger('visibilityChanged', [
+        //     state('shown', style({opacity: 1})),
+        //     state('hidden', style({opacity: 0})),
+        //     transition('hidden => shown', animate('300ms ease-in')),
+        //     transition('shown => hidden', animate('300ms ease-out'))
+        // ]),
         trigger('visibilityChanged', [
-            state('shown', style({opacity: 1})),
-            state('hidden', style({opacity: 0})),
-            transition('hidden => shown', animate('300ms ease-in')),
-            transition('shown => hidden', animate('300ms ease-out'))
+            state('shown', style({transform: 'translateX(0)', opacity: 1})),
+            state('hidden', style({transform: 'translateX(100%)', opacity: 0})),
+            transition('hidden => shown', [
+                style({transform: 'translateX(-100%)'}),
+                animate(400)
+            ]),
+            transition('shown => hidden', [
+                animate(400, style({transform: 'translateX(100%)'}))
+            ])
         ])]
 })
-
-export class UploadComponent implements OnInit {
+export class UploadComponent implements OnInit,AfterViewInit {
     upload_text = "Inserisci un utente ed un oggetto associato"
     visibility = 'hidden';
 
@@ -30,9 +40,23 @@ export class UploadComponent implements OnInit {
     users: User[]
 
     disabled = false
+    dato: any[]
 
     constructor(private dataService: DataService) {
 
+    }
+
+    ngOnInit() {
+        this.dataService.getDati().subscribe(
+            (data) => {
+                console.log(data)
+                this.dato = data
+            });
+        this.users = this.dataService.getUsers()
+    }
+
+    ngAfterViewInit(): void {
+        this.visibility = 'shown'
     }
 
     controlUserObjects(e: any) {
@@ -62,10 +86,6 @@ export class UploadComponent implements OnInit {
         }
     }
 
-    ngOnInit() {
-        this.users = this.dataService.getUsers()
-        this.visibility = 'shown'
-    }
 
     onUpload(e: any) {
         console.log(e)
