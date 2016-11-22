@@ -10,6 +10,9 @@ export class FilterPipe implements PipeTransform {
     transform(array: any, daFiltrare: any): any {
         if (array === undefined) return array;
 
+        /**
+         * Ordinamento
+         */
         array.sort((a: any, b: any) => {
             if (a.string_name().toLowerCase() < b.string_name().toLowerCase()) {
                 return -1;

@@ -4,6 +4,9 @@ import {Component} from '@angular/core';
     selector: 'my-app',
     templateUrl: `./app/app.component.html`,
 })
+/**
+ * Controller del componente principale, contiene tutti gli altri componenti divisi in sottocomponenti
+ */
 export class AppComponent {
     isPlotActive = false;
     isDropdownActive = false;

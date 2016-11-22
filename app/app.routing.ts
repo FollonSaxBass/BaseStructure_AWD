@@ -23,9 +23,9 @@ import DynamicComponentAnm from "./analisi_multipla/correlationMultiple/dynamic_
 import {UploadComponent} from "./upload/upload.component";
 
 /**
- * Vengono definiti tutti i path ai componenti principali
+ * Vengono definiti tutti i path ai componenti principali,
+ * importando poi i sottocomponenti utilizzando routingComponents(Vettore in fondo a questo file)
  * Routing di Angular 2
- *
  * */
 const routes: Routes = [
     {

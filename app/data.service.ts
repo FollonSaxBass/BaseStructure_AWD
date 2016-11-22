@@ -4,6 +4,11 @@ import {Http, Response, URLSearchParams} from '@angular/http'
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
 
+
+/**
+ * Definizioni delle classi utilizzate per i dati.
+ * Modello generale
+ */
 export class Valore {
     val: number;
     timestamp: string;

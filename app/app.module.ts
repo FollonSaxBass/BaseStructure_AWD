@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {Ng2BootstrapModule} from 'ng2-bootstrap/ng2-bootstrap';
-
 import {AppComponent} from './app.component';
 import {AppRoutingModule, routingComponents} from './app.routing'
 import {DataService} from "./data.service";
@@ -18,6 +17,12 @@ import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {MessagesModule} from "primeng/components/messages/messages";
 import {BusyModule} from "angular2-busy";
 import {FileUploadModule} from "primeng/components/fileupload/fileupload";
+
+/**
+ *Importazione dei moduli a livello di applicazione,
+ * notare che si è importato a questo livello anche il servizio(provider) dataService
+ * importabile successivamente in tutta l'applicazione
+ */
 @NgModule({
     declarations: [AppComponent, routingComponents, FilterPipe],
     imports: [
