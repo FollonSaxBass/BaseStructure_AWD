@@ -4,6 +4,7 @@
         <input style="width: 100%;" type="text" [(ngModel)]="daFiltrare" pTooltip="Inserisci oggetto da filtrare"
                [ngModelOptions]="{standalone: true}"/>
     </form>
+
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let object of user.oggetti|filter:daFiltrare" (click)="onSelect(object)"
             [class.active]="object === selectedObject">
