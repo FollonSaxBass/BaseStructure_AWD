@@ -49,7 +49,6 @@ export class UploadComponent implements OnInit,AfterViewInit {
     ngOnInit() {
         this.dataService.getDati().subscribe(
             (data) => {
-                console.log(data)
                 this.dato = data
             });
         this.users = this.dataService.getUsers()
@@ -59,6 +58,11 @@ export class UploadComponent implements OnInit,AfterViewInit {
         this.visibility = 'shown'
     }
 
+    /**
+     * Quando l'utente inserisce il nome di un utento o dell'oggetto viene chiamato questo metodo.
+     * Controllo che lo username e l'oggetto non siano già presenti all'interno del database
+     * @param e
+     */
     controlUserObjects(e: any) {
         this.msgs = []
         this.disabled = false
@@ -86,9 +90,11 @@ export class UploadComponent implements OnInit,AfterViewInit {
         }
     }
 
-
+    /**
+     * Metodo chiamato dopo l'upload con successo di un file con nome utente e nome oggetto
+     * @param e
+     */
     onUpload(e: any) {
-        console.log(e)
         this.visibility = 'shown';
         this.dataService.loadUsers()
         this.nome_oggetto = ""
@@ -100,9 +106,13 @@ export class UploadComponent implements OnInit,AfterViewInit {
         });
     }
 
+    /**
+     * Chiamato in caso di errore durante l'upload
+     * L'errore può essere causato dal server o dalla mancata connettività
+     * @param e
+     */
     onError(e: any) {
         this.visibility = 'shown';
-        console.log(e)
         this.message_success.push({
             severity: 'error',
             summary: 'OOOOOooooopsssssss!',

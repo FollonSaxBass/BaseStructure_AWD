@@ -193,7 +193,6 @@ export class ChartComponent implements OnInit {
                 document.body.removeChild(link);
             },
             (error) => {
-                console.log(error)
                 this.message_ok.push({
                     severity: 'error',
                     summary: 'CSV non scaricato!',

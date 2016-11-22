@@ -151,6 +151,12 @@ export class AnalisiMultiplaComponent implements OnInit {
         }
     }
 
+    /**
+     * Metodo per verificare se due array sono composti dagli stessi oggetti
+     * @param a
+     * @param b
+     * @returns {boolean}
+     */
     arraysEqual(a: any, b: any) {
         if (a === b) return true;
         if (a == null || b == null) return false;
@@ -163,7 +169,7 @@ export class AnalisiMultiplaComponent implements OnInit {
     }
 
     onInvia(users: any, reload: boolean) {
-        // this.isLoadingAnalisi = true;
+        this.isLoadingAnalisi = true;
         let temp1: any
         let temp2: any
         if (reload) {

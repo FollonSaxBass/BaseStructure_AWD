@@ -125,7 +125,6 @@ export class correlationMultiple {
             myData.push(temp)
         }
         var result = json2csv({data: myData, fields: fields});
-        console.log(typeof result);
         this.saveData(result, "correlazioneMultipla" + this.selectedObject.nome_oggetto + ".csv")
     }
 

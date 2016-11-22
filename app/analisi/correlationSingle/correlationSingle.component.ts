@@ -260,7 +260,6 @@ export class correlationSingle implements OnInit {
             myData.push(temp)
         }
         var result = json2csv({data: myData, fields: fields});
-        console.log(typeof result);
         this.saveData(result, "correlazioneSingola" + this.selectedObject.nome_oggetto + ".csv")
     }
 
