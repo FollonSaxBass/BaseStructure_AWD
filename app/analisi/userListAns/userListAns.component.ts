@@ -7,6 +7,9 @@ import {Message} from "primeng/components/common/api";
     templateUrl: './app/analisi/userListAns/userListAns.component.html'
 })
 
+/**
+ * Controller della lista di utenti per quanto riguarda l'analisi singola
+ */
 export class userListAns {
     msgs: Message[] = [];
     error = false
@@ -18,11 +21,19 @@ export class userListAns {
 
     @Output() onSelectedUser = new EventEmitter();
 
+    /**
+     * Selezione dello user con cambio evidenziazione nella view
+     * @param user
+     */
     onSelect(user: User): void {
         this.selectedUser = user;
         this.onSelectedUser.emit(this.selectedUser)
     }
 
+    /**
+     * Costruttore che intercetta anche l'errore in caso di fallimento nel caricamento degli utenti
+     * @param dataService
+     */
     constructor(private dataService: DataService) {
         dataService.userSource$.subscribe(
             content => {
@@ -59,6 +70,9 @@ export class userListAns {
             });
     }
 
+    /**
+     * Reload degli utenti
+     */
     reLoad() {
         this.msgs = []
         this.error = false

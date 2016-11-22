@@ -63,6 +63,11 @@ export class AnalisiMultiplaComponent implements OnInit {
                     tempObj.push(new_oggetto)
                 }
                 this.objects = tempObj;
+            },
+            (error) => {
+                if (error.status == "0") {
+                } else {
+                }
             }
         );
     }

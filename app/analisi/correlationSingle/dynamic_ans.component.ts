@@ -53,6 +53,5 @@ export default class DynamicComponentAns {
     }
 
     constructor(private resolver: ComponentFactoryResolver) {
-
     }
 }

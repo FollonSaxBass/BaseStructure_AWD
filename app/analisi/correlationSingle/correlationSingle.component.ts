@@ -65,6 +65,11 @@ export class correlationSingle implements OnInit {
     data_max_calc: string
     datiInviati: any
 
+    /**
+     * Prendo i dati dal componente dinamico, a cui sno stati passati dal component padre
+     * @param dataService
+     * @param injector
+     */
     constructor(private dataService: DataService, private injector: Injector) {
         this.selectedUser = this.injector.get('selectedUser');
         this.selectedObject = this.injector.get('selectedObject');
@@ -79,7 +84,10 @@ export class correlationSingle implements OnInit {
         this.loadData(false)
     }
 
-
+    /**
+     * Ricarico i dati per riempire di nuovo la matrice di correlazione
+     * @param reload
+     */
     loadData(reload: boolean) {
         let temp1: any
         let temp2: any
@@ -223,10 +231,17 @@ export class correlationSingle implements OnInit {
         this.timestamps = _tempTimestamps;
     }
 
+    /**
+     * Alla fine dello slide le date potrebbero essere cambiate, di conseguenza ricarico la matrice di correlazione
+     */
     onSlideEnd() {
         this.loadData(true)
     }
 
+    /**
+     * Costruisco la struttura all'interno di oggetti json
+     * in modo da poterlo trasformare in csv e farlo scaricare all'utente
+     */
     loadCSV() {
         let fields: string[] = []
         fields.push("#")
@@ -249,6 +264,11 @@ export class correlationSingle implements OnInit {
         this.saveData(result, "correlazioneSingola" + this.selectedObject.nome_oggetto + ".csv")
     }
 
+    /**
+     * Salvataggio dei dati testuali in un file csv
+     * @param data
+     * @param filename
+     */
     saveData(data: any, filename: any) {
         var a = document.createElement("a");
         document.body.appendChild(a);

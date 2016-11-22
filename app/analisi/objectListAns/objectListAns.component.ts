@@ -7,6 +7,9 @@ import {Message} from "primeng/components/common/api";
     templateUrl: './app/analisi/objectListAns/objectListAns.component.html'
 })
 
+/**
+ * Controller della lista di oggetti per quanto riguarda l'analisi singola
+ */
 export class objectListAns implements OnChanges {
     msgs: Message[] = [];
     error = false
@@ -20,6 +23,10 @@ export class objectListAns implements OnChanges {
     @Output() onSelectedAnalizza = new EventEmitter();
     @Output() onReload = new EventEmitter();
 
+    /**
+     * Selezione dell'oggetto con cambio evidenziazione nella view
+     * @param oggetto
+     */
     onSelect(oggetto: Oggetto): void {
         this.selectedObject = oggetto;
         this.onSelectedObject.emit(this.selectedObject)
