@@ -10,12 +10,6 @@ import {DataService, User} from "../data.service";
     selector: 'app-home',
     templateUrl: './app/upload/upload.component.html',
     animations: [
-        // trigger('visibilityChanged', [
-        //     state('shown', style({opacity: 1})),
-        //     state('hidden', style({opacity: 0})),
-        //     transition('hidden => shown', animate('300ms ease-in')),
-        //     transition('shown => hidden', animate('300ms ease-out'))
-        // ]),
         trigger('visibilityChanged', [
             state('shown', style({transform: 'translateX(0)', opacity: 1})),
             state('hidden', style({transform: 'translateX(100%)', opacity: 0})),
@@ -28,6 +22,11 @@ import {DataService, User} from "../data.service";
             ])
         ])]
 })
+
+/**
+ * Classe utilizzata per fare l'upload di un nuovo oggetto associato ad un nuovo utente
+ *
+ */
 export class UploadComponent implements OnInit,AfterViewInit {
     upload_text = "Inserisci un utente ed un oggetto associato"
     visibility = 'hidden';
@@ -46,6 +45,9 @@ export class UploadComponent implements OnInit,AfterViewInit {
 
     }
 
+    /**
+     * Inizializzo la tabella d'esempio
+     */
     ngOnInit() {
         this.dataService.getDati().subscribe(
             (data) => {
@@ -120,6 +122,10 @@ export class UploadComponent implements OnInit,AfterViewInit {
         });
     }
 
+    /**
+     * Prima di fare l'upload controllo comunque che non sia già presente un utente con quell'oggetto
+     * @param e
+     */
     onBeforeUpload(e: any) {
         this.visibility = 'hidden';
         let found = false

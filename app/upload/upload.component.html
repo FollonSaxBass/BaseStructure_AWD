@@ -1,5 +1,4 @@
-<div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-1"></div>
-<div [@visibilityChanged]="visibility" style="text-align: center;" class=" col-lg-4">
+<div [@visibilityChanged]="visibility" style="text-align: center;" class=" col-lg-5">
     <h3>Istruzioni</h3>
     <h4>Struttura del file CSV</h4>
     <p>Il file csv deve indicare nell'header i nomi delle colonne opportunemente attribuite all'oggetto. E' possibile
@@ -26,11 +25,16 @@
 <div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-5">
     <h3>{{upload_text}}</h3>
     <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">@</span>
+
         <input [(ngModel)]="nome_user" type="text" class="form-control" placeholder="Username"
                aria-describedby="basic-addon1" (keyup)="controlUserObjects($event)">
+        <span class="input-group-addon" id="basic-addon1">Nome User</span>
+    </div>
+    <div class="input-group">
+
         <input [(ngModel)]="nome_oggetto" type="text" class="form-control" placeholder="Nome oggetto"
-               aria-describedby="sizing-addon1" (keyup)="controlUserObjects($event)">
+               aria-describedby="basic-addon2" (keyup)="controlUserObjects($event)">
+        <span class="input-group-addon" id="basic-addon2">Nome oggetto</span>
     </div>
     <p-messages [value]="msgs"></p-messages>
     <div [ngStyle]="{'display': disabled ? 'none' : 'block'}">
