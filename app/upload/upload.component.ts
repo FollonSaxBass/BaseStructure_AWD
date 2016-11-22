@@ -68,6 +68,7 @@ export class UploadComponent implements OnInit {
     }
 
     onUpload(e: any) {
+        console.log(e)
         this.visibility = 'shown';
         this.dataService.loadUsers()
         this.nome_oggetto = ""

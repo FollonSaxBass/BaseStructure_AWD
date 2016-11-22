@@ -10,7 +10,7 @@
     </div>
     <p-messages [value]="msgs"></p-messages>
     <div [ngStyle]="{'display': disabled ? 'none' : 'block'}">
-        <p-fileUpload name="file[]" accept=".csv" maxFileSize="1000000" [disabled]="disabled ? true : null"
+        <p-fileUpload name="file" accept=".csv" maxFileSize="1000000" [disabled]="disabled ? true : null"
                       url="https://awdapi.herokuapp.com/uploadCSV" (onBeforeUpload)="onBeforeUpload($event)"
                       (onUpload)="onUpload($event)" (onError)="onError($event)"></p-fileUpload>
     </div>
