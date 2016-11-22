@@ -11,9 +11,11 @@
         </li>
     </ul>
 </div>
+<div class="myLoading">
 <button [ladda]="isLoading" style="background-color: #337AB7;" data-size="s" *ngIf="selectedObject&&!msgs.length>0"
         (click)="clickedInvia()" class="btn btn-primary">Invia
 </button>
+</div>
 <p-messages [value]="msgs"></p-messages>
 <div *ngIf="msgs.length>0" class="myLoading">
     <button (click)="reLoad()" class="btn btn-primary"

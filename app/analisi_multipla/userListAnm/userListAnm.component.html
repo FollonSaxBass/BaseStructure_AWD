@@ -12,7 +12,9 @@
         </li>
     </ul>
 </div>
-<button [ladda]="isLoadingAnalisi" style="background-color: #337AB7;" data-size="s"
-        *ngIf="selectedUsers.length>0&&selectedColumn" (click)="clickedInvia()">
-    Invia
-</button>
+<div class="myLoading">
+    <button [ladda]="isLoadingAnalisi" style="background-color: #337AB7;" data-size="s"
+            *ngIf="selectedUsers.length>0&&selectedColumn" (click)="clickedInvia()">
+        Invia
+    </button>
+</div>

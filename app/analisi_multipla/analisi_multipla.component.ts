@@ -90,7 +90,7 @@ export class AnalisiMultiplaComponent implements OnInit {
                 severity: 'error', summary: 'AAAAhhh!!', detail: 'Per inviare una nuova richiesta devi ' +
                 'selezionare un utente differente'
             })
-
+            this.isLoadingAnalisi = false
         } else {
             if (!reload) {
                 this.selectedObject = oggetto
@@ -192,6 +192,7 @@ export class AnalisiMultiplaComponent implements OnInit {
                 'ti conviene selezionarne più di uno per avere un risultato utile'
             })
             this.isLoadingAnalisi = false
+            this.dataService.startBlock.next("UnBlocked")
         } else {
             if (this.dataSended != null &&
                 this.arraysEqual(this.dataSended.selectedUsers, this.selectedUsers) &&
@@ -204,6 +205,7 @@ export class AnalisiMultiplaComponent implements OnInit {
                     'selezionare un utente, oggetto, attributi o date differenti'
                 })
                 this.isLoadingAnalisi = false
+                this.dataService.startBlock.next("UnBlocked")
             } else {
                 this.dataSended = {
                     "selectedUsers": this.selectedUsers.slice(),

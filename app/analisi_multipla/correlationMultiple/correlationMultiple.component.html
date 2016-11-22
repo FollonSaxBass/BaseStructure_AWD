@@ -24,9 +24,11 @@
                     </td>
                 </tr>
             </table>
+            <div class="myLoading">
             <button (click)="loadCSV()" class="btn btn-primary"
                     style="background-color: #337AB7" data-size="s">Download CSV
             </button>
+            </div>
         </div>
         <div *ngIf="loaded" class="col-lg-4">
             <correlation-table-columans [nomi_colonne]="nomi_colonne"
