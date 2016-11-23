@@ -304,7 +304,7 @@ export class DataService {
         }
         let url = "https://awdapi.herokuapp.com/deleteObject"
         return this.http.post(url, toSend).map(
-            (res) => res.json()
+            (res) => res
         ).catch(this.handleError);
     }
 

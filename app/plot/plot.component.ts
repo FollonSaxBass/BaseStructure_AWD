@@ -98,6 +98,7 @@ export class PlotComponent implements OnInit {
                 window.location.reload()
             },
             (error) => {
+                console.log(error)
                 this.message_error.push({
                     severity: 'error', summary: 'AAAAhhh!!', detail: 'errore durante la cancellazione dell\'oggetto'
                 })
