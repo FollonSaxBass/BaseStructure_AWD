@@ -117,8 +117,8 @@ export class UploadComponent implements OnInit,AfterViewInit {
         this.visibility = 'shown';
         this.message_success.push({
             severity: 'error',
-            summary: 'OOOOOooooopsssssss!',
-            detail: 'Qualcosa è andato storto, ritenta l\'upload'
+            summary: 'Qualcosa è andato storto!',
+            detail: 'Errore ritornato dal server: ' + JSON.parse(e.xhr.response).error
         });
     }
 
