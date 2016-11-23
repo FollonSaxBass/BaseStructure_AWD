@@ -24,9 +24,7 @@
                     </td>
                 </tr>
             </table>
-            <button (click)="loadCSV()" class="btn btn-primary"
-                    style="background-color: #337AB7" data-size="s">Download CSV
-            </button>
+
         </div>
         <div *ngIf="loaded" class="col-lg-4">
             <correlation-table-columans [nomi_colonne]="nomi_colonne"
@@ -44,5 +42,11 @@
             <div><h4 style="float: left;">Range: {{timestampsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
                 {{timestampsTotal[rangeValues[1]]}}</h4></div>
         </div>
+
+    </div>
+    <div class="myLoading" style="margin-bottom: 10px">
+        <button (click)="loadCSV()" class="btn btn-primary"
+                style="background-color: #337AB7" data-size="s">Download CSV
+        </button>
     </div>
 </div>

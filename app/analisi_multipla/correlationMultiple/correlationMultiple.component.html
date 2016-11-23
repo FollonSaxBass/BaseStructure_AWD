@@ -6,7 +6,7 @@
     <div class="panel-body">
 
         <div class="col-lg-8" style="text-align:center;">
-            <table class="table table-responsive table-bordered">
+            <table class="table table-responsive table-bordered" style="overflow: scroll;max-height: 500px">
                 <tr class="active">
                     <th>
                         #
@@ -25,9 +25,9 @@
                 </tr>
             </table>
             <div class="myLoading">
-            <button (click)="loadCSV()" class="btn btn-primary"
-                    style="background-color: #337AB7" data-size="s">Download CSV
-            </button>
+                <button (click)="loadCSV()" class="btn btn-primary"
+                        style="background-color: #337AB7" data-size="s">Download CSV
+                </button>
             </div>
         </div>
         <div *ngIf="loaded" class="col-lg-4">

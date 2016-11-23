@@ -59,7 +59,7 @@ export class ChartComponent implements OnInit {
         //     fontColor: "#444"
         // },
         legend: {
-            position: 'right',
+            position: 'top',
             labels: {
                 padding: 14,
                 fontSize: 14,

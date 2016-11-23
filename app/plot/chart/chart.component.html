@@ -20,21 +20,18 @@
                 <p-growl [value]="message_ok"></p-growl>
             </div>
         </div>
-        <div class="col-lg-10">
-            <div class="myLoading" style="margin-top: 10px; margin-bottom: 10px">
-                <button (click)="loadCSV()" class="btn btn-primary"
-                        style="background-color: #337AB7" data-size="s">Download CSV Valori
-                </button>
-            </div>
+        <div>
+            <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="chartMin" [max]="chartMax"
+                      (onChange)="onChange($event)"></p-slider>
+        </div>
 
-            <div>
-                <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="chartMin" [max]="chartMax"
-                          (onChange)="onChange($event)"></p-slider>
-            </div>
-
-            <div><h4 style="float: left;">Range:
-                {{lineChartLabelsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
-                {{lineChartLabelsTotal[rangeValues[1]]}}</h4></div>
+        <div><h4 style="float: left;">Range:
+            {{lineChartLabelsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
+            {{lineChartLabelsTotal[rangeValues[1]]}}</h4></div>
+        <div class="myLoading" style="margin-top: 10px; margin-bottom: 10px">
+            <button (click)="loadCSV()" class="btn btn-primary"
+                    style="background-color: #337AB7" data-size="s">Download CSV Valori
+            </button>
         </div>
     </div>
 </div>
