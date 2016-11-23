@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import {DataService, User, Oggetto} from "../../data.service";
-import {Message} from "primeng/components/common/api";
+import {Message, ConfirmationService} from "primeng/components/common/api";
 
 @Component({
     selector: 'object-list-plot',
@@ -21,6 +21,7 @@ export class objectList implements OnChanges {
     //Elementi per comunicare col padre
     @Output() onSelectedObject = new EventEmitter();
     @Output() onSelectedPlotta = new EventEmitter();
+    @Output() onDelete = new EventEmitter();
     @Output() onReload = new EventEmitter();
 
     /***
@@ -40,14 +41,13 @@ export class objectList implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        // this.selectedObject = null
     }
 
     /**
      * Costruttore comprende la gestione degli errori
      * @param dataService
      */
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService, private confirmationService: ConfirmationService) {
         dataService.plotSource$.subscribe(
             content => {
                 if (content == "Errore0") {
@@ -61,6 +61,7 @@ export class objectList implements OnChanges {
                     this.error = true
                     this.msgs.push({severity: 'error', summary: 'Server error', detail: 'Something\'s gone wrong'});
                 }
+                this.isLoading = false
             });
     }
 
@@ -69,6 +70,21 @@ export class objectList implements OnChanges {
         this.error = false
         this.onReload.emit()
         this.onSelectedPlotta.emit()
+    }
+
+    deleteIt() {
+        this.isLoading = true
+        this.confirmationService.confirm({
+            message: 'Vuoi davvero eliminare l\'oggetto ' + this.selectedObject.nome_oggetto,
+            accept: () => {
+                //Actual logic to perform a confirmation
+                this.onDelete.emit()
+            },
+            reject: () => {
+                //Actual logic to perform a confirmation
+                this.isLoading = false
+            }
+        });
     }
 
 }

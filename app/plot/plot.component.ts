@@ -91,4 +91,17 @@ export class PlotComponent implements OnInit {
     onReload() {
         this.componentData = null
     }
+
+    onDelete() {
+        this.dataService.deleteObject(this.selectedUser.id_user, this.selectedObject.id_oggetto).subscribe(
+            (data) => {
+                window.location.reload()
+            },
+            (error) => {
+                this.message_error.push({
+                    severity: 'error', summary: 'AAAAhhh!!', detail: 'errore durante la cancellazione dell\'oggetto'
+                })
+                this.dataService.plotSource.next()
+            });
+    }
 }

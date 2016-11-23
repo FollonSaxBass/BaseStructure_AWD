@@ -147,7 +147,6 @@ export class DataService {
         return this.users;
     }
 
-    //TODO: fare richiesta post dove dice Artio
     /**
      * Richiesta per plottaggio
      * @param id_user
@@ -290,5 +289,24 @@ export class DataService {
             (res) => res.json()
         ).catch(this.handleError);
     }
+
+    //TODO: fare richiesta post dove dice Artio
+    /**
+     * Richiesta per plottaggio
+     * @param id_user
+     * @param id_oggetto
+     * @returns {Observable<R>}
+     */
+    deleteObject(id_user: number, id_oggetto: number) {
+        let toSend = {
+            "userid": id_user,
+            "objectid": id_oggetto
+        }
+        let url = "https://awdapi.herokuapp.com/deleteObject"
+        return this.http.post(url, toSend).map(
+            (res) => res.json()
+        ).catch(this.handleError);
+    }
+
 
 }

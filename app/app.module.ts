@@ -17,6 +17,8 @@ import {TooltipModule} from "primeng/components/tooltip/tooltip";
 import {MessagesModule} from "primeng/components/messages/messages";
 import {BusyModule} from "angular2-busy";
 import {FileUploadModule} from "primeng/components/fileupload/fileupload";
+import {ConfirmationService} from "primeng/components/common/api";
+import {ConfirmDialogModule} from "primeng/components/confirmdialog/confirmdialog";
 
 /**
  *Importazione dei moduli a livello di applicazione,
@@ -42,9 +44,9 @@ import {FileUploadModule} from "primeng/components/fileupload/fileupload";
         TooltipModule,
         MessagesModule,
         BusyModule,
-        FileUploadModule
+        FileUploadModule, ConfirmDialogModule
     ],
-    providers: [DataService],
+    providers: [DataService,ConfirmationService],
     bootstrap: [AppComponent]
 })
 
