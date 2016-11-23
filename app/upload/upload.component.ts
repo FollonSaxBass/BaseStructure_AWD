@@ -120,6 +120,7 @@ export class UploadComponent implements OnInit,AfterViewInit {
             summary: 'Qualcosa è andato storto!',
             detail: 'Errore ritornato dal server: ' + JSON.parse(e.xhr.response).error
         });
+        console.log(JSON.parse(e.xhr.response).error)
     }
 
     /**
