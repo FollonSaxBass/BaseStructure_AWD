@@ -66,12 +66,17 @@ export class ChartComponent implements OnInit {
                 fontColor: "#444"
             }
         },
-
+        elements: {
+            point: {
+                radius: 2
+            }
+        },
         scales: {
             xAxes: [{
 
                 ticks: {
                     maxTicksLimit: 8,
+                    stepSize: 20,
                     minRotation: 45
                 }
             }]

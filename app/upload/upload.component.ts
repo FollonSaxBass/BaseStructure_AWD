@@ -41,6 +41,8 @@ export class UploadComponent implements OnInit,AfterViewInit {
     disabled = false
     dato: any[]
 
+    isUploading = false
+
     constructor(private dataService: DataService) {
 
     }
@@ -97,6 +99,7 @@ export class UploadComponent implements OnInit,AfterViewInit {
      * @param e
      */
     onUpload(e: any) {
+        this.isUploading = false
         this.visibility = 'shown';
         this.dataService.loadUsers()
         this.nome_oggetto = ""
@@ -114,6 +117,7 @@ export class UploadComponent implements OnInit,AfterViewInit {
      * @param e
      */
     onError(e: any) {
+        this.isUploading = false
         this.visibility = 'shown';
         this.message_success.push({
             severity: 'error',
@@ -128,6 +132,7 @@ export class UploadComponent implements OnInit,AfterViewInit {
      * @param e
      */
     onBeforeUpload(e: any) {
+        this.isUploading = true
         this.visibility = 'hidden';
         let found = false
 
