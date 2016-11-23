@@ -43,6 +43,10 @@ export class objectList implements OnChanges {
         // this.selectedObject = null
     }
 
+    /**
+     * Costruttore comprende la gestione degli errori
+     * @param dataService
+     */
     constructor(private dataService: DataService) {
         dataService.plotSource$.subscribe(
             content => {

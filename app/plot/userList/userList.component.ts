@@ -29,6 +29,10 @@ export class userList implements OnInit {
         this.users = this.dataService.getUsers()
     }
 
+    /**
+     * Costruttore comprende la gestione degli errori
+     * @param dataService
+     */
     constructor(private dataService: DataService) {
         dataService.userSource$.subscribe(
             content => {

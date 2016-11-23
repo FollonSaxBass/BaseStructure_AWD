@@ -91,5 +91,4 @@ export class PlotComponent implements OnInit {
     onReload() {
         this.componentData = null
     }
-
 }
