@@ -44,5 +44,6 @@
     </div>
 </div>
 <p-growl [value]="message_success"></p-growl>
-<img *ngIf="isUploading" src="../../public/loading_text.gif">
+<div class="myLoading"><img *ngIf="isUploading" src="../../public/loading_small_1.gif"></div>
+
 <div [@visibilityChanged]="visibility" style="text-align: center;" class="col-lg-1"></div>
