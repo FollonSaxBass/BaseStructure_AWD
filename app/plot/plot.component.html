@@ -20,11 +20,12 @@
     <div class="panel-heading">Oggetti riferiti a {{selectedUser.nome_user}}</div>
     <div class="panel-body">
         <object-list-plot [user]="selectedUser" [isLoading]="isLoading" (onSelectedObject)="onSelectedObject($event)"
-                          (onSelectedPlotta)="onSelectedPlotta($event)" (onDelete)="onDelete($event)" (onReload)="onReload($event)">Loading...
+                          (onSelectedPlotta)="onSelectedPlotta($event)" (onDelete)="onDelete($event)"
+                          (onReload)="onReload($event)">Loading...
         </object-list-plot>
     </div>
 </div>
 <p-growl [value]="message_error"></p-growl>
-<div class="myLoading"><img *ngIf="isLoading" src="../../public/loading_small_1.gif"></div>
+<div class="myLoading"><img *ngIf="isLoading&&message_error.length==0" src="../../public/loading_small_1.gif"></div>
 
 <dynamic-component *ngIf="selectedObject" [componentData]="componentData">Loading...</dynamic-component>
