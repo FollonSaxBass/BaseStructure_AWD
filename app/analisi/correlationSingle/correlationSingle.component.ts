@@ -167,6 +167,7 @@ export class correlationSingle implements OnInit {
                     this.loaded = true
                     this.visibility = 'shown'
                     this.dataService.contentSource.next();
+
                 },
                 (error) => {
                     if (error.status == "0") {

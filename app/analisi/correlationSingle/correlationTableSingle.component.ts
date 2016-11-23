@@ -1,4 +1,5 @@
-import {OnInit, Input, Component, Output, EventEmitter} from "@angular/core";
+import {OnInit, Input, Component, Output, EventEmitter, OnChanges, SimpleChanges} from "@angular/core";
+import {DataService} from "../../data.service";
 
 @Component({
     selector: 'correlation-table-columans',
@@ -8,7 +9,10 @@ import {OnInit, Input, Component, Output, EventEmitter} from "@angular/core";
 /**
  * Unisce due tabelle in cui possono essere inserite o tolte le colonne
  */
-export class correlationTableSingle implements OnInit {
+export class correlationTableSingle implements OnInit,OnChanges {
+    ngOnChanges(changes: SimpleChanges): void {
+        this.onSelectedColumnAdd.emit({dati: this.dati, deleted: this.deleted})
+    }
 
     /**
      * Funzione per rimuovere un elemento da un array
@@ -34,9 +38,6 @@ export class correlationTableSingle implements OnInit {
     deleted: Array<any> = [];
     //Colonne da tenere nella matrice di correlazione
     dati: Array<any> = [];
-
-    constructor() {
-    }
 
     ngOnInit() {
         let _dati: Array<any> = [];

@@ -79,6 +79,8 @@ export class DataService {
     startBlock = new Subject();
     startBlock$ = this.startBlock.asObservable();
 
+
+
     /**
      * La prima cosa che fa questo componente è andare a prendere i dati degli utenti perchè caratterizza
      * sia la richiesta di plot che la richiesta di analisi singola
