@@ -12,18 +12,15 @@ import {Observable} from "rxjs/Observable";
 export class Valore {
     val: number;
     timestamp: string;
-
 }
 export class Colonna {
     id_colonna: number;
     nome_colonna: string;
     desc: string;
     values: Valore[];
-
     string_name() {
         return this.nome_colonna;
     }
-
     constructor() {
         this.values = new Array();
     }
@@ -32,11 +29,9 @@ export class Oggetto {
     id_oggetto: number;
     nome_oggetto: string;
     columns: Colonna[];
-
     string_name() {
         return this.nome_oggetto;
     }
-
     constructor() {
         this.columns = new Array();
     }
@@ -45,11 +40,9 @@ export class User {
     id_user: number;
     nome_user: string;
     oggetti: Oggetto[];
-
     string_name() {
         return this.nome_user;
     }
-
     constructor() {
         this.oggetti = new Array();
     }
@@ -78,8 +71,6 @@ export class DataService {
 
     startBlock = new Subject();
     startBlock$ = this.startBlock.asObservable();
-
-
 
     /**
      * La prima cosa che fa questo componente è andare a prendere i dati degli utenti perchè caratterizza

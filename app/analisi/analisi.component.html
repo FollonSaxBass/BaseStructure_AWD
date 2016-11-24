@@ -1,5 +1,8 @@
 <div class="panel panel-default col-lg-12 header-title">
     <h2>Single Correlation Analysis</h2>
+    <div class="myLoading">
+        <img *ngIf="!isLoading&&users.length==0" src="../../public/loading_small_1.gif">
+    </div>
 </div>
 <div class="panel panel-default col-lg-2">
     <div class="panel-heading">Users</div>

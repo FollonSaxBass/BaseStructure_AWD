@@ -26,11 +26,8 @@ export class FilterPipe implements PipeTransform {
         if (daFiltrare === undefined) return array;
         if (array.length == 0) return array
 
-        if (daFiltrare === undefined) return array;
-
         return array.filter(function (user: any) {
             return user.string_name().toLowerCase().includes(daFiltrare.toLowerCase());
-
         })
 
     }

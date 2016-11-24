@@ -10,7 +10,9 @@
         {{user.nome_user}}
     </li>
 </ul>
-<div class="myLoading"><img *ngIf="!users&&!(error&&!itsFirst)" src="../../public/loading_small_1.gif"></div>
+<div class="myLoading">
+    <img *ngIf="itsFirst&&users.length==0" src="../../public/loading_small_1.gif">
+</div>
 <div *ngIf="error&&!itsFirst" class="myLoading">
     <p-messages [value]="msgs"></p-messages>
     <button *ngIf="error" (click)="reLoad()" class="btn btn-primary"

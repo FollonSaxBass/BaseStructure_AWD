@@ -22,7 +22,6 @@ export class PlotComponent implements OnInit {
     isLoading = false
     isLoadingPlotta = true
 
-
     //Utilizzato per mandare tutti i dati per il plot al componente chartComponent
     componentData: any = null;
 
