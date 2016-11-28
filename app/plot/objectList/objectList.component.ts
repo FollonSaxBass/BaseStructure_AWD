@@ -11,6 +11,8 @@ export class objectList implements OnChanges {
     msgs: Message[] = [];
     error = false
 
+    isLoadingDelete = false
+
     //User ricevuto dal padre
     @Input() user: User;
     @Input() isLoading: boolean;
@@ -73,7 +75,7 @@ export class objectList implements OnChanges {
     }
 
     deleteIt() {
-        this.isLoading = true
+        this.isLoadingDelete = true
         this.confirmationService.confirm({
             message: 'Vuoi davvero eliminare l\'oggetto ' + this.selectedObject.nome_oggetto,
             accept: () => {
@@ -82,7 +84,7 @@ export class objectList implements OnChanges {
             },
             reject: () => {
                 //Actual logic to perform a confirmation
-                this.isLoading = false
+                this.isLoadingDelete = false
             }
         });
     }

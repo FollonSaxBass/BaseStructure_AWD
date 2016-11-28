@@ -29,7 +29,7 @@
             {{lineChartLabelsTotal[rangeValues[0]]}}</h4><h4 style="float: right;">
             {{lineChartLabelsTotal[rangeValues[1]]}}</h4></div>
         <div class="myLoading" style="margin-top: 10px; margin-bottom: 10px">
-            <button (click)="loadCSV()" class="btn btn-primary"
+            <button (click)="loadCSV()" class="btn btn-primary" [ladda]="inDownload"
                     style="background-color: #337AB7" data-size="s">Download CSV Valori
             </button>
         </div>

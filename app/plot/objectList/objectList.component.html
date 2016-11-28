@@ -13,10 +13,14 @@
 </div>
 <button *ngIf="user.oggetti.indexOf(selectedObject)>-1" [ladda]="isLoading" (click)="clickedPlotta(object)"
         class="btn btn-primary"
+        [ngClass]="{'disabled': isLoadingDelete ? true : false}"
+        [attr.disabled]="isLoadingDelete? true:null"
         style="background-color: #337AB7" data-size="s">Plotta
 </button>
-<button *ngIf="user.oggetti.indexOf(selectedObject)>-1" [ladda]="isLoading" (click)="deleteIt()"
+<button *ngIf="user.oggetti.indexOf(selectedObject)>-1" [ladda]="isLoadingDelete" (click)="deleteIt()"
         class="btn btn-primary"
+        [ngClass]="{'disabled': isLoading}"
+        [attr.disabled]="isLoading? true:null"
         style="background-color: #337AB7" data-size="s">Delete
 </button>
 <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

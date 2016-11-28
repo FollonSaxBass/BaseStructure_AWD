@@ -21,6 +21,8 @@ export class ChartComponent implements OnInit {
     //Lista delle colonne
     colonne: Colonna[] = []
 
+    //Caricamento down csv
+    inDownload = false
     // Range values inizializzati a 0,1 per creare la vista,
     // Al caricamento dei dati vengono sostituiti dai valori ritornati dal padre
     // Range values iniziale e finale della range bar per definire il numero di possibili step
@@ -75,7 +77,7 @@ export class ChartComponent implements OnInit {
             xAxes: [{
 
                 ticks: {
-                    maxTicksLimit: 8,
+                    maxTicksLimit: 9,
                     stepSize: 20,
                     minRotation: 45
                 }
@@ -186,10 +188,11 @@ export class ChartComponent implements OnInit {
     }
 
     loadCSV() {
-
+        this.inDownload = true;
         this.dataService.getCSVLink(this.selectedUser.id_user, this.selectedObject.id_oggetto,
             this.lineChartLabelsTotal[this.rangeValues[0]], this.lineChartLabelsTotal[this.rangeValues[1]]).subscribe(
             (data) => {
+                this.inDownload = false
                 var link = document.createElement("a");
                 link.download = name;
                 link.href = data.url;
@@ -198,6 +201,7 @@ export class ChartComponent implements OnInit {
                 document.body.removeChild(link);
             },
             (error) => {
+                this.inDownload = false
                 this.message_ok.push({
                     severity: 'error',
                     summary: 'CSV non scaricato!',
